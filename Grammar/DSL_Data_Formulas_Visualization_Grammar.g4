@@ -14,8 +14,8 @@ readCommand : 'Data' ID ASSIGN readFromFile
 
 readFromFile : READ_FROM LPAREN PATH RPAREN;
 
-exportCommand : 'ExportToFile' LPAREN PATH RPAREN exportToFile
-              | 'ExportToImage' LPAREN PATH RPAREN exportToImage;
+exportCommand : EXPORT_TO_FILE LPAREN PATH RPAREN exportToFile
+              | EXPORT_TO_IMAGE LPAREN PATH RPAREN exportToImage;
 
 exportToFile : 'dataset' ASSIGN LPAREN ID RPAREN 'name' ASSIGN LPAREN ID DOT fileType RPAREN;
 
@@ -29,7 +29,7 @@ visualizeFormula : VISUAL_FORMULA LPAREN formulaContent RPAREN 'range' ASSIGN LP
 
 visualizeData : VISUAL_DATA LPAREN visualizationType RPAREN 'dataset' ASSIGN LPAREN ID RPAREN;
 
-visualizationType : 'console' | plotType;
+visualizationType : CONSOLE | plotType;
 
 plotType : GRAPH | BAR | PIE | HIST;
 
@@ -44,7 +44,8 @@ formulaContent : FORMULA;
 START : 'Start';
 END : 'End';
 READ_FROM : 'ReadFrom';
-EXPORT_TO : 'Export';
+EXPORT_TO_FILE : 'ExportToFile';
+EXPORT_TO_IMAGE : 'ExportToImage';
 VISUAL_FORMULA : 'VisualFormula';
 VISUAL_DATA : 'VisualData';
 GRAPH : 'graph';
@@ -57,18 +58,17 @@ CSV : 'csv';
 TEXT : 'text';
 JSON : 'json';
 EXCEL : 'excel';
+CONSOLE : 'console';
 ID : [a-zA-Z_/]+[a-zA-Z0-9_/]*;
 PATH : '"' [a-zA-Z0-9_/]+ '"';
-FORMULA : 'formula[' (ID | OPERATORS | LPAREN | RPAREN | DIGIT | '+' | '-' | '*' | '/' | '^' | WS)+ ']';
+FORMULA : 'formula[' (ID | OPERATORS | LPAREN | RPAREN | DIGIT | WS)+ ']';
 SEMICOLON : ';';
 COLON : ':';
 COMMA : ',';
 LPAREN : '(';
 RPAREN : ')';
 ASSIGN : '=';
-MINUS : '-';
-OPERATORS : '*' | '^' | 'log' | 'sqr' | 'sqrt' | 'fact';
-DATA : 'data';
+OPERATORS : '*' | '^' | 'log' | 'sqr' | 'sqrt' | 'fact' | '+' | '-';
 DIGIT : '-'? [0-9]+;
 DOT : '.';
 WS : [ \t\r\n]+ -> skip; // Skip whitespace
