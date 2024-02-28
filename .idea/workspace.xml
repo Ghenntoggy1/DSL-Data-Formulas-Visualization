@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc725dec-f923-4da1-bc49-ceb824ae6da1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="dc725dec-f923-4da1-bc49-ceb824ae6da1" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,7 +26,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Grammar",
     "last_opened_file_path": "D:/Programming/Projects/DSL/DSL_Data_Formulas_Visualization/Grammar/Output",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -82,7 +80,7 @@
       <workItem from="1708121876525" duration="723000" />
       <workItem from="1708297116983" duration="12000" />
       <workItem from="1709154794221" duration="159000" />
-      <workItem from="1709154961501" duration="6250000" />
+      <workItem from="1709154961501" duration="6578000" />
     </task>
     <servers />
   </component>
