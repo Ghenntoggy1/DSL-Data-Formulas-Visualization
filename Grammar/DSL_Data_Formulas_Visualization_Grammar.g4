@@ -1,7 +1,7 @@
 grammar DSL_Data_Formulas_Visualization_Grammar;
 
 // Parser rules
-program : START commandsList END;
+program : commandsList;
 
 commandsList : command+;
 
@@ -24,7 +24,8 @@ exportToImage : plotType LPAREN ID RPAREN 'name' ASSIGN LPAREN ID DOT imageType 
 visualizeCommand : visualizeFormula
                  | visualizeData;
 
-visualizeFormula : VISUAL_FORMULA LPAREN formulaContent RPAREN 'range' ASSIGN LPAREN DIGIT COMMA DIGIT RPAREN;
+visualizeFormula : VISUAL_FORMULA LPAREN formulaContent RPAREN 'range' ASSIGN LPAREN DIGIT COMMA DIGIT RPAREN
+                 | VISUAL_FORMULA LPAREN ID RPAREN 'range' ASSIGN LPAREN DIGIT COMMA DIGIT RPAREN;
 
 visualizeData : VISUAL_DATA LPAREN visualizationType RPAREN 'dataset' ASSIGN LPAREN ID RPAREN;
 
