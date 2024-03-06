@@ -3,11 +3,14 @@ grammar DSL_Data_Formulas_Visualization_Grammar;
 // Parser rules
 program : commandsList;
 
-commandsList : command+;
+commandsList : (command | comment)+;
 
 command : readCommand SEMICOLON
         | exportCommand SEMICOLON
         | visualizeCommand SEMICOLON;
+
+comment : COMMENT_BLOCK
+        | COMMENT_LINE;
 
 readCommand : 'Data' ID ASSIGN readFromFile
             | 'Formula' ID ASSIGN formulaContent;
@@ -60,7 +63,9 @@ JSON : 'json';
 EXCEL : 'excel';
 CONSOLE : 'console';
 ID : [a-zA-Z_/]+[a-zA-Z0-9_/]*;
-PATH : '"' [a-zA-Z0-9_/]+ '"';
+PATH : '"' [a-zA-Z0-9_/.]+ '"';
+COMMENT_BLOCK : '/*' .*? '*/';
+COMMENT_LINE : '#' ~[\r\n]*;
 FORMULA : 'formula[' (ID | OPERATORS | LPAREN | RPAREN | DIGIT | WS)+ ']';
 SEMICOLON : ';';
 COLON : ':';
