@@ -17,7 +17,5 @@ def print_parse_tree(argv):
 
 
 if __name__ == '__main__':
-    import sys
-
     print_parse_tree("C:\\Users\\user\\Desktop\\Example Program 1.txt")
 
