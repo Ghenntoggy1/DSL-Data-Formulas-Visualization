@@ -35,6 +35,15 @@ class DSL_Data_Formulas_Visualization_GrammarListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#comment.
+    def enterComment(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.CommentContext):
+        pass
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#comment.
+    def exitComment(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.CommentContext):
+        pass
+
+
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readCommand.
     def enterReadCommand(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.ReadCommandContext):
         pass

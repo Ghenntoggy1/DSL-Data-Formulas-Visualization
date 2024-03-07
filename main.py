@@ -1,16 +1,23 @@
-# This is a sample Python script.
+from antlr4 import *
+from antlr4.tree.Trees import Trees
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarLexer import \
+    DSL_Data_Formulas_Visualization_GrammarLexer
+from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarParser import \
+    DSL_Data_Formulas_Visualization_GrammarParser
 
 
-# Press the green button in the gutter to run the script.
+def print_parse_tree(argv):
+    input = FileStream(argv)
+    lexer = DSL_Data_Formulas_Visualization_GrammarLexer(input)
+    stream = CommonTokenStream(lexer)
+    parser = DSL_Data_Formulas_Visualization_GrammarParser(stream)
+    tree = parser.program()
+    print(Trees.toStringTree(tree, None, parser))
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    import sys
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    print_parse_tree("C:\\Users\\user\\Desktop\\Example Program 1.txt")
+

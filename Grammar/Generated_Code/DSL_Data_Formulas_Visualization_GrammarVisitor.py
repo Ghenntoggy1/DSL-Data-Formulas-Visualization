@@ -24,6 +24,11 @@ class DSL_Data_Formulas_Visualization_GrammarVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#comment.
+    def visitComment(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.CommentContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readCommand.
     def visitReadCommand(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.ReadCommandContext):
         return self.visitChildren(ctx)

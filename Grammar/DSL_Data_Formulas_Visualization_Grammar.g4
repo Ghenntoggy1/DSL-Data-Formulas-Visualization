@@ -58,7 +58,7 @@ HIST : 'hist';
 PNG : 'png';
 JPG : 'jpg';
 CSV : 'csv';
-TEXT : 'text';
+TEXT : 'txt';
 JSON : 'json';
 EXCEL : 'excel';
 CONSOLE : 'console';
