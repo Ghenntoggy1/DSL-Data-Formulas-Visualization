@@ -17,5 +17,7 @@ def print_parse_tree(argv):
 
 
 if __name__ == '__main__':
-    print_parse_tree("C:\\Users\\user\\Desktop\\Example Program 1.txt")
+    print_parse_tree(".\\Grammar\\Example_Program_Code\\Example_Program_1.txt")
+    print_parse_tree(".\\Grammar\\Example_Program_Code\\Example_Program_2.txt")
+    print_parse_tree(".\\Grammar\\Example_Program_Code\\Example_Program_3.txt")
 
