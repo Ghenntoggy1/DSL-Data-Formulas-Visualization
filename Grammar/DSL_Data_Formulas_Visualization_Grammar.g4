@@ -7,7 +7,9 @@ commandsList : command+;
 
 command : readCommand SEMICOLON
         | exportCommand SEMICOLON
-        | visualizeCommand SEMICOLON;
+        | visualizeCommand SEMICOLON
+        | ifStatement
+        | whileStatement;
 
 readCommand : 'Data' ID ASSIGN readFromFile
             | 'Formula' ID ASSIGN formulaContent;
@@ -38,6 +40,13 @@ imageType : PNG | JPG;
 
 formulaContent : FORMULA;
 
+ifStatement : 'if' LPAREN condition RPAREN '{' commandsList '}' ('else' '{' commandsList '}')?;
+
+whileStatement : 'while' LPAREN condition RPAREN '{' commandsList '}';
+
+condition : expression;
+
+expression : ID (EQUAL | NOT_EQUAL | GREATER | LESS | GREATER_EQUAL | LESS_EQUAL) (ID | DIGIT);
 
 // Lexer rules
 START : 'Start';
@@ -71,3 +80,10 @@ DATA : 'data';
 DIGIT : '-'? [0-9]+;
 DOT : '.';
 WS : [ \t\r\n]+ -> skip; // Skip whitespace
+
+EQUAL : '==';
+NOT_EQUAL : '!=';
+GREATER : '>';
+LESS : '<';
+GREATER_EQUAL : '>=';
+LESS_EQUAL : '<=';
