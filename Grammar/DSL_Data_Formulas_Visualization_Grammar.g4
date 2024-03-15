@@ -3,13 +3,11 @@ grammar DSL_Data_Formulas_Visualization_Grammar;
 // Parser rules
 program : commandsList;
 
-commandsList : (command | comment)+;
+commandsList : (command | ifStatement | whileStatement | comment)+;
 
 command : readCommand SEMICOLON
         | exportCommand SEMICOLON
-        | visualizeCommand SEMICOLON
-        | ifStatement
-        | whileStatement;
+        | visualizeCommand SEMICOLON;
 
 comment : COMMENT_BLOCK
         | COMMENT_LINE;
@@ -44,9 +42,10 @@ imageType : PNG | JPG;
 
 formulaContent : FORMULA;
 
-ifStatement : 'if' LPAREN condition RPAREN '{' commandsList '}' ('else' '{' commandsList '}')?;
+ifStatement : 'if' LPAREN condition RPAREN ':' INDENT commandsList DEDENT
+            ( 'else' ':' INDENT commandsList DEDENT)?;
 
-whileStatement : 'while' LPAREN condition RPAREN '{' commandsList '}';
+whileStatement : 'while' LPAREN condition RPAREN ':' INDENT commandsList DEDENT;
 
 condition : expression;
 
@@ -93,3 +92,6 @@ GREATER : '>';
 LESS : '<';
 GREATER_EQUAL : '>=';
 LESS_EQUAL : '<=';
+
+INDENT : '\n' [ \t]*;
+DEDENT : '\n' [ \t]*;
