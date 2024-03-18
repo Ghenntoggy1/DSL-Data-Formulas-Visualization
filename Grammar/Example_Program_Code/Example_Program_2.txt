@@ -1,3 +1,6 @@
+if (var1 == var2) {
+    VisualData(graph) dataset=(var1);
+};
 # This is Table Data read from TXT File;
 Data tableData = ReadFrom("/path1/folder1/file.txt");
 /* Line 1

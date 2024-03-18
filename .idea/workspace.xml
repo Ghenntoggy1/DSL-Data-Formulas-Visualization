@@ -5,8 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc725dec-f923-4da1-bc49-ceb824ae6da1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_03_2024_22_24__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_03_2024_22_24__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Grammar/DSL_Data_Formulas_Visualization_Grammar.g4" beforeDir="false" afterPath="$PROJECT_DIR$/Grammar/DSL_Data_Formulas_Visualization_Grammar.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/Example_Program_Code/Example_Program_2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Grammar/Example_Program_Code/Example_Program_2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/Generated_Code/DSL_Data_Formulas_Visualization_Grammar.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/Generated_Code/DSL_Data_Formulas_Visualization_Grammar.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/Generated_Code/DSL_Data_Formulas_Visualization_GrammarLexer.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/Generated_Code/DSL_Data_Formulas_Visualization_GrammarLexer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/Generated_Code/DSL_Data_Formulas_Visualization_GrammarLexer.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/Generated_Code/DSL_Data_Formulas_Visualization_GrammarListener.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/Generated_Code/DSL_Data_Formulas_Visualization_GrammarParser.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/Generated_Code/DSL_Data_Formulas_Visualization_GrammarVisitor.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,22 +39,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;tudor__main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Programming/Projects/DSL/DSL_Data_Formulas_Visualization/Grammar/Example_Program_Code&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/Programming/Projects/DSL/DSL_Data_Formulas_Visualization/Grammar/Example_Program_Code",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Programming\Projects\DSL\DSL_Data_Formulas_Visualization\Grammar\Example_Program_Code" />
@@ -110,7 +119,18 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DSL_Data_Formulas_Visualization$main.coverage" NAME="main Coverage Results" MODIFIED="1709838940164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DSL_Data_Formulas_Visualization$main.coverage" NAME="main Coverage Results" MODIFIED="1710796299430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

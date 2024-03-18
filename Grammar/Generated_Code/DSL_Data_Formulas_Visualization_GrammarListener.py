@@ -161,5 +161,41 @@ class DSL_Data_Formulas_Visualization_GrammarListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#ifStatement.
+    def enterIfStatement(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.IfStatementContext):
+        pass
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#ifStatement.
+    def exitIfStatement(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.IfStatementContext):
+        pass
+
+
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#whileStatement.
+    def enterWhileStatement(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.WhileStatementContext):
+        pass
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#whileStatement.
+    def exitWhileStatement(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.WhileStatementContext):
+        pass
+
+
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition.
+    def enterCondition(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.ConditionContext):
+        pass
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition.
+    def exitCondition(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.ConditionContext):
+        pass
+
+
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#expression.
+    def enterExpression(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.ExpressionContext):
+        pass
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#expression.
+    def exitExpression(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.ExpressionContext):
+        pass
+
+
 
 del DSL_Data_Formulas_Visualization_GrammarParser

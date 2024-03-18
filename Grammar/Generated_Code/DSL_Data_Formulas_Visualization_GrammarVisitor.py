@@ -94,5 +94,25 @@ class DSL_Data_Formulas_Visualization_GrammarVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#ifStatement.
+    def visitIfStatement(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.IfStatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#whileStatement.
+    def visitWhileStatement(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.WhileStatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition.
+    def visitCondition(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.ConditionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#expression.
+    def visitExpression(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.ExpressionContext):
+        return self.visitChildren(ctx)
+
+
 
 del DSL_Data_Formulas_Visualization_GrammarParser
