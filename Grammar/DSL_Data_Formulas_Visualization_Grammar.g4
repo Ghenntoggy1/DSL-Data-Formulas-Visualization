@@ -3,7 +3,7 @@ grammar DSL_Data_Formulas_Visualization_Grammar;
 // Parser rules
 program : commandsList;
 
-commandsList : (command | comment)+;
+commandsList : (command | ifStatement | whileStatement | comment)+;
 
 command : readCommand SEMICOLON
         | exportCommand SEMICOLON
@@ -42,6 +42,14 @@ imageType : PNG | JPG;
 
 formulaContent : FORMULA;
 
+ifStatement : 'if' LPAREN condition RPAREN LBRACE commandsList RBRACE
+             ( 'else' LBRACE commandsList RBRACE )? SEMICOLON ;
+
+whileStatement : 'while' LPAREN condition RPAREN LBRACE commandsList RBRACE SEMICOLON;
+
+condition : expression;
+
+expression : ID (EQUAL | NOT_EQUAL | GREATER | LESS | GREATER_EQUAL | LESS_EQUAL) (ID | DIGIT);
 
 // Lexer rules
 START : 'Start';
@@ -77,3 +85,13 @@ OPERATORS : '*' | '^' | 'log' | 'sqr' | 'sqrt' | 'fact' | '+' | '-';
 DIGIT : '-'? [0-9]+;
 DOT : '.';
 WS : [ \t\r\n]+ -> skip; // Skip whitespace
+
+EQUAL : '==';
+NOT_EQUAL : '!=';
+GREATER : '>';
+LESS : '<';
+GREATER_EQUAL : '>=';
+LESS_EQUAL : '<=';
+
+LBRACE : '{';
+RBRACE : '}';
