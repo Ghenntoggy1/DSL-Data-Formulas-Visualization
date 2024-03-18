@@ -42,10 +42,10 @@ imageType : PNG | JPG;
 
 formulaContent : FORMULA;
 
-ifStatement : 'if' LPAREN condition RPAREN ':' INDENT commandsList DEDENT
-            ( 'else' ':' INDENT commandsList DEDENT)?;
+ifStatement : 'if' LPAREN condition RPAREN LBRACE commandsList RBRACE
+             ( 'else' LBRACE commandsList RBRACE )? SEMICOLON ;
 
-whileStatement : 'while' LPAREN condition RPAREN ':' INDENT commandsList DEDENT;
+whileStatement : 'while' LPAREN condition RPAREN LBRACE commandsList RBRACE SEMICOLON;
 
 condition : expression;
 
@@ -93,5 +93,5 @@ LESS : '<';
 GREATER_EQUAL : '>=';
 LESS_EQUAL : '<=';
 
-INDENT : '\n' [ \t]*;
-DEDENT : '\n' [ \t]*;
+LBRACE : '{';
+RBRACE : '}';
