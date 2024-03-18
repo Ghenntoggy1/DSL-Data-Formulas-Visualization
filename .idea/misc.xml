@@ -15,7 +15,7 @@
         <PerGrammarGenerationSettings>
           <option name="fileName" value="$PROJECT_DIR$/Grammar/DSL_Data_Formulas_Visualization_Grammar.g4" />
           <option name="autoGen" value="true" />
-          <option name="outputDir" value="D:\Programming\Projects\DSL\DSL_Data_Formulas_Visualization\Grammar\Output" />
+          <option name="outputDir" value="D:\Programming\Projects\DSL\DSL_Data_Formulas_Visualization\Grammar" />
           <option name="libDir" value="" />
           <option name="encoding" value="" />
           <option name="pkg" value="Generated_Code" />

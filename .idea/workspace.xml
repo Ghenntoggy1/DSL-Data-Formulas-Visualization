@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc725dec-f923-4da1-bc49-ceb824ae6da1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Grammar/DSL_Data_Formulas_Visualization_Grammar.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Grammar/Example_Program_Code/Example_Program_1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Grammar/Example_Program_Code/Example_Program_3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/Example_Program_Code/Example Program 1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Grammar/Example_Program_Code/Example_Program_2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/ParserImages/parseTree.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/ParserImages/parseTree2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Grammar/ParserImages/parseTree2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,10 +32,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Programming/Projects/DSL/DSL_Data_Formulas_Visualization/Grammar/Output",
+    "git-widget-placeholder": "Grammar",
+    "last_opened_file_path": "D:/Programming/Projects/DSL/DSL_Data_Formulas_Visualization/Grammar/Example_Program_Code",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -41,6 +46,14 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Programming\Projects\DSL\DSL_Data_Formulas_Visualization\Grammar\Example_Program_Code" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Programming\Projects\DSL\DSL_Data_Formulas_Visualization\Grammar" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="DSL_Data_Formulas_Visualization" />
@@ -69,7 +82,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-5a2391486177-2887949eec09-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.13763.11" />
+        <option value="bundled-python-sdk-d68999036c7f-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.14475.56" />
       </set>
     </attachedChunks>
   </component>
@@ -84,22 +97,19 @@
       <workItem from="1708121876525" duration="723000" />
       <workItem from="1708297116983" duration="12000" />
       <workItem from="1709154794221" duration="159000" />
-      <workItem from="1709154961501" duration="5605000" />
+      <workItem from="1709154961501" duration="8354000" />
+      <workItem from="1709163475941" duration="1540000" />
+      <workItem from="1709312448035" duration="11000" />
+      <workItem from="1709724824003" duration="3865000" />
+      <workItem from="1709797831230" duration="2303000" />
+      <workItem from="1709830041504" duration="7981000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>8</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/DSL_Data_Formulas_Visualization$main.coverage" NAME="main Coverage Results" MODIFIED="1709838940164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

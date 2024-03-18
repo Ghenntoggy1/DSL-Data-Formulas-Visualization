@@ -1,0 +1,7 @@
+# This is Table Data read from TXT File;
+Data tableData = ReadFrom("/path1/folder1/file.txt");
+/* Line 1
+Data excelData = ReadFrom("/path2/folder1/file.xlss");
+Line 3 */
+VisualData(console) dataset = (tableData);
+ExportToFile ("path3/folder/") dataset=(excelData) name=(newFile.json);
