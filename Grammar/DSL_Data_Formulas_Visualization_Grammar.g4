@@ -52,8 +52,6 @@ condition :  ID expression (ID | DIGIT);
 expression : (EQUAL | NOT_EQUAL | GREATER | LESS | GREATER_EQUAL | LESS_EQUAL) ;
 
 // Lexer rules
-START : 'Start';
-END : 'End';
 DATA : 'Data';
 DATASET: 'dataset';
 NAME : 'name';
