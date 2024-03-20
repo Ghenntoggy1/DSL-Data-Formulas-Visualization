@@ -89,7 +89,7 @@ ASSIGN : '=';
 LBRACKET : '[';
 RBRACKET : ']';
 OPERATORS : '*' | '^' | 'log' | 'sqr' | 'sqrt' | 'fact' | '+' | '-';
-DIGIT : '-'? [0-9]+;
+DIGIT : '-'? [0-9]+(.[0-9]+)?;
 DOT : '.';
 WS : [ \t\r\n]+ -> skip; // Skip whitespace
 
