@@ -27,8 +27,8 @@ exportToImage : plotType LPAREN ID RPAREN NAME ASSIGN LPAREN ID DOT imageType RP
 visualizeCommand : visualizeFormula
                  | visualizeData;
 
-visualizeFormula : VISUAL_FORMULA LPAREN formulaContent RPAREN RANGE ASSIGN LPAREN DIGIT COMMA DIGIT RPAREN
-                 | VISUAL_FORMULA LPAREN ID RPAREN RANGE ASSIGN LPAREN DIGIT COMMA DIGIT RPAREN;
+visualizeFormula : VISUAL_FORMULA LPAREN formulaContent RPAREN RANGE ASSIGN LPAREN ( DIGIT | INTEGER | FLOAT ) COMMA ( DIGIT | INTEGER | FLOAT ) RPAREN
+                 | VISUAL_FORMULA LPAREN ID RPAREN RANGE ASSIGN LPAREN ( DIGIT | INTEGER | FLOAT ) COMMA ( DIGIT | INTEGER | FLOAT ) RPAREN;
 
 visualizeData : VISUAL_DATA LPAREN visualizationType RPAREN DATASET ASSIGN LPAREN ID RPAREN;
 
@@ -40,14 +40,14 @@ fileType : CSV | TEXT | JSON | EXCEL;
 
 imageType : PNG | JPG;
 
-formulaContent : (ID | OPERATORS | LPAREN | RPAREN | DIGIT | WS)+;
+formulaContent : (ID | OPERATORS | LPAREN | RPAREN | DIGIT | INTEGER | FLOAT | WS)+;
 
 ifStatement : IF LPAREN condition RPAREN LBRACE commandsList RBRACE
              ( ELSE LBRACE commandsList RBRACE )? SEMICOLON ;
 
 whileStatement : WHILE LPAREN condition RPAREN LBRACE commandsList RBRACE SEMICOLON;
 
-condition :  ID expression (ID | DIGIT);
+condition :  ID expression (ID | DIGIT | INTEGER | FLOAT);
 
 expression : (EQUAL | NOT_EQUAL | GREATER | LESS | GREATER_EQUAL | LESS_EQUAL) ;
 
@@ -89,7 +89,9 @@ ASSIGN : '=';
 LBRACKET : '[';
 RBRACKET : ']';
 OPERATORS : '*' | '^' | 'log' | 'sqr' | 'sqrt' | 'fact' | '+' | '-';
-DIGIT : '-'? [0-9]+(.[0-9]+)?;
+DIGIT : [0-9];
+INTEGER : '-'? DIGIT+;
+FLOAT : INTEGER (DOT DIGIT+)?;
 DOT : '.';
 WS : [ \t\r\n]+ -> skip; // Skip whitespace
 
