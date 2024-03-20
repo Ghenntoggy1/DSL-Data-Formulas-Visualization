@@ -91,7 +91,7 @@ RBRACKET : ']';
 OPERATORS : '*' | '^' | 'log' | 'sqr' | 'sqrt' | 'fact' | '+' | '-';
 DIGIT : [0-9];
 INTEGER : '-'? DIGIT+;
-FLOAT : INTEGER (DOT DIGIT+)?;
+FLOAT : INTEGER DOT DIGIT+;
 DOT : '.';
 WS : [ \t\r\n]+ -> skip; // Skip whitespace
 
