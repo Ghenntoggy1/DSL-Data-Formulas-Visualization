@@ -10,7 +10,7 @@ else:
 
 def serializedATN():
     return [
-        4,1,48,203,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,50,203,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
         7,20,1,0,1,0,1,1,1,1,1,1,1,1,4,1,49,8,1,11,1,12,1,50,1,2,1,2,1,2,
@@ -26,55 +26,55 @@ def serializedATN():
         17,1,17,1,17,1,17,1,17,3,17,184,8,17,1,17,1,17,1,18,1,18,1,18,1,
         18,1,18,1,18,1,18,1,18,1,18,1,19,1,19,1,19,1,19,1,20,1,20,1,20,0,
         0,21,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,0,
-        7,1,0,27,28,1,0,14,17,1,0,20,23,1,0,18,19,4,0,25,25,32,33,37,38,
-        40,40,2,0,25,25,38,38,1,0,41,46,194,0,42,1,0,0,0,2,48,1,0,0,0,4,
-        61,1,0,0,0,6,63,1,0,0,0,8,73,1,0,0,0,10,75,1,0,0,0,12,90,1,0,0,0,
-        14,92,1,0,0,0,16,105,1,0,0,0,18,119,1,0,0,0,20,144,1,0,0,0,22,146,
-        1,0,0,0,24,158,1,0,0,0,26,160,1,0,0,0,28,162,1,0,0,0,30,164,1,0,
-        0,0,32,167,1,0,0,0,34,171,1,0,0,0,36,187,1,0,0,0,38,196,1,0,0,0,
-        40,200,1,0,0,0,42,43,3,2,1,0,43,1,1,0,0,0,44,49,3,4,2,0,45,49,3,
-        34,17,0,46,49,3,36,18,0,47,49,3,6,3,0,48,44,1,0,0,0,48,45,1,0,0,
-        0,48,46,1,0,0,0,48,47,1,0,0,0,49,50,1,0,0,0,50,48,1,0,0,0,50,51,
-        1,0,0,0,51,3,1,0,0,0,52,53,3,8,4,0,53,54,5,29,0,0,54,62,1,0,0,0,
-        55,56,3,12,6,0,56,57,5,29,0,0,57,62,1,0,0,0,58,59,3,18,9,0,59,60,
-        5,29,0,0,60,62,1,0,0,0,61,52,1,0,0,0,61,55,1,0,0,0,61,58,1,0,0,0,
-        62,5,1,0,0,0,63,64,7,0,0,0,64,7,1,0,0,0,65,66,5,1,0,0,66,67,5,25,
-        0,0,67,68,5,34,0,0,68,74,3,10,5,0,69,70,5,8,0,0,70,71,5,25,0,0,71,
-        72,5,34,0,0,72,74,3,32,16,0,73,65,1,0,0,0,73,69,1,0,0,0,74,9,1,0,
-        0,0,75,76,5,9,0,0,76,77,5,32,0,0,77,78,5,26,0,0,78,79,5,33,0,0,79,
-        11,1,0,0,0,80,81,5,10,0,0,81,82,5,32,0,0,82,83,5,26,0,0,83,84,5,
-        33,0,0,84,91,3,14,7,0,85,86,5,11,0,0,86,87,5,32,0,0,87,88,5,26,0,
-        0,88,89,5,33,0,0,89,91,3,16,8,0,90,80,1,0,0,0,90,85,1,0,0,0,91,13,
-        1,0,0,0,92,93,5,2,0,0,93,94,5,34,0,0,94,95,5,32,0,0,95,96,5,25,0,
-        0,96,97,5,33,0,0,97,98,5,3,0,0,98,99,5,34,0,0,99,100,5,32,0,0,100,
-        101,5,25,0,0,101,102,5,39,0,0,102,103,3,28,14,0,103,104,5,33,0,0,
-        104,15,1,0,0,0,105,106,3,26,13,0,106,107,5,32,0,0,107,108,5,25,0,
-        0,108,109,5,33,0,0,109,110,5,3,0,0,110,111,5,34,0,0,111,112,5,32,
-        0,0,112,113,5,25,0,0,113,114,5,39,0,0,114,115,3,30,15,0,115,116,
-        5,33,0,0,116,17,1,0,0,0,117,120,3,20,10,0,118,120,3,22,11,0,119,
-        117,1,0,0,0,119,118,1,0,0,0,120,19,1,0,0,0,121,122,5,12,0,0,122,
-        123,5,32,0,0,123,124,3,32,16,0,124,125,5,33,0,0,125,126,5,6,0,0,
-        126,127,5,34,0,0,127,128,5,32,0,0,128,129,5,38,0,0,129,130,5,31,
-        0,0,130,131,5,38,0,0,131,132,5,33,0,0,132,145,1,0,0,0,133,134,5,
-        12,0,0,134,135,5,32,0,0,135,136,5,25,0,0,136,137,5,33,0,0,137,138,
-        5,6,0,0,138,139,5,34,0,0,139,140,5,32,0,0,140,141,5,38,0,0,141,142,
-        5,31,0,0,142,143,5,38,0,0,143,145,5,33,0,0,144,121,1,0,0,0,144,133,
-        1,0,0,0,145,21,1,0,0,0,146,147,5,13,0,0,147,148,5,32,0,0,148,149,
-        3,24,12,0,149,150,5,33,0,0,150,151,5,2,0,0,151,152,5,34,0,0,152,
-        153,5,32,0,0,153,154,5,25,0,0,154,155,5,33,0,0,155,23,1,0,0,0,156,
-        159,5,24,0,0,157,159,3,26,13,0,158,156,1,0,0,0,158,157,1,0,0,0,159,
-        25,1,0,0,0,160,161,7,1,0,0,161,27,1,0,0,0,162,163,7,2,0,0,163,29,
-        1,0,0,0,164,165,7,3,0,0,165,31,1,0,0,0,166,168,7,4,0,0,167,166,1,
-        0,0,0,168,169,1,0,0,0,169,167,1,0,0,0,169,170,1,0,0,0,170,33,1,0,
-        0,0,171,172,5,4,0,0,172,173,5,32,0,0,173,174,3,38,19,0,174,175,5,
-        33,0,0,175,176,5,47,0,0,176,177,3,2,1,0,177,183,5,48,0,0,178,179,
-        5,5,0,0,179,180,5,47,0,0,180,181,3,2,1,0,181,182,5,48,0,0,182,184,
-        1,0,0,0,183,178,1,0,0,0,183,184,1,0,0,0,184,185,1,0,0,0,185,186,
-        5,29,0,0,186,35,1,0,0,0,187,188,5,7,0,0,188,189,5,32,0,0,189,190,
-        3,38,19,0,190,191,5,33,0,0,191,192,5,47,0,0,192,193,3,2,1,0,193,
-        194,5,48,0,0,194,195,5,29,0,0,195,37,1,0,0,0,196,197,5,25,0,0,197,
-        198,3,40,20,0,198,199,7,5,0,0,199,39,1,0,0,0,200,201,7,6,0,0,201,
-        41,1,0,0,0,10,48,50,61,73,90,119,144,158,169,183
+        8,1,0,27,28,1,0,38,40,1,0,14,17,1,0,20,23,1,0,18,19,4,0,25,25,32,
+        33,37,40,42,42,2,0,25,25,38,40,1,0,43,48,194,0,42,1,0,0,0,2,48,1,
+        0,0,0,4,61,1,0,0,0,6,63,1,0,0,0,8,73,1,0,0,0,10,75,1,0,0,0,12,90,
+        1,0,0,0,14,92,1,0,0,0,16,105,1,0,0,0,18,119,1,0,0,0,20,144,1,0,0,
+        0,22,146,1,0,0,0,24,158,1,0,0,0,26,160,1,0,0,0,28,162,1,0,0,0,30,
+        164,1,0,0,0,32,167,1,0,0,0,34,171,1,0,0,0,36,187,1,0,0,0,38,196,
+        1,0,0,0,40,200,1,0,0,0,42,43,3,2,1,0,43,1,1,0,0,0,44,49,3,4,2,0,
+        45,49,3,34,17,0,46,49,3,36,18,0,47,49,3,6,3,0,48,44,1,0,0,0,48,45,
+        1,0,0,0,48,46,1,0,0,0,48,47,1,0,0,0,49,50,1,0,0,0,50,48,1,0,0,0,
+        50,51,1,0,0,0,51,3,1,0,0,0,52,53,3,8,4,0,53,54,5,29,0,0,54,62,1,
+        0,0,0,55,56,3,12,6,0,56,57,5,29,0,0,57,62,1,0,0,0,58,59,3,18,9,0,
+        59,60,5,29,0,0,60,62,1,0,0,0,61,52,1,0,0,0,61,55,1,0,0,0,61,58,1,
+        0,0,0,62,5,1,0,0,0,63,64,7,0,0,0,64,7,1,0,0,0,65,66,5,1,0,0,66,67,
+        5,25,0,0,67,68,5,34,0,0,68,74,3,10,5,0,69,70,5,8,0,0,70,71,5,25,
+        0,0,71,72,5,34,0,0,72,74,3,32,16,0,73,65,1,0,0,0,73,69,1,0,0,0,74,
+        9,1,0,0,0,75,76,5,9,0,0,76,77,5,32,0,0,77,78,5,26,0,0,78,79,5,33,
+        0,0,79,11,1,0,0,0,80,81,5,10,0,0,81,82,5,32,0,0,82,83,5,26,0,0,83,
+        84,5,33,0,0,84,91,3,14,7,0,85,86,5,11,0,0,86,87,5,32,0,0,87,88,5,
+        26,0,0,88,89,5,33,0,0,89,91,3,16,8,0,90,80,1,0,0,0,90,85,1,0,0,0,
+        91,13,1,0,0,0,92,93,5,2,0,0,93,94,5,34,0,0,94,95,5,32,0,0,95,96,
+        5,25,0,0,96,97,5,33,0,0,97,98,5,3,0,0,98,99,5,34,0,0,99,100,5,32,
+        0,0,100,101,5,25,0,0,101,102,5,41,0,0,102,103,3,28,14,0,103,104,
+        5,33,0,0,104,15,1,0,0,0,105,106,3,26,13,0,106,107,5,32,0,0,107,108,
+        5,25,0,0,108,109,5,33,0,0,109,110,5,3,0,0,110,111,5,34,0,0,111,112,
+        5,32,0,0,112,113,5,25,0,0,113,114,5,41,0,0,114,115,3,30,15,0,115,
+        116,5,33,0,0,116,17,1,0,0,0,117,120,3,20,10,0,118,120,3,22,11,0,
+        119,117,1,0,0,0,119,118,1,0,0,0,120,19,1,0,0,0,121,122,5,12,0,0,
+        122,123,5,32,0,0,123,124,3,32,16,0,124,125,5,33,0,0,125,126,5,6,
+        0,0,126,127,5,34,0,0,127,128,5,32,0,0,128,129,7,1,0,0,129,130,5,
+        31,0,0,130,131,7,1,0,0,131,132,5,33,0,0,132,145,1,0,0,0,133,134,
+        5,12,0,0,134,135,5,32,0,0,135,136,5,25,0,0,136,137,5,33,0,0,137,
+        138,5,6,0,0,138,139,5,34,0,0,139,140,5,32,0,0,140,141,7,1,0,0,141,
+        142,5,31,0,0,142,143,7,1,0,0,143,145,5,33,0,0,144,121,1,0,0,0,144,
+        133,1,0,0,0,145,21,1,0,0,0,146,147,5,13,0,0,147,148,5,32,0,0,148,
+        149,3,24,12,0,149,150,5,33,0,0,150,151,5,2,0,0,151,152,5,34,0,0,
+        152,153,5,32,0,0,153,154,5,25,0,0,154,155,5,33,0,0,155,23,1,0,0,
+        0,156,159,5,24,0,0,157,159,3,26,13,0,158,156,1,0,0,0,158,157,1,0,
+        0,0,159,25,1,0,0,0,160,161,7,2,0,0,161,27,1,0,0,0,162,163,7,3,0,
+        0,163,29,1,0,0,0,164,165,7,4,0,0,165,31,1,0,0,0,166,168,7,5,0,0,
+        167,166,1,0,0,0,168,169,1,0,0,0,169,167,1,0,0,0,169,170,1,0,0,0,
+        170,33,1,0,0,0,171,172,5,4,0,0,172,173,5,32,0,0,173,174,3,38,19,
+        0,174,175,5,33,0,0,175,176,5,49,0,0,176,177,3,2,1,0,177,183,5,50,
+        0,0,178,179,5,5,0,0,179,180,5,49,0,0,180,181,3,2,1,0,181,182,5,50,
+        0,0,182,184,1,0,0,0,183,178,1,0,0,0,183,184,1,0,0,0,184,185,1,0,
+        0,0,185,186,5,29,0,0,186,35,1,0,0,0,187,188,5,7,0,0,188,189,5,32,
+        0,0,189,190,3,38,19,0,190,191,5,33,0,0,191,192,5,49,0,0,192,193,
+        3,2,1,0,193,194,5,50,0,0,194,195,5,29,0,0,195,37,1,0,0,0,196,197,
+        5,25,0,0,197,198,3,40,20,0,198,199,7,6,0,0,199,39,1,0,0,0,200,201,
+        7,7,0,0,201,41,1,0,0,0,10,48,50,61,73,90,119,144,158,169,183
     ]
 
 class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
@@ -94,9 +94,9 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
                      "'png'", "'jpg'", "'csv'", "'txt'", "'json'", "'excel'", 
                      "'console'", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "';'", "':'", "','", "'('", "')'", "'='", 
-                     "'['", "']'", "<INVALID>", "<INVALID>", "'.'", "<INVALID>", 
-                     "'=='", "'!='", "'>'", "'<'", "'>='", "'<='", "'{'", 
-                     "'}'" ]
+                     "'['", "']'", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "'.'", "<INVALID>", "'=='", "'!='", "'>'", 
+                     "'<'", "'>='", "'<='", "'{'", "'}'" ]
 
     symbolicNames = [ "<INVALID>", "DATA", "DATASET", "NAME", "IF", "ELSE", 
                       "RANGE", "WHILE", "FORMULA_T", "READ_FROM", "EXPORT_TO_FILE", 
@@ -105,9 +105,9 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
                       "TEXT", "JSON", "EXCEL", "CONSOLE", "ID", "PATH", 
                       "COMMENT_BLOCK", "COMMENT_LINE", "SEMICOLON", "COLON", 
                       "COMMA", "LPAREN", "RPAREN", "ASSIGN", "LBRACKET", 
-                      "RBRACKET", "OPERATORS", "DIGIT", "DOT", "WS", "EQUAL", 
-                      "NOT_EQUAL", "GREATER", "LESS", "GREATER_EQUAL", "LESS_EQUAL", 
-                      "LBRACE", "RBRACE" ]
+                      "RBRACKET", "OPERATORS", "DIGIT", "INTEGER", "FLOAT", 
+                      "DOT", "WS", "EQUAL", "NOT_EQUAL", "GREATER", "LESS", 
+                      "GREATER_EQUAL", "LESS_EQUAL", "LBRACE", "RBRACE" ]
 
     RULE_program = 0
     RULE_commandsList = 1
@@ -177,16 +177,18 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
     RBRACKET=36
     OPERATORS=37
     DIGIT=38
-    DOT=39
-    WS=40
-    EQUAL=41
-    NOT_EQUAL=42
-    GREATER=43
-    LESS=44
-    GREATER_EQUAL=45
-    LESS_EQUAL=46
-    LBRACE=47
-    RBRACE=48
+    INTEGER=39
+    FLOAT=40
+    DOT=41
+    WS=42
+    EQUAL=43
+    NOT_EQUAL=44
+    GREATER=45
+    LESS=46
+    GREATER_EQUAL=47
+    LESS_EQUAL=48
+    LBRACE=49
+    RBRACE=50
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -1033,14 +1035,26 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
         def ASSIGN(self):
             return self.getToken(DSL_Data_Formulas_Visualization_GrammarParser.ASSIGN, 0)
 
+        def COMMA(self):
+            return self.getToken(DSL_Data_Formulas_Visualization_GrammarParser.COMMA, 0)
+
         def DIGIT(self, i:int=None):
             if i is None:
                 return self.getTokens(DSL_Data_Formulas_Visualization_GrammarParser.DIGIT)
             else:
                 return self.getToken(DSL_Data_Formulas_Visualization_GrammarParser.DIGIT, i)
 
-        def COMMA(self):
-            return self.getToken(DSL_Data_Formulas_Visualization_GrammarParser.COMMA, 0)
+        def INTEGER(self, i:int=None):
+            if i is None:
+                return self.getTokens(DSL_Data_Formulas_Visualization_GrammarParser.INTEGER)
+            else:
+                return self.getToken(DSL_Data_Formulas_Visualization_GrammarParser.INTEGER, i)
+
+        def FLOAT(self, i:int=None):
+            if i is None:
+                return self.getTokens(DSL_Data_Formulas_Visualization_GrammarParser.FLOAT)
+            else:
+                return self.getToken(DSL_Data_Formulas_Visualization_GrammarParser.FLOAT, i)
 
         def ID(self):
             return self.getToken(DSL_Data_Formulas_Visualization_GrammarParser.ID, 0)
@@ -1069,6 +1083,7 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
 
         localctx = DSL_Data_Formulas_Visualization_GrammarParser.VisualizeFormulaContext(self, self._ctx, self.state)
         self.enterRule(localctx, 20, self.RULE_visualizeFormula)
+        self._la = 0 # Token type
         try:
             self.state = 144
             self._errHandler.sync(self)
@@ -1090,11 +1105,21 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
                 self.state = 127
                 self.match(DSL_Data_Formulas_Visualization_GrammarParser.LPAREN)
                 self.state = 128
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.DIGIT)
+                _la = self._input.LA(1)
+                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1924145348608) != 0)):
+                    self._errHandler.recoverInline(self)
+                else:
+                    self._errHandler.reportMatch(self)
+                    self.consume()
                 self.state = 129
                 self.match(DSL_Data_Formulas_Visualization_GrammarParser.COMMA)
                 self.state = 130
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.DIGIT)
+                _la = self._input.LA(1)
+                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1924145348608) != 0)):
+                    self._errHandler.recoverInline(self)
+                else:
+                    self._errHandler.reportMatch(self)
+                    self.consume()
                 self.state = 131
                 self.match(DSL_Data_Formulas_Visualization_GrammarParser.RPAREN)
                 pass
@@ -1116,11 +1141,21 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
                 self.state = 139
                 self.match(DSL_Data_Formulas_Visualization_GrammarParser.LPAREN)
                 self.state = 140
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.DIGIT)
+                _la = self._input.LA(1)
+                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1924145348608) != 0)):
+                    self._errHandler.recoverInline(self)
+                else:
+                    self._errHandler.reportMatch(self)
+                    self.consume()
                 self.state = 141
                 self.match(DSL_Data_Formulas_Visualization_GrammarParser.COMMA)
                 self.state = 142
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.DIGIT)
+                _la = self._input.LA(1)
+                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1924145348608) != 0)):
+                    self._errHandler.recoverInline(self)
+                else:
+                    self._errHandler.reportMatch(self)
+                    self.consume()
                 self.state = 143
                 self.match(DSL_Data_Formulas_Visualization_GrammarParser.RPAREN)
                 pass
@@ -1504,6 +1539,18 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
             else:
                 return self.getToken(DSL_Data_Formulas_Visualization_GrammarParser.DIGIT, i)
 
+        def INTEGER(self, i:int=None):
+            if i is None:
+                return self.getTokens(DSL_Data_Formulas_Visualization_GrammarParser.INTEGER)
+            else:
+                return self.getToken(DSL_Data_Formulas_Visualization_GrammarParser.INTEGER, i)
+
+        def FLOAT(self, i:int=None):
+            if i is None:
+                return self.getTokens(DSL_Data_Formulas_Visualization_GrammarParser.FLOAT)
+            else:
+                return self.getToken(DSL_Data_Formulas_Visualization_GrammarParser.FLOAT, i)
+
         def WS(self, i:int=None):
             if i is None:
                 return self.getTokens(DSL_Data_Formulas_Visualization_GrammarParser.WS)
@@ -1544,7 +1591,7 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
                 if _alt == 1:
                     self.state = 166
                     _la = self._input.LA(1)
-                    if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1524746944512) != 0)):
+                    if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 6472549269504) != 0)):
                         self._errHandler.recoverInline(self)
                     else:
                         self._errHandler.reportMatch(self)
@@ -1780,6 +1827,12 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
         def DIGIT(self):
             return self.getToken(DSL_Data_Formulas_Visualization_GrammarParser.DIGIT, 0)
 
+        def INTEGER(self):
+            return self.getToken(DSL_Data_Formulas_Visualization_GrammarParser.INTEGER, 0)
+
+        def FLOAT(self):
+            return self.getToken(DSL_Data_Formulas_Visualization_GrammarParser.FLOAT, 0)
+
         def getRuleIndex(self):
             return DSL_Data_Formulas_Visualization_GrammarParser.RULE_condition
 
@@ -1813,7 +1866,7 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
             self.expression()
             self.state = 198
             _la = self._input.LA(1)
-            if not(_la==25 or _la==38):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1924178903040) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -1881,7 +1934,7 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 200
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 138538465099776) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 554153860399104) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
