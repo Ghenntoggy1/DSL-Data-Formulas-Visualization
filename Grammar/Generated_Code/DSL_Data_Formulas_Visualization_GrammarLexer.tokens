@@ -48,6 +48,7 @@ GREATER_EQUAL=47
 LESS_EQUAL=48
 LBRACE=49
 RBRACE=50
+EOF_TOKEN=51
 'Data'=1
 'dataset'=2
 'name'=3
@@ -89,3 +90,4 @@ RBRACE=50
 '<='=48
 '{'=49
 '}'=50
+'<EOF>'=51

@@ -10,7 +10,7 @@ else:
 
 def serializedATN():
     return [
-        4,1,50,203,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,51,203,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
         7,20,1,0,1,0,1,1,1,1,1,1,1,1,4,1,49,8,1,11,1,12,1,50,1,2,1,2,1,2,
@@ -96,7 +96,7 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
                      "<INVALID>", "';'", "':'", "','", "'('", "')'", "'='", 
                      "'['", "']'", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "'.'", "<INVALID>", "'=='", "'!='", "'>'", 
-                     "'<'", "'>='", "'<='", "'{'", "'}'" ]
+                     "'<'", "'>='", "'<='", "'{'", "'}'", "'<EOF>'" ]
 
     symbolicNames = [ "<INVALID>", "DATA", "DATASET", "NAME", "IF", "ELSE", 
                       "RANGE", "WHILE", "FORMULA_T", "READ_FROM", "EXPORT_TO_FILE", 
@@ -107,7 +107,8 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
                       "COMMA", "LPAREN", "RPAREN", "ASSIGN", "LBRACKET", 
                       "RBRACKET", "OPERATORS", "DIGIT", "INTEGER", "FLOAT", 
                       "DOT", "WS", "EQUAL", "NOT_EQUAL", "GREATER", "LESS", 
-                      "GREATER_EQUAL", "LESS_EQUAL", "LBRACE", "RBRACE" ]
+                      "GREATER_EQUAL", "LESS_EQUAL", "LBRACE", "RBRACE", 
+                      "EOF_TOKEN" ]
 
     RULE_program = 0
     RULE_commandsList = 1
@@ -189,6 +190,7 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
     LESS_EQUAL=48
     LBRACE=49
     RBRACE=50
+    EOF_TOKEN=51
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)

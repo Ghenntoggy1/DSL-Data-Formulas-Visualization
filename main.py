@@ -10,9 +10,19 @@ from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarParser import
 def print_parse_tree(argv):
     input = FileStream(argv)
     lexer = DSL_Data_Formulas_Visualization_GrammarLexer(input)
+
     stream = CommonTokenStream(lexer)
+    stream.fill()
+    print("Tokens:")
+    for token in stream.tokens:
+        print(
+            f"[<{lexer.symbolicNames[token.type]}> ='{token.text}']")
+
     parser = DSL_Data_Formulas_Visualization_GrammarParser(stream)
     tree = parser.program()
+
+
+    print("Parse Tree:")
     print(Trees.toStringTree(tree, None, parser))
 
 

@@ -104,3 +104,4 @@ LESS_EQUAL : '<=';
 
 LBRACE : '{';
 RBRACE : '}';
+EOF_TOKEN : '<EOF>';
