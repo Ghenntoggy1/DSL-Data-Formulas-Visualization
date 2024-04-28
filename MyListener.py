@@ -27,6 +27,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#comment.
     def enterComment(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.CommentContext):
+        # TODO: delete if elif, leave pass -> now it s for testing purposes
         if ctx.COMMENT_LINE():
             print(f"Comment Line: {ctx.COMMENT_LINE().getText()}")
         elif ctx.COMMENT_BLOCK():
@@ -81,7 +82,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeCommand.
     def enterVisualizeCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeCommandContext):
-        pass
+        print("Enter Visualize Command")
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeCommand.
     def exitVisualizeCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeCommandContext):
@@ -153,8 +154,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                 method = getattr(condition, method_name)
                 # Check if method returns a token
                 if hasattr(method, "__self__") and hasattr(method.__self__, "getRuleIndex"):
-                    print(f"Method: {method_name}")
-                    # Check if the method is one of the condition tokens
+                    # Check if the method is one of the variable tokens
                     if method_name in [
                         "ID", "DIGIT", "INTEGER", "FLOAT",
                     ] and len(method()) > 0:
@@ -162,6 +162,12 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                             params.append(token.getText())
 
         print(f"Params: {params}")
+        print(f"Expression: {condition.expression().getText()}")
+
+        # TODO: variables should be found in the program (objects), for numbers it works fine
+        # print(f"Evaluated: {eval(params[0] + condition.expression().getText() + params[1])}")
+
+
 
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#ifStatement.

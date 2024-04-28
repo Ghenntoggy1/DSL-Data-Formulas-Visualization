@@ -1,3 +1,6 @@
-if (v2 == v1) {
+if (v2 >= v1) {
     VisualData(graph) dataset=(var1);
+}
+else {
+    VisualData(graph) dataset=(var2);
 };
