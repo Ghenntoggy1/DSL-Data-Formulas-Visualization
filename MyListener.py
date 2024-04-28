@@ -234,7 +234,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
         #     pass
         print(f"Evaluated: {value_eval}")
         self.variables['cond_eval'] = value_eval
-        # print(f"Evaluated: {eval(params[0] + condition.expression().getText() + params[1])}")
 
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_objects.
