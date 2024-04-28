@@ -114,6 +114,16 @@ class DSL_Data_Formulas_Visualization_GrammarVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_objects.
+    def visitCondition_objects(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.Condition_objectsContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_numbers.
+    def visitCondition_numbers(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.Condition_numbersContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#expression.
     def visitExpression(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.ExpressionContext):
         return self.visitChildren(ctx)
