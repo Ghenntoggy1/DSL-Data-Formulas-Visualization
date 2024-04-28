@@ -271,10 +271,15 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
         print(f"Params: {params}")
         print(f"Expression: {operator}")
 
-        # TODO: variables should be found in the program (objects), for numbers it works fine
         for i in range(len(params)):
             if params[i] in self.variables.keys():
                 params[i] = self.variables[params[i]]
+            else:
+                # Not sure if None substitution is the best way to handle this. In essence, if the variable is not in
+                # the variables dictionary, it means that it's not defined, and languages throw an error.
+                # params[i] = None
+
+                raise NameError(f"Variable {params[i]} is not defined.")
         print(f"Params: {params}")
         value_eval = params[0] == params[1]
         print(f"Evaluated: {value_eval}")

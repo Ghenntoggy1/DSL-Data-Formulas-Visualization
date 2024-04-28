@@ -1,3 +1,9 @@
+if (v2 == v3) {
+    VisualData(graph) dataset=(var1);
+}
+else {
+    VisualData(graph) dataset=(var2);
+};
 # VisualFormula(formula) range = (-10, 10);
 VisualFormula(formula) range = (-10, 10);
 /* Examples */
