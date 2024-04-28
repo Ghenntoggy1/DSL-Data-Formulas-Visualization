@@ -197,6 +197,24 @@ class DSL_Data_Formulas_Visualization_GrammarListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_objects.
+    def enterCondition_objects(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.Condition_objectsContext):
+        pass
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_objects.
+    def exitCondition_objects(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.Condition_objectsContext):
+        pass
+
+
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_numbers.
+    def enterCondition_numbers(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.Condition_numbersContext):
+        pass
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_numbers.
+    def exitCondition_numbers(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.Condition_numbersContext):
+        pass
+
+
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#expression.
     def enterExpression(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.ExpressionContext):
         pass

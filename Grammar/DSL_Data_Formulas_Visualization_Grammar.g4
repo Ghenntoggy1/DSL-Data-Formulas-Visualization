@@ -49,7 +49,11 @@ ifStatement : IF LPAREN condition RPAREN LBRACE commandsList RBRACE
 
 whileStatement : WHILE LPAREN condition RPAREN LBRACE commandsList RBRACE SEMICOLON;
 
-condition :  (ID | DIGIT | INTEGER | FLOAT) expression (ID | DIGIT | INTEGER | FLOAT);
+condition :  condition_objects | condition_numbers;
+
+condition_objects : ID (EQUAL | NOT_EQUAL) ID;
+
+condition_numbers : (DIGIT | INTEGER | FLOAT) expression (DIGIT | INTEGER | FLOAT);
 
 expression : (EQUAL | NOT_EQUAL | GREATER | LESS | GREATER_EQUAL | LESS_EQUAL) ;
 

@@ -6,8 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="dc725dec-f923-4da1-bc49-ceb824ae6da1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/DSL_Data_Formulas_Visualization_Grammar.g4" beforeDir="false" afterPath="$PROJECT_DIR$/Grammar/DSL_Data_Formulas_Visualization_Grammar.g4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Grammar/Example_Program_Code/Example_Program_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Grammar/Example_Program_Code/Example_Program_1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/Generated_Code/DSL_Data_Formulas_Visualization_Grammar.interp" beforeDir="false" afterPath="$PROJECT_DIR$/Grammar/Generated_Code/DSL_Data_Formulas_Visualization_Grammar.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/Generated_Code/DSL_Data_Formulas_Visualization_GrammarListener.py" beforeDir="false" afterPath="$PROJECT_DIR$/Grammar/Generated_Code/DSL_Data_Formulas_Visualization_GrammarListener.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/Generated_Code/DSL_Data_Formulas_Visualization_GrammarParser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Grammar/Generated_Code/DSL_Data_Formulas_Visualization_GrammarParser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grammar/Generated_Code/DSL_Data_Formulas_Visualization_GrammarVisitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Grammar/Generated_Code/DSL_Data_Formulas_Visualization_GrammarVisitor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyListener.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyListener.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +46,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.MyListener.executor": "Run",
     "Python.main.executor": "Run",
+    "Python.test.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "listener",
@@ -136,7 +144,7 @@
       <workItem from="1714176040278" duration="3109000" />
       <workItem from="1714220144096" duration="2913000" />
       <workItem from="1714298854584" duration="1369000" />
-      <workItem from="1714304144010" duration="5672000" />
+      <workItem from="1714304144010" duration="15226000" />
     </task>
     <servers />
   </component>
@@ -155,6 +163,8 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DSL_Data_Formulas_Visualization$main.coverage" NAME="main Coverage Results" MODIFIED="1714313143790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DSL_Data_Formulas_Visualization$MyListener.coverage" NAME="MyListener Coverage Results" MODIFIED="1714331892866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DSL_Data_Formulas_Visualization$main.coverage" NAME="main Coverage Results" MODIFIED="1714331925259" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DSL_Data_Formulas_Visualization$test.coverage" NAME="test Coverage Results" MODIFIED="1714331848211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Grammar" />
   </component>
 </project>
