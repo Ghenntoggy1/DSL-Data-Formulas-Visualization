@@ -161,6 +161,15 @@ class DSL_Data_Formulas_Visualization_GrammarListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#primaryExpression.
+    def enterPrimaryExpression(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.PrimaryExpressionContext):
+        pass
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#primaryExpression.
+    def exitPrimaryExpression(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.PrimaryExpressionContext):
+        pass
+
+
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#ifStatement.
     def enterIfStatement(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.IfStatementContext):
         pass

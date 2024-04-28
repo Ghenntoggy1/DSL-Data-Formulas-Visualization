@@ -145,7 +145,24 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#ifStatement.
     def enterIfStatement(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.IfStatementContext):
-        pass
+        params = []
+        condition = ctx.condition()
+        # Check each method if it's relevant for condition
+        for method_name in dir(condition):
+            if callable(getattr(condition, method_name)) and not method_name.startswith("__"):
+                method = getattr(condition, method_name)
+                # Check if method returns a token
+                if hasattr(method, "__self__") and hasattr(method.__self__, "getRuleIndex"):
+                    print(f"Method: {method_name}")
+                    # Check if the method is one of the condition tokens
+                    if method_name in [
+                        "ID", "DIGIT", "INTEGER", "FLOAT",
+                    ] and len(method()) > 0:
+                        for token in method():
+                            params.append(token.getText())
+
+        print(f"Params: {params}")
+
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#ifStatement.
     def exitIfStatement(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.IfStatementContext):
