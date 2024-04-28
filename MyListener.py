@@ -4,6 +4,7 @@ from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarListener impo
 from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarParser import DSL_Data_Formulas_Visualization_GrammarParser
 import matplotlib.pyplot as plt
 import numpy as np
+import math
 
 
 class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
@@ -123,9 +124,11 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
             return
 
         x = np.linspace(range_start, range_end, 200)
-        formula_content = formula_content.replace("sin", "np.sin").replace("exp", "np.exp").replace("log", "np.log")
+        formula_content = formula_content.replace("sin", "np.sin").replace("exp", "np.exp")
+        formula_content = formula_content.replace("log", "np.log").replace("sqrt", "np.sqrt")
+        formula_content = formula_content.replace("fact", "np.math.factorial")
+        formula_content = formula_content.replace('sqr(', 'np.square(')  # '(' is required so that it doesn't match sqrt
         formula_content = formula_content.replace('^', '**')
-
         y = eval(formula_content, {"x": x, "np": np})
 
         plt.figure()
