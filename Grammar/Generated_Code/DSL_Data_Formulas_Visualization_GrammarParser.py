@@ -10,7 +10,7 @@ else:
 
 def serializedATN():
     return [
-        4,1,51,227,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,51,214,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
         7,20,2,21,7,21,2,22,7,22,2,23,7,23,1,0,1,0,1,1,1,1,1,1,1,1,4,1,55,
@@ -19,22 +19,21 @@ def serializedATN():
         5,1,5,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,3,6,97,8,6,1,7,1,7,
         1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,8,1,8,1,8,1,8,1,8,
         1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,9,1,9,3,9,126,8,9,1,10,1,10,1,10,1,
-        10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,
-        10,1,10,1,10,1,10,1,10,1,10,1,10,3,10,151,8,10,1,11,1,11,1,11,1,
-        11,1,11,1,11,1,11,1,11,1,11,1,11,1,12,1,12,3,12,165,8,12,1,13,1,
-        13,1,14,1,14,1,15,1,15,1,16,1,16,1,16,1,16,1,16,1,16,1,16,4,16,180,
-        8,16,11,16,12,16,181,1,17,1,17,1,17,1,17,1,18,1,18,1,18,1,18,1,18,
-        1,18,1,18,1,18,1,18,1,18,1,18,1,18,3,18,200,8,18,1,18,1,18,1,19,
-        1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,20,1,20,3,20,215,8,20,
+        10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,11,1,11,1,11,1,11,1,
+        11,1,11,1,11,1,11,1,11,1,11,1,12,1,12,3,12,152,8,12,1,13,1,13,1,
+        14,1,14,1,15,1,15,1,16,1,16,1,16,1,16,1,16,1,16,1,16,4,16,167,8,
+        16,11,16,12,16,168,1,17,1,17,1,17,1,17,1,18,1,18,1,18,1,18,1,18,
+        1,18,1,18,1,18,1,18,1,18,1,18,1,18,3,18,187,8,18,1,18,1,18,1,19,
+        1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,20,1,20,3,20,202,8,20,
         1,21,1,21,1,21,1,21,1,22,1,22,1,22,1,22,1,23,1,23,1,23,0,0,24,0,
         2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,
         0,7,1,0,28,29,1,0,38,40,1,0,14,17,1,0,20,23,1,0,18,19,1,0,43,44,
-        1,0,43,48,222,0,48,1,0,0,0,2,54,1,0,0,0,4,67,1,0,0,0,6,69,1,0,0,
+        1,0,43,48,208,0,48,1,0,0,0,2,54,1,0,0,0,4,67,1,0,0,0,6,69,1,0,0,
         0,8,79,1,0,0,0,10,81,1,0,0,0,12,96,1,0,0,0,14,98,1,0,0,0,16,111,
-        1,0,0,0,18,125,1,0,0,0,20,150,1,0,0,0,22,152,1,0,0,0,24,164,1,0,
-        0,0,26,166,1,0,0,0,28,168,1,0,0,0,30,170,1,0,0,0,32,179,1,0,0,0,
-        34,183,1,0,0,0,36,187,1,0,0,0,38,203,1,0,0,0,40,214,1,0,0,0,42,216,
-        1,0,0,0,44,220,1,0,0,0,46,224,1,0,0,0,48,49,3,2,1,0,49,1,1,0,0,0,
+        1,0,0,0,18,125,1,0,0,0,20,127,1,0,0,0,22,139,1,0,0,0,24,151,1,0,
+        0,0,26,153,1,0,0,0,28,155,1,0,0,0,30,157,1,0,0,0,32,166,1,0,0,0,
+        34,170,1,0,0,0,36,174,1,0,0,0,38,190,1,0,0,0,40,201,1,0,0,0,42,203,
+        1,0,0,0,44,207,1,0,0,0,46,211,1,0,0,0,48,49,3,2,1,0,49,1,1,0,0,0,
         50,55,3,4,2,0,51,55,3,36,18,0,52,55,3,38,19,0,53,55,3,6,3,0,54,50,
         1,0,0,0,54,51,1,0,0,0,54,52,1,0,0,0,54,53,1,0,0,0,55,56,1,0,0,0,
         56,54,1,0,0,0,56,57,1,0,0,0,57,3,1,0,0,0,58,59,3,8,4,0,59,60,5,30,
@@ -58,32 +57,28 @@ def serializedATN():
         19,1,0,0,0,127,128,5,12,0,0,128,129,5,33,0,0,129,130,3,32,16,0,130,
         131,5,34,0,0,131,132,5,6,0,0,132,133,5,35,0,0,133,134,5,33,0,0,134,
         135,7,1,0,0,135,136,5,32,0,0,136,137,7,1,0,0,137,138,5,34,0,0,138,
-        151,1,0,0,0,139,140,5,12,0,0,140,141,5,33,0,0,141,142,5,26,0,0,142,
-        143,5,34,0,0,143,144,5,6,0,0,144,145,5,35,0,0,145,146,5,33,0,0,146,
-        147,7,1,0,0,147,148,5,32,0,0,148,149,7,1,0,0,149,151,5,34,0,0,150,
-        127,1,0,0,0,150,139,1,0,0,0,151,21,1,0,0,0,152,153,5,13,0,0,153,
-        154,5,33,0,0,154,155,3,24,12,0,155,156,5,34,0,0,156,157,5,2,0,0,
-        157,158,5,35,0,0,158,159,5,33,0,0,159,160,5,26,0,0,160,161,5,34,
-        0,0,161,23,1,0,0,0,162,165,5,24,0,0,163,165,3,26,13,0,164,162,1,
-        0,0,0,164,163,1,0,0,0,165,25,1,0,0,0,166,167,7,2,0,0,167,27,1,0,
-        0,0,168,169,7,3,0,0,169,29,1,0,0,0,170,171,7,4,0,0,171,31,1,0,0,
-        0,172,180,5,26,0,0,173,180,5,25,0,0,174,180,3,34,17,0,175,180,5,
-        38,0,0,176,180,5,39,0,0,177,180,5,40,0,0,178,180,5,42,0,0,179,172,
-        1,0,0,0,179,173,1,0,0,0,179,174,1,0,0,0,179,175,1,0,0,0,179,176,
-        1,0,0,0,179,177,1,0,0,0,179,178,1,0,0,0,180,181,1,0,0,0,181,179,
-        1,0,0,0,181,182,1,0,0,0,182,33,1,0,0,0,183,184,5,33,0,0,184,185,
-        3,32,16,0,185,186,5,34,0,0,186,35,1,0,0,0,187,188,5,4,0,0,188,189,
-        5,33,0,0,189,190,3,40,20,0,190,191,5,34,0,0,191,192,5,49,0,0,192,
-        193,3,2,1,0,193,199,5,50,0,0,194,195,5,5,0,0,195,196,5,49,0,0,196,
-        197,3,2,1,0,197,198,5,50,0,0,198,200,1,0,0,0,199,194,1,0,0,0,199,
-        200,1,0,0,0,200,201,1,0,0,0,201,202,5,30,0,0,202,37,1,0,0,0,203,
-        204,5,7,0,0,204,205,5,33,0,0,205,206,3,40,20,0,206,207,5,34,0,0,
-        207,208,5,49,0,0,208,209,3,2,1,0,209,210,5,50,0,0,210,211,5,30,0,
-        0,211,39,1,0,0,0,212,215,3,42,21,0,213,215,3,44,22,0,214,212,1,0,
-        0,0,214,213,1,0,0,0,215,41,1,0,0,0,216,217,5,26,0,0,217,218,7,5,
-        0,0,218,219,5,26,0,0,219,43,1,0,0,0,220,221,7,1,0,0,221,222,3,46,
-        23,0,222,223,7,1,0,0,223,45,1,0,0,0,224,225,7,6,0,0,225,47,1,0,0,
-        0,12,54,56,67,79,96,125,150,164,179,181,199,214
+        21,1,0,0,0,139,140,5,13,0,0,140,141,5,33,0,0,141,142,3,24,12,0,142,
+        143,5,34,0,0,143,144,5,2,0,0,144,145,5,35,0,0,145,146,5,33,0,0,146,
+        147,5,26,0,0,147,148,5,34,0,0,148,23,1,0,0,0,149,152,5,24,0,0,150,
+        152,3,26,13,0,151,149,1,0,0,0,151,150,1,0,0,0,152,25,1,0,0,0,153,
+        154,7,2,0,0,154,27,1,0,0,0,155,156,7,3,0,0,156,29,1,0,0,0,157,158,
+        7,4,0,0,158,31,1,0,0,0,159,167,5,26,0,0,160,167,5,25,0,0,161,167,
+        3,34,17,0,162,167,5,38,0,0,163,167,5,39,0,0,164,167,5,40,0,0,165,
+        167,5,42,0,0,166,159,1,0,0,0,166,160,1,0,0,0,166,161,1,0,0,0,166,
+        162,1,0,0,0,166,163,1,0,0,0,166,164,1,0,0,0,166,165,1,0,0,0,167,
+        168,1,0,0,0,168,166,1,0,0,0,168,169,1,0,0,0,169,33,1,0,0,0,170,171,
+        5,33,0,0,171,172,3,32,16,0,172,173,5,34,0,0,173,35,1,0,0,0,174,175,
+        5,4,0,0,175,176,5,33,0,0,176,177,3,40,20,0,177,178,5,34,0,0,178,
+        179,5,49,0,0,179,180,3,2,1,0,180,186,5,50,0,0,181,182,5,5,0,0,182,
+        183,5,49,0,0,183,184,3,2,1,0,184,185,5,50,0,0,185,187,1,0,0,0,186,
+        181,1,0,0,0,186,187,1,0,0,0,187,188,1,0,0,0,188,189,5,30,0,0,189,
+        37,1,0,0,0,190,191,5,7,0,0,191,192,5,33,0,0,192,193,3,40,20,0,193,
+        194,5,34,0,0,194,195,5,49,0,0,195,196,3,2,1,0,196,197,5,50,0,0,197,
+        198,5,30,0,0,198,39,1,0,0,0,199,202,3,42,21,0,200,202,3,44,22,0,
+        201,199,1,0,0,0,201,200,1,0,0,0,202,41,1,0,0,0,203,204,5,26,0,0,
+        204,205,7,5,0,0,205,206,5,26,0,0,206,43,1,0,0,0,207,208,7,1,0,0,
+        208,209,3,46,23,0,209,210,7,1,0,0,210,45,1,0,0,0,211,212,7,6,0,0,
+        212,47,1,0,0,0,11,54,56,67,79,96,125,151,166,168,186,201
     ]
 
 class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
@@ -1070,9 +1065,6 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
             else:
                 return self.getToken(DSL_Data_Formulas_Visualization_GrammarParser.FLOAT, i)
 
-        def ID(self):
-            return self.getToken(DSL_Data_Formulas_Visualization_GrammarParser.ID, 0)
-
         def getRuleIndex(self):
             return DSL_Data_Formulas_Visualization_GrammarParser.RULE_visualizeFormula
 
@@ -1099,82 +1091,39 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
         self.enterRule(localctx, 20, self.RULE_visualizeFormula)
         self._la = 0 # Token type
         try:
-            self.state = 150
-            self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,6,self._ctx)
-            if la_ == 1:
-                self.enterOuterAlt(localctx, 1)
-                self.state = 127
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.VISUAL_FORMULA)
-                self.state = 128
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.LPAREN)
-                self.state = 129
-                self.formulaContent()
-                self.state = 130
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.RPAREN)
-                self.state = 131
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.RANGE)
-                self.state = 132
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.ASSIGN)
-                self.state = 133
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.LPAREN)
-                self.state = 134
-                _la = self._input.LA(1)
-                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1924145348608) != 0)):
-                    self._errHandler.recoverInline(self)
-                else:
-                    self._errHandler.reportMatch(self)
-                    self.consume()
-                self.state = 135
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.COMMA)
-                self.state = 136
-                _la = self._input.LA(1)
-                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1924145348608) != 0)):
-                    self._errHandler.recoverInline(self)
-                else:
-                    self._errHandler.reportMatch(self)
-                    self.consume()
-                self.state = 137
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.RPAREN)
-                pass
-
-            elif la_ == 2:
-                self.enterOuterAlt(localctx, 2)
-                self.state = 139
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.VISUAL_FORMULA)
-                self.state = 140
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.LPAREN)
-                self.state = 141
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.ID)
-                self.state = 142
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.RPAREN)
-                self.state = 143
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.RANGE)
-                self.state = 144
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.ASSIGN)
-                self.state = 145
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.LPAREN)
-                self.state = 146
-                _la = self._input.LA(1)
-                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1924145348608) != 0)):
-                    self._errHandler.recoverInline(self)
-                else:
-                    self._errHandler.reportMatch(self)
-                    self.consume()
-                self.state = 147
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.COMMA)
-                self.state = 148
-                _la = self._input.LA(1)
-                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1924145348608) != 0)):
-                    self._errHandler.recoverInline(self)
-                else:
-                    self._errHandler.reportMatch(self)
-                    self.consume()
-                self.state = 149
-                self.match(DSL_Data_Formulas_Visualization_GrammarParser.RPAREN)
-                pass
-
-
+            self.enterOuterAlt(localctx, 1)
+            self.state = 127
+            self.match(DSL_Data_Formulas_Visualization_GrammarParser.VISUAL_FORMULA)
+            self.state = 128
+            self.match(DSL_Data_Formulas_Visualization_GrammarParser.LPAREN)
+            self.state = 129
+            self.formulaContent()
+            self.state = 130
+            self.match(DSL_Data_Formulas_Visualization_GrammarParser.RPAREN)
+            self.state = 131
+            self.match(DSL_Data_Formulas_Visualization_GrammarParser.RANGE)
+            self.state = 132
+            self.match(DSL_Data_Formulas_Visualization_GrammarParser.ASSIGN)
+            self.state = 133
+            self.match(DSL_Data_Formulas_Visualization_GrammarParser.LPAREN)
+            self.state = 134
+            _la = self._input.LA(1)
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1924145348608) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+            self.state = 135
+            self.match(DSL_Data_Formulas_Visualization_GrammarParser.COMMA)
+            self.state = 136
+            _la = self._input.LA(1)
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1924145348608) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
+            self.state = 137
+            self.match(DSL_Data_Formulas_Visualization_GrammarParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1245,23 +1194,23 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
         self.enterRule(localctx, 22, self.RULE_visualizeData)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 152
+            self.state = 139
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.VISUAL_DATA)
-            self.state = 153
+            self.state = 140
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.LPAREN)
-            self.state = 154
+            self.state = 141
             self.visualizationType()
-            self.state = 155
+            self.state = 142
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.RPAREN)
-            self.state = 156
+            self.state = 143
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.DATASET)
-            self.state = 157
+            self.state = 144
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.ASSIGN)
-            self.state = 158
+            self.state = 145
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.LPAREN)
-            self.state = 159
+            self.state = 146
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.ID)
-            self.state = 160
+            self.state = 147
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -1311,17 +1260,17 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
         localctx = DSL_Data_Formulas_Visualization_GrammarParser.VisualizationTypeContext(self, self._ctx, self.state)
         self.enterRule(localctx, 24, self.RULE_visualizationType)
         try:
-            self.state = 164
+            self.state = 151
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [24]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 162
+                self.state = 149
                 self.match(DSL_Data_Formulas_Visualization_GrammarParser.CONSOLE)
                 pass
             elif token in [14, 15, 16, 17]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 163
+                self.state = 150
                 self.plotType()
                 pass
             else:
@@ -1382,7 +1331,7 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 166
+            self.state = 153
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 245760) != 0)):
                 self._errHandler.recoverInline(self)
@@ -1444,7 +1393,7 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 168
+            self.state = 155
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 15728640) != 0)):
                 self._errHandler.recoverInline(self)
@@ -1500,7 +1449,7 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 170
+            self.state = 157
             _la = self._input.LA(1)
             if not(_la==18 or _la==19):
                 self._errHandler.recoverInline(self)
@@ -1593,45 +1542,45 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 179 
+            self.state = 166 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 179
+                self.state = 166
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [26]:
-                    self.state = 172
+                    self.state = 159
                     self.match(DSL_Data_Formulas_Visualization_GrammarParser.ID)
                     pass
                 elif token in [25]:
-                    self.state = 173
+                    self.state = 160
                     self.match(DSL_Data_Formulas_Visualization_GrammarParser.OPERATORS)
                     pass
                 elif token in [33]:
-                    self.state = 174
+                    self.state = 161
                     self.primaryExpression()
                     pass
                 elif token in [38]:
-                    self.state = 175
+                    self.state = 162
                     self.match(DSL_Data_Formulas_Visualization_GrammarParser.DIGIT)
                     pass
                 elif token in [39]:
-                    self.state = 176
+                    self.state = 163
                     self.match(DSL_Data_Formulas_Visualization_GrammarParser.INTEGER)
                     pass
                 elif token in [40]:
-                    self.state = 177
+                    self.state = 164
                     self.match(DSL_Data_Formulas_Visualization_GrammarParser.FLOAT)
                     pass
                 elif token in [42]:
-                    self.state = 178
+                    self.state = 165
                     self.match(DSL_Data_Formulas_Visualization_GrammarParser.WS)
                     pass
                 else:
                     raise NoViableAltException(self)
 
-                self.state = 181 
+                self.state = 168 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 6330882457600) != 0)):
@@ -1689,11 +1638,11 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
         self.enterRule(localctx, 34, self.RULE_primaryExpression)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 183
+            self.state = 170
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.LPAREN)
-            self.state = 184
+            self.state = 171
             self.formulaContent()
-            self.state = 185
+            self.state = 172
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -1776,35 +1725,35 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 187
+            self.state = 174
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.IF)
-            self.state = 188
+            self.state = 175
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.LPAREN)
-            self.state = 189
+            self.state = 176
             self.condition()
-            self.state = 190
+            self.state = 177
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.RPAREN)
-            self.state = 191
+            self.state = 178
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.LBRACE)
-            self.state = 192
+            self.state = 179
             self.commandsList()
-            self.state = 193
+            self.state = 180
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.RBRACE)
-            self.state = 199
+            self.state = 186
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==5:
-                self.state = 194
+                self.state = 181
                 self.match(DSL_Data_Formulas_Visualization_GrammarParser.ELSE)
-                self.state = 195
+                self.state = 182
                 self.match(DSL_Data_Formulas_Visualization_GrammarParser.LBRACE)
-                self.state = 196
+                self.state = 183
                 self.commandsList()
-                self.state = 197
+                self.state = 184
                 self.match(DSL_Data_Formulas_Visualization_GrammarParser.RBRACE)
 
 
-            self.state = 201
+            self.state = 188
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -1874,21 +1823,21 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
         self.enterRule(localctx, 38, self.RULE_whileStatement)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 203
+            self.state = 190
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.WHILE)
-            self.state = 204
+            self.state = 191
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.LPAREN)
-            self.state = 205
+            self.state = 192
             self.condition()
-            self.state = 206
+            self.state = 193
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.RPAREN)
-            self.state = 207
+            self.state = 194
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.LBRACE)
-            self.state = 208
+            self.state = 195
             self.commandsList()
-            self.state = 209
+            self.state = 196
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.RBRACE)
-            self.state = 210
+            self.state = 197
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -1939,17 +1888,17 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
         localctx = DSL_Data_Formulas_Visualization_GrammarParser.ConditionContext(self, self._ctx, self.state)
         self.enterRule(localctx, 40, self.RULE_condition)
         try:
-            self.state = 214
+            self.state = 201
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [26]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 212
+                self.state = 199
                 self.condition_objects()
                 pass
             elif token in [38, 39, 40]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 213
+                self.state = 200
                 self.condition_numbers()
                 pass
             else:
@@ -2010,16 +1959,16 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 216
+            self.state = 203
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.ID)
-            self.state = 217
+            self.state = 204
             _la = self._input.LA(1)
             if not(_la==43 or _la==44):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
                 self.consume()
-            self.state = 218
+            self.state = 205
             self.match(DSL_Data_Formulas_Visualization_GrammarParser.ID)
         except RecognitionException as re:
             localctx.exception = re
@@ -2086,16 +2035,16 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 220
+            self.state = 207
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1924145348608) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
                 self.consume()
-            self.state = 221
+            self.state = 208
             self.expression()
-            self.state = 222
+            self.state = 209
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1924145348608) != 0)):
                 self._errHandler.recoverInline(self)
@@ -2163,7 +2112,7 @@ class DSL_Data_Formulas_Visualization_GrammarParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 224
+            self.state = 211
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 554153860399104) != 0)):
                 self._errHandler.recoverInline(self)

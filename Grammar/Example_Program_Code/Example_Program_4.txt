@@ -1,2 +1,5 @@
+# VisualFormula(formula) range = (-10, 10);
+VisualFormula(formula) range = (-10, 10);
+/* Examples */
 VisualFormula(sin(x^2) * exp(-x) + log(x+1)) range = (0, 10);
-VisualFormula(x^2.2 + sqrt(x)) range = (0, 10);
+VisualFormula(formula^2.2 + sqrt(x)) range = (0, 10);

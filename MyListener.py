@@ -13,8 +13,8 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     def __init__(self):
         super().__init__()
         self.variables = {'v1': Test(),
-                          'v2': Test()}  # Variables are stored in a dictionary
-        print(self.variables["v1"] == self.variables["v2"])
+                          'v2': Test(),
+                          'formula': 'x^2'}  # Variables are stored in a dictionary
 
     def enterProgram(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ProgramContext):
         print("Enter Program")
@@ -43,6 +43,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#comment.
     def enterComment(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.CommentContext):
         # TODO: delete if elif, leave pass -> now it s for testing purposes
+        print("Enter Comment")
         if ctx.COMMENT_LINE():
             print(f"Comment Line: {ctx.COMMENT_LINE().getText()}")
         elif ctx.COMMENT_BLOCK():
@@ -53,7 +54,8 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#comment.
     def exitComment(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.CommentContext):
-        pass
+        print("Exit Comment")
+        # pass
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readCommand.
     def enterReadCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadCommandContext):
@@ -105,7 +107,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeFormula.
-    def enterVisualizeFormula(self, ctx):
+    def enterVisualizeFormula(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeFormulaContext):
         # basic implementation of formula visualization
         # TODO make it work for other variable names, not only x
         # TODO make it accept formula as a variable
@@ -116,7 +118,10 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
         for child in ctx.children:
             if isinstance(child, DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):
-                formula_content = child.getText()
+                if child.getText() in self.variables.keys():
+                    formula_content = self.variables[child.getText()]
+                else:
+                    formula_content = child.getText()
             elif child.getText() == 'range':
                 # according to grammar, range numbers are at fixed positions after 'range'
                 try:
@@ -129,6 +134,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
         if formula_content is None or range_start is None or range_end is None:
             print("Error: Formula content or range values could not be parsed.")
             return
+        print(f"Formula: {formula_content}")
 
         x = np.linspace(range_start, range_end, 200)
         formula_content = formula_content.replace("sin", "np.sin").replace("exp", "np.exp")
@@ -148,7 +154,8 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeFormula.
     def exitVisualizeFormula(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeFormulaContext):
-        pass
+        print("Exit Visualize Formula")
+        # pass
 
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeData.
@@ -270,19 +277,14 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                 params[i] = self.variables[params[i]]
         print(f"Params: {params}")
         value_eval = params[0] == params[1]
-        # if operator == "==":
-        #     value_eval = params[0] == params[1]
-        # elif operator == "!=":
-        #     value_eval = params[0] != params[1]
-        # else:
-        #     pass
         print(f"Evaluated: {value_eval}")
         self.variables['cond_eval'] = value_eval
 
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_objects.
     def exitCondition_objects(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.Condition_objectsContext):
-        pass
+        print("Exit Condition Objects")
+        # pass
 
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_numbers.
@@ -313,6 +315,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
         value_eval = eval(self.params[0] + " " + ctx.expression().getText() + " " + self.params[1])
         print(f"Evaluated: {value_eval}")
         self.variables['cond_eval'] = value_eval
+        print("Exit Condition Numbers")
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#expression.
     def enterExpression(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ExpressionContext):

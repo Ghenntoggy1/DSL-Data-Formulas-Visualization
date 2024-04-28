@@ -1,6 +1,4 @@
 from antlr4 import FileStream, CommonTokenStream, ParseTreeWalker
-from antlr4.error.ErrorListener import ConsoleErrorListener
-from antlr4.error.Errors import InputMismatchException
 from antlr4.tree.Trees import Trees
 import sys
 
@@ -11,9 +9,6 @@ from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarParser import
 
 from MyListener import MyListener
 
-
-class MyErrorListener(ConsoleErrorListener):
-    pass
 
 def print_parse_tree(argv):
     input = FileStream(argv)
@@ -41,7 +36,8 @@ def print_parse_tree(argv):
 
 
 if __name__ == '__main__':
-    print_parse_tree(".\\Grammar\\Example_Program_Code\\Example_Program_1.txt")
+    # print_parse_tree(".\\Grammar\\Example_Program_Code\\Example_Program_1.txt")
     # print_parse_tree(".\\Grammar\\Example_Program_Code\\Example_Program_2.txt")
     # print_parse_tree(".\\Grammar\\Example_Program_Code\\Example_Program_3.txt")
+    print_parse_tree(".\\Grammar\\Example_Program_Code\\Example_Program_4.txt")
 
