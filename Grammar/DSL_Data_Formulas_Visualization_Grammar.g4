@@ -40,7 +40,9 @@ fileType : CSV | TEXT | JSON | EXCEL;
 
 imageType : PNG | JPG;
 
-formulaContent : (ID | OPERATORS | LPAREN | RPAREN | DIGIT | INTEGER | FLOAT | WS)+;
+formulaContent : (ID | OPERATORS | primaryExpression | DIGIT | INTEGER | FLOAT | WS)+;
+
+primaryExpression : LPAREN  formulaContent  RPAREN;
 
 ifStatement : IF LPAREN condition RPAREN LBRACE commandsList RBRACE
              ( ELSE LBRACE commandsList RBRACE )? SEMICOLON ;

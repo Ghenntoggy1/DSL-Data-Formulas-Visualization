@@ -1,1 +1,3 @@
-Data datum = ReadFrom(/path)
+Data tableData = ReadFrom("/path1/folder1/file.txt");
+Formula formula = x^2.2 + sqrt(x);
+
