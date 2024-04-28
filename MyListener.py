@@ -1,7 +1,15 @@
+import antlr4
+
 from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarListener import DSL_Data_Formulas_Visualization_GrammarListener
 from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarParser import DSL_Data_Formulas_Visualization_GrammarParser
+import matplotlib.pyplot as plt
+import numpy as np
+
 
 class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
+    def __init__(self):
+        self.variables = {}
+
     def enterProgram(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ProgramContext):
         print("Enter Program")
 
@@ -89,8 +97,44 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
         pass
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeFormula.
-    def enterVisualizeFormula(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeFormulaContext):
-        pass
+    def enterVisualizeFormula(self, ctx):
+        # basic implementation of formula visualization
+        # TODO make it work for other variable names, not only x
+        # TODO make it accept formula as a variable
+
+        formula_content = None
+        range_start = None
+        range_end = None
+
+        for child in ctx.children:
+            if isinstance(child, DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):
+                formula_content = child.getText()
+            elif child.getText() == 'range':
+                # according to grammar, range numbers are at fixed positions after 'range'
+                try:
+                    range_start = float(ctx.children[ctx.children.index(child) + 3].getText())
+                    range_end = float(ctx.children[ctx.children.index(child) + 5].getText())
+                except (IndexError, ValueError) as e:
+                    print(f"Error parsing range values: {e}")
+                    return
+
+        if formula_content is None or range_start is None or range_end is None:
+            print("Error: Formula content or range values could not be parsed.")
+            return
+
+        x = np.linspace(range_start, range_end, 200)
+        formula_content = formula_content.replace("sin", "np.sin").replace("exp", "np.exp").replace("log", "np.log")
+        formula_content = formula_content.replace('^', '**')
+
+        y = eval(formula_content, {"x": x, "np": np})
+
+        plt.figure()
+        plt.plot(x, y)
+        plt.title('Formula Visualization')
+        plt.xlabel('x')
+        plt.ylabel('Formula result')
+        plt.grid(True)
+        plt.show()
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeFormula.
     def exitVisualizeFormula(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeFormulaContext):

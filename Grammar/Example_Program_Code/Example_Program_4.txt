@@ -1,0 +1,1 @@
+VisualFormula(sin(x^2) * exp(-x) + log(x+1)) range = (0, 10);
