@@ -1,3 +1,3 @@
-Data tableData = ReadFrom("/path1/folder1/file.txt");
-Formula formula = x^2.2 + sqrt(x);
-
+# Data tableData = ReadFrom("/path1/folder1/file.txt");
+Formula formula1 = (-5 + 6) * 2;
+# VisualFormula(2 * 2 / 2) range=(-10, 10);

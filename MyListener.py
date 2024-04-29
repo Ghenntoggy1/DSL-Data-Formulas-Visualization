@@ -118,6 +118,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
         for child in ctx.children:
             if isinstance(child, DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):
+                print(f"Formula content: {child.getText()}")
                 if child.getText() in self.variables.keys():
                     formula_content = self.variables[child.getText()]
                 else:
