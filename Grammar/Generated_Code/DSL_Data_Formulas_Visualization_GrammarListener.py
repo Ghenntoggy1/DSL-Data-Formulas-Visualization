@@ -152,6 +152,15 @@ class DSL_Data_Formulas_Visualization_GrammarListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaWhole.
+    def enterFormulaWhole(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.FormulaWholeContext):
+        pass
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaWhole.
+    def exitFormulaWhole(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.FormulaWholeContext):
+        pass
+
+
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaContent.
     def enterFormulaContent(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):
         pass

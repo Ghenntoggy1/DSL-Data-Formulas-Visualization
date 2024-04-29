@@ -13,7 +13,7 @@ comment : COMMENT_BLOCK
         | COMMENT_LINE;
 
 readCommand : DATA ID ASSIGN readFromFile
-            | FORMULA_T ID ASSIGN formulaContent;
+            | FORMULA_T ID ASSIGN formulaWhole;
 
 readFromFile : READ_FROM LPAREN PATH RPAREN;
 
@@ -27,7 +27,7 @@ exportToImage : plotType LPAREN ID RPAREN NAME ASSIGN LPAREN ID DOT imageType RP
 visualizeCommand : visualizeFormula
                  | visualizeData;
 
-visualizeFormula : VISUAL_FORMULA LPAREN formulaContent RPAREN RANGE ASSIGN LPAREN ( DIGIT | INTEGER | FLOAT ) COMMA ( DIGIT | INTEGER | FLOAT ) RPAREN;
+visualizeFormula : VISUAL_FORMULA LPAREN formulaWhole RPAREN RANGE ASSIGN LPAREN ( DIGIT | INTEGER | FLOAT ) COMMA ( DIGIT | INTEGER | FLOAT ) RPAREN;
 
 visualizeData : VISUAL_DATA LPAREN visualizationType RPAREN DATASET ASSIGN LPAREN ID RPAREN;
 
@@ -38,6 +38,8 @@ plotType : GRAPH | BAR | PIE | HIST;
 fileType : CSV | TEXT | JSON | EXCEL;
 
 imageType : PNG | JPG;
+
+formulaWhole : formulaContent;
 
 formulaContent : (ID | OPERATORS | primaryExpression | DIGIT | INTEGER | FLOAT | WS)+;
 
@@ -99,7 +101,7 @@ INTEGER : '-'? DIGIT+;
 FLOAT : INTEGER DOT DIGIT+;
 DOT : '.';
 WS : [ \t\r\n]+ -> skip; // Skip whitespace
-
+SPACE: [ \t\r\n];
 EQUAL : '==';
 NOT_EQUAL : '!=';
 GREATER : '>';

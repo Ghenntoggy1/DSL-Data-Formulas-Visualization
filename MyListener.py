@@ -12,9 +12,13 @@ import math
 class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     def __init__(self):
         super().__init__()
-        self.variables = {'v1': Test(),
+        self.variables = {
+                          'np': np,
+                          'v1': Test(),
                           'v2': Test(),
-                          'formula': 'x^2'}  # Variables are stored in a dictionary
+                          }
+        self.pointer = None
+
 
     def enterProgram(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ProgramContext):
         print("Enter Program")
@@ -22,6 +26,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#program.
     def exitProgram(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ProgramContext):
         # del MyListener
+        print(f"Variables: {self.variables}")
         print("Exit Program")
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#commandsList.
@@ -59,11 +64,13 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readCommand.
     def enterReadCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadCommandContext):
-        pass
+        if ctx.FORMULA_T() is not None:
+            self.variables[ctx.ID().getText()] = None
+            self.pointer = ctx.ID().getText()
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readCommand.
     def exitReadCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadCommandContext):
-        pass
+        self.pointer = None
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readFromFile.
     def enterReadFromFile(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadFromFileContext):
@@ -117,7 +124,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
         range_end = None
 
         for child in ctx.children:
-            if isinstance(child, DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):
+            if isinstance(child, DSL_Data_Formulas_Visualization_GrammarParser.FormulaWholeContext):
                 print(f"Formula content: {child.getText()}")
                 if child.getText() in self.variables.keys():
                     formula_content = self.variables[child.getText()]
@@ -131,6 +138,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                 except (IndexError, ValueError) as e:
                     print(f"Error parsing range values: {e}")
                     return
+        print(f'{self.variables}')
 
         if formula_content is None or range_start is None or range_end is None:
             print("Error: Formula content or range values could not be parsed.")
@@ -138,13 +146,66 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
         print(f"Formula: {formula_content}")
 
         x = np.linspace(range_start, range_end, 200)
-        formula_content = formula_content.replace("sin", "np.sin").replace("exp", "np.exp")
-        formula_content = formula_content.replace("log", "np.log").replace("sqrt", "np.sqrt")
-        formula_content = formula_content.replace("fact", "np.math.factorial")
-        formula_content = formula_content.replace('sqr(', 'np.square(')  # '(' is required so that it doesn't match sqrt
-        formula_content = formula_content.replace('^', '**')
-        y = eval(formula_content, {"x": x, "np": np})
+        # for key in self.variables.keys():
+        #     formula_content = formula_content.replace(key, str(self.variables[key]))
+        # # formula_content = formula_content.replace('formula', self.variables['formula'])
 
+        formula_content = formula_content.replace('+', ' + ')
+        formula_content = formula_content.replace('-', ' - ')
+        formula_content = formula_content.replace('*', ' * ')
+        formula_content = formula_content.replace('/', ' / ')
+        formula_content = formula_content.replace('(', ' ( ')
+        formula_content = formula_content.replace(')', ' ) ')
+        formula_content = formula_content.replace("sin", " np.sin").replace("exp", " np.exp")
+        formula_content = formula_content.replace("cos", " np.cos").replace("tan", " np.tan")
+        formula_content = formula_content.replace("log", " np.log").replace("sqrt", " np.sqrt")
+        formula_content = formula_content.replace('sqr (', ' np.square (')  # '(' is required so that it doesn't match sqrt
+        formula_content = formula_content.replace('^', ' ^ ')
+        formula = formula_content.split()
+        while any([token in self.variables.keys() for token in formula]):
+            print(f"Formula: {formula}")
+            for i in range(len(formula)):
+                token = formula[i]
+                if token in self.variables.keys():
+                    formula[i] = self.variables[token]
+                    # formula_content_new.append(self.variables[token])
+            formula_content = ' '.join(formula)
+            formula_content = formula_content.replace('+', ' + ')
+            formula_content = formula_content.replace('-', ' - ')
+            formula_content = formula_content.replace('*', ' * ')
+            formula_content = formula_content.replace('/', ' / ')
+            formula_content = formula_content.replace('(', ' ( ')
+            formula_content = formula_content.replace(')', ' ) ')
+            formula_content = formula_content.replace("sin", " np.sin").replace("exp", " np.exp")
+            formula_content = formula_content.replace("cos", " np.cos").replace("tan", " np.tan")
+            formula_content = formula_content.replace("log", " np.log").replace("sqrt", " np.sqrt")
+            formula_content = formula_content.replace('sqr (',
+                                                      ' np.square (')  # '(' is required so that it doesn't match sqrt
+            formula_content = formula_content.replace('^', ' ^ ')
+            formula = formula_content.split()
+
+
+        formula_content = ' '.join(formula)
+        formula_content = formula_content.replace('+', ' + ')
+        formula_content = formula_content.replace('-', ' - ')
+        formula_content = formula_content.replace('*', ' * ')
+        formula_content = formula_content.replace('/', ' / ')
+        formula_content = formula_content.replace('(', ' ( ')
+        formula_content = formula_content.replace(')', ' ) ')
+        formula_content = formula_content.replace("sin", " np.sin").replace("exp", " np.exp")
+        formula_content = formula_content.replace("cos", " np.cos").replace("tan", " np.tan")
+        formula_content = formula_content.replace("log", " np.log").replace("sqrt", " np.sqrt")
+        formula_content = formula_content.replace('sqr (',
+                                                  ' np.square (')  # '(' is required so that it doesn't match sqrt
+        formula_content = formula_content.replace('^', ' ** ')
+
+        print(f"Formula: {formula}")
+        print(f"Formula: {formula_content}")
+        y = eval(formula_content, {'np': np, 'x': x})
+        print(f"Y: {y}")
+        print(type(y))
+        if type(y) is not np.ndarray:
+            y = [y] * 200
         plt.figure()
         plt.plot(x, y)
         plt.title('Formula Visualization')
@@ -152,6 +213,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
         plt.ylabel('Formula result')
         plt.grid(True)
         plt.show()
+        print(f"variables: {self.variables}")
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeFormula.
     def exitVisualizeFormula(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeFormulaContext):
@@ -203,10 +265,20 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     def exitImageType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ImageTypeContext):
         pass
 
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaWhole.
+    def enterFormulaWhole(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FormulaWholeContext):
+        print("Enter Formula Whole")
+        text = ctx.getText()
+        if self.pointer is not None:
+            self.variables[self.pointer] = text
+        # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaWhole.
+    def exitFormulaWhole(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FormulaWholeContext):
+        print("Exit Formula Whole")
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaContent.
     def enterFormulaContent(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):
         pass
+
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaContent.
     def exitFormulaContent(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):

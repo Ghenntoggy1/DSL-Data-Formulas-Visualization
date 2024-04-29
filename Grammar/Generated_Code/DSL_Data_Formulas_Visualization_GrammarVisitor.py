@@ -89,6 +89,11 @@ class DSL_Data_Formulas_Visualization_GrammarVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaWhole.
+    def visitFormulaWhole(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.FormulaWholeContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaContent.
     def visitFormulaContent(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):
         return self.visitChildren(ctx)
