@@ -88,6 +88,24 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
             print(file_path)
             if os.path.isfile(file_path):
                 print(f"File existent: {file_path}")
+                if file_path != "":
+                    tail = os.path.split(file_path)[1]
+                    tail = tail.split(".")[1]
+                else:
+                    tail = None
+                if tail not in ["xlsx", "csv", "txt"]:
+                    print("Invalid file format!")
+                    file_path = ""
+                while file_path == "":
+                    file_path = filedialog.askopenfilename(initialdir=tail[0],
+                                                           title="Select a dataset file (.xlsx, .csv, .txt)")
+                    if file_path != "":
+                        tail = os.path.split(file_path)[1]
+                        tail = tail.split(".")[1]
+                    print(tail)
+                    if tail not in ["xlsx", "csv", "txt"]:
+                        print("Invalid file format!")
+                        file_path = ""
                 self.filePath = file_path
             elif os.path.exists(file_path):
                 print(f"File path existent but not file: {file_path}")
@@ -96,16 +114,20 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                 root.attributes("-topmost", True)
                 file_path = filedialog.askopenfilename(initialdir=file_path,
                                                        title="Select a dataset file (.xlsx, .csv, .txt)")
-                tail = os.path.split(file_path)[1]
-                tail = tail.split(".")[1]
+                if file_path != "":
+                    tail = os.path.split(file_path)[1]
+                    tail = tail.split(".")[1]
+                else:
+                    tail = None
                 if tail not in ["xlsx", "csv", "txt"]:
                     print("Invalid file format!")
                     file_path = ""
                 while file_path == "":
                     file_path = filedialog.askopenfilename(initialdir=file_path,
                                                            title="Select a dataset file (.xlsx, .csv, .txt)")
-                    tail = os.path.split(file_path)[1]
-                    tail = tail.split(".")[1]
+                    if file_path != "":
+                        tail = os.path.split(file_path)[1]
+                        tail = tail.split(".")[1]
                     print(tail)
                     if tail not in ["xlsx", "csv", "txt"]:
                         print("Invalid file format!")
@@ -124,16 +146,20 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
                 file_path = filedialog.askopenfilename(initialdir=desktop_path,  # initialdir="" for project opening
                                                        title="Select a dataset file (.xlsx, .csv, .txt)")
-                tail = os.path.split(file_path)[1]
-                tail = tail.split(".")[1]
+                if file_path != "":
+                    tail = os.path.split(file_path)[1]
+                    tail = tail.split(".")[1]
+                else:
+                    tail = None
                 if tail not in ["xlsx", "csv", "txt"]:
                     print("Invalid file format!")
                     file_path = ""
                 while file_path == "":
                     file_path = filedialog.askopenfilename(initialdir=file_path,
                                                            title="Select a dataset file (.xlsx, .csv, .txt)")
-                    tail = os.path.split(file_path)[1]
-                    tail = tail.split(".")[1]
+                    if file_path != "":
+                        tail = os.path.split(file_path)[1]
+                        tail = tail.split(".")[1]
                     if tail not in ["xlsx", "csv", "txt"]:
                         print("Invalid file format!")
                         file_path = ""
@@ -156,16 +182,20 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
         file_path = filedialog.askopenfilename(initialdir="",
                                                title="Select a dataset file (.xlsx, .csv, .txt)")
-        tail = os.path.split(file_path)[1]
-        tail = tail.split(".")[1]
+        if file_path != "":
+            tail = os.path.split(file_path)[1]
+            tail = tail.split(".")[1]
+        else:
+            tail = None
         if tail not in ["xlsx", "csv", "txt"]:
             print("Invalid file format!")
             file_path = ""
         while file_path == "":
             file_path = filedialog.askopenfilename(initialdir=file_path,
                                                    title="Select a dataset file (.xlsx, .csv, .txt)")
-            tail = os.path.split(file_path)[1]
-            tail = tail.split(".")[1]
+            if file_path != "":
+                tail = os.path.split(file_path)[1]
+                tail = tail.split(".")[1]
             print(tail)
             if tail not in ["xlsx", "csv", "txt"]:
                 print("Invalid file format!")
