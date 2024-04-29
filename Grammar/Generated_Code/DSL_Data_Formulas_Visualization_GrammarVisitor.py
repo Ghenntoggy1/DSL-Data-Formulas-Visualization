@@ -39,6 +39,11 @@ class DSL_Data_Formulas_Visualization_GrammarVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.
+    def visitEmpty(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#exportCommand.
     def visitExportCommand(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.ExportCommandContext):
         return self.visitChildren(ctx)
@@ -89,8 +94,18 @@ class DSL_Data_Formulas_Visualization_GrammarVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaWhole.
+    def visitFormulaWhole(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.FormulaWholeContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaContent.
     def visitFormulaContent(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#primaryExpression.
+    def visitPrimaryExpression(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.PrimaryExpressionContext):
         return self.visitChildren(ctx)
 
 
@@ -106,6 +121,16 @@ class DSL_Data_Formulas_Visualization_GrammarVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition.
     def visitCondition(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.ConditionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_objects.
+    def visitCondition_objects(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.Condition_objectsContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_numbers.
+    def visitCondition_numbers(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.Condition_numbersContext):
         return self.visitChildren(ctx)
 
 

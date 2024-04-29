@@ -1,1 +1,6 @@
-Formula formula = x^2.2 + sqrt(x);
+if (v2 == v1) {
+    VisualData(graph) dataset=(var1);
+}
+else {
+    VisualData(graph) dataset=(var2);
+};

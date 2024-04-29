@@ -12,10 +12,13 @@ command : readCommand SEMICOLON
 comment : COMMENT_BLOCK
         | COMMENT_LINE;
 
+// TODO: Add dialog for data selection file -> empty parenthesis
 readCommand : DATA ID ASSIGN readFromFile
-            | FORMULA_T ID ASSIGN formulaContent;
+            | FORMULA_T ID ASSIGN formulaWhole;
 
-readFromFile : READ_FROM LPAREN PATH RPAREN;
+readFromFile : READ_FROM LPAREN (PATH | empty) RPAREN;
+
+empty : ;
 
 exportCommand : EXPORT_TO_FILE LPAREN PATH RPAREN exportToFile
               | EXPORT_TO_IMAGE LPAREN PATH RPAREN exportToImage;
@@ -27,8 +30,7 @@ exportToImage : plotType LPAREN ID RPAREN NAME ASSIGN LPAREN ID DOT imageType RP
 visualizeCommand : visualizeFormula
                  | visualizeData;
 
-visualizeFormula : VISUAL_FORMULA LPAREN formulaContent RPAREN RANGE ASSIGN LPAREN ( DIGIT | INTEGER | FLOAT ) COMMA ( DIGIT | INTEGER | FLOAT ) RPAREN
-                 | VISUAL_FORMULA LPAREN ID RPAREN RANGE ASSIGN LPAREN ( DIGIT | INTEGER | FLOAT ) COMMA ( DIGIT | INTEGER | FLOAT ) RPAREN;
+visualizeFormula : VISUAL_FORMULA LPAREN formulaWhole RPAREN RANGE ASSIGN LPAREN ( DIGIT | INTEGER | FLOAT ) COMMA ( DIGIT | INTEGER | FLOAT ) RPAREN;
 
 visualizeData : VISUAL_DATA LPAREN visualizationType RPAREN DATASET ASSIGN LPAREN ID RPAREN;
 
@@ -40,14 +42,22 @@ fileType : CSV | TEXT | JSON | EXCEL;
 
 imageType : PNG | JPG;
 
-formulaContent : (ID | OPERATORS | LPAREN | RPAREN | DIGIT | INTEGER | FLOAT | WS)+;
+formulaWhole : formulaContent;
+
+formulaContent : (ID | OPERATORS | primaryExpression | DIGIT | INTEGER | FLOAT | WS)+;
+
+primaryExpression : LPAREN  formulaContent  RPAREN;
 
 ifStatement : IF LPAREN condition RPAREN LBRACE commandsList RBRACE
              ( ELSE LBRACE commandsList RBRACE )? SEMICOLON ;
 
 whileStatement : WHILE LPAREN condition RPAREN LBRACE commandsList RBRACE SEMICOLON;
 
-condition :  ID expression (ID | DIGIT | INTEGER | FLOAT);
+condition :  condition_objects | condition_numbers;
+
+condition_objects : ID (EQUAL | NOT_EQUAL) ID;
+
+condition_numbers : (DIGIT | INTEGER | FLOAT) expression (DIGIT | INTEGER | FLOAT);
 
 expression : (EQUAL | NOT_EQUAL | GREATER | LESS | GREATER_EQUAL | LESS_EQUAL) ;
 
@@ -94,7 +104,7 @@ INTEGER : '-'? DIGIT+;
 FLOAT : INTEGER DOT DIGIT+;
 DOT : '.';
 WS : [ \t\r\n]+ -> skip; // Skip whitespace
-
+SPACE: [ \t\r\n];
 EQUAL : '==';
 NOT_EQUAL : '!=';
 GREATER : '>';

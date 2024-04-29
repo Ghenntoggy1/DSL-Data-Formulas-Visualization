@@ -62,6 +62,15 @@ class DSL_Data_Formulas_Visualization_GrammarListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.
+    def enterEmpty(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):
+        pass
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.
+    def exitEmpty(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):
+        pass
+
+
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#exportCommand.
     def enterExportCommand(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.ExportCommandContext):
         pass
@@ -152,12 +161,30 @@ class DSL_Data_Formulas_Visualization_GrammarListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaWhole.
+    def enterFormulaWhole(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.FormulaWholeContext):
+        pass
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaWhole.
+    def exitFormulaWhole(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.FormulaWholeContext):
+        pass
+
+
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaContent.
     def enterFormulaContent(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):
         pass
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaContent.
     def exitFormulaContent(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):
+        pass
+
+
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#primaryExpression.
+    def enterPrimaryExpression(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.PrimaryExpressionContext):
+        pass
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#primaryExpression.
+    def exitPrimaryExpression(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.PrimaryExpressionContext):
         pass
 
 
@@ -185,6 +212,24 @@ class DSL_Data_Formulas_Visualization_GrammarListener(ParseTreeListener):
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition.
     def exitCondition(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.ConditionContext):
+        pass
+
+
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_objects.
+    def enterCondition_objects(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.Condition_objectsContext):
+        pass
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_objects.
+    def exitCondition_objects(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.Condition_objectsContext):
+        pass
+
+
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_numbers.
+    def enterCondition_numbers(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.Condition_numbersContext):
+        pass
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_numbers.
+    def exitCondition_numbers(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.Condition_numbersContext):
         pass
 
 
