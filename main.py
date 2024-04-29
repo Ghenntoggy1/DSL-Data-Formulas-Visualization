@@ -28,8 +28,9 @@ def print_parse_tree(argv):
     tree_str = Trees.toStringTree(tree, None, parser)
     print(tree_str)
     if parser.getNumberOfSyntaxErrors() > 0:
+        print("Syntax errors found, exiting...")
         exit(1)
-
+    print("Parsing successful, no syntax errors found.")
     listener = MyListener()
     walker = ParseTreeWalker()
     walker.walk(listener, tree)

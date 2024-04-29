@@ -165,8 +165,8 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                         file_path = ""
                 print(f"File path: {file_path}")
                 self.filePath = file_path
-        self.variables[self.pointer] = self.filePath
-        print("FINAL FILE PATH: ", self.filePath)
+            self.variables[self.pointer] = self.filePath
+            print("FINAL FILE PATH: ", self.filePath)
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readFromFile.
     def exitReadFromFile(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadFromFileContext):

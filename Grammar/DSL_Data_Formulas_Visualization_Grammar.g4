@@ -88,7 +88,7 @@ EXCEL : 'excel';
 CONSOLE : 'console';
 OPERATORS : '*' | '^' | 'log' | 'sqr' | 'sqrt' | 'fact' | '+' | '-';
 ID : [a-zA-Z_/]+[a-zA-Z0-9_/]*;
-PATH : '"' [a-zA-Z0-9_:.\\ -]+ '"';
+PATH : '"' [a-zA-Z0-9_:.\\ -]* '"';
 COMMENT_BLOCK : '/*' .*? '*/';
 COMMENT_LINE : '#' ~[\r\n]*;
 SEMICOLON : ';';
