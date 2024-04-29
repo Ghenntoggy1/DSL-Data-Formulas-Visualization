@@ -170,7 +170,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readFromFile.
     def exitReadFromFile(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadFromFileContext):
-        pass
+        self.filePath = None
 
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.
