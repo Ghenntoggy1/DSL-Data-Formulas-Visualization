@@ -1,12 +1,14 @@
-import antlr4
+import os
 
 from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarListener import DSL_Data_Formulas_Visualization_GrammarListener
 from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarParser import DSL_Data_Formulas_Visualization_GrammarParser
 from Grammar.test import Test
 
-import matplotlib.pyplot as plt
-import numpy as np
-import math
+import matplotlib.pyplot as plt  # Visualization
+import numpy as np  # mathematical operations + arrays
+import tkinter as tk  # context menu for Reading Files
+from tkinter import filedialog  # context menu for Reading Files
+import math  # mathematical operations
 
 
 class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
@@ -17,7 +19,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                           'v2': Test(),
                           }
         self.pointer = None
-
+        self.filePath = None
 
     def enterProgram(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ProgramContext):
         print("Enter Program")
@@ -64,33 +66,119 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readCommand.
     def enterReadCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadCommandContext):
         if ctx.FORMULA_T() is not None:
+            print("Enter Read Formula Command")
             self.variables[ctx.ID().getText()] = None
             self.pointer = ctx.ID().getText()
         if ctx.DATA() is not None:
+            print("Enter Read Data Command")
             self.variables[ctx.ID().getText()] = None
             self.pointer = ctx.ID().getText()
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readCommand.
     def exitReadCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadCommandContext):
         self.pointer = None
-
-
-    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.
-    def enterEmpty(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):
-        pass
-
-    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.
-    def exitEmpty(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):
-        pass
+        print("Exit Read Command")
 
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readFromFile.
     def enterReadFromFile(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadFromFileContext):
-        pass
+        if ctx.PATH() is not None:
+            print("Enter Read From File")
+            file_path = ctx.PATH().getText().replace('"', '')
+            print(file_path)
+            if os.path.isfile(file_path):
+                print(f"File existent: {file_path}")
+                self.filePath = file_path
+            elif os.path.exists(file_path):
+                print(f"File path existent but not file: {file_path}")
+                root = tk.Tk()
+                root.withdraw()
+                root.attributes("-topmost", True)
+                file_path = filedialog.askopenfilename(initialdir=file_path,
+                                                       title="Select a dataset file (.xlsx, .csv, .txt)")
+                tail = os.path.split(file_path)[1]
+                tail = tail.split(".")[1]
+                if tail not in ["xlsx", "csv", "txt"]:
+                    print("Invalid file format!")
+                    file_path = ""
+                while file_path == "":
+                    file_path = filedialog.askopenfilename(initialdir=file_path,
+                                                           title="Select a dataset file (.xlsx, .csv, .txt)")
+                    tail = os.path.split(file_path)[1]
+                    tail = tail.split(".")[1]
+                    print(tail)
+                    if tail not in ["xlsx", "csv", "txt"]:
+                        print("Invalid file format!")
+                        file_path = ""
+
+                print(f"File path: {file_path}")
+                self.filePath = file_path
+
+            else:
+                print(f"File path doesn't exist: {file_path}")
+                root = tk.Tk()
+                root.withdraw()
+                root.attributes("-topmost", True)
+
+                desktop_path = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+
+                file_path = filedialog.askopenfilename(initialdir=desktop_path,  # initialdir="" for project opening
+                                                       title="Select a dataset file (.xlsx, .csv, .txt)")
+                tail = os.path.split(file_path)[1]
+                tail = tail.split(".")[1]
+                if tail not in ["xlsx", "csv", "txt"]:
+                    print("Invalid file format!")
+                    file_path = ""
+                while file_path == "":
+                    file_path = filedialog.askopenfilename(initialdir=file_path,
+                                                           title="Select a dataset file (.xlsx, .csv, .txt)")
+                    tail = os.path.split(file_path)[1]
+                    tail = tail.split(".")[1]
+                    if tail not in ["xlsx", "csv", "txt"]:
+                        print("Invalid file format!")
+                        file_path = ""
+                print(f"File path: {file_path}")
+                self.filePath = file_path
+        self.variables[self.pointer] = self.filePath
+        print("FINAL FILE PATH: ", self.filePath)
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readFromFile.
     def exitReadFromFile(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadFromFileContext):
         pass
+
+
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.
+    def enterEmpty(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):
+        print("Enter Empty")
+        root = tk.Tk()
+        root.withdraw()
+        root.attributes("-topmost", True)
+
+        file_path = filedialog.askopenfilename(initialdir="",
+                                               title="Select a dataset file (.xlsx, .csv, .txt)")
+        tail = os.path.split(file_path)[1]
+        tail = tail.split(".")[1]
+        if tail not in ["xlsx", "csv", "txt"]:
+            print("Invalid file format!")
+            file_path = ""
+        while file_path == "":
+            file_path = filedialog.askopenfilename(initialdir=file_path,
+                                                   title="Select a dataset file (.xlsx, .csv, .txt)")
+            tail = os.path.split(file_path)[1]
+            tail = tail.split(".")[1]
+            print(tail)
+            if tail not in ["xlsx", "csv", "txt"]:
+                print("Invalid file format!")
+                file_path = ""
+        print(f"File path: {file_path}")
+        self.filePath = file_path
+        self.variables[self.pointer] = self.filePath
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.
+    def exitEmpty(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):
+        self.filePath = None
+        print("Exit Empty")
+
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#exportCommand.
     def enterExportCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ExportCommandContext):
