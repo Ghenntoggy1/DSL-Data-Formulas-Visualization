@@ -12,10 +12,13 @@ command : readCommand SEMICOLON
 comment : COMMENT_BLOCK
         | COMMENT_LINE;
 
+// TODO: Add dialog for data selection file -> empty parenthesis
 readCommand : DATA ID ASSIGN readFromFile
             | FORMULA_T ID ASSIGN formulaWhole;
 
-readFromFile : READ_FROM LPAREN PATH RPAREN;
+readFromFile : READ_FROM LPAREN (PATH | empty) RPAREN;
+
+empty : ;
 
 exportCommand : EXPORT_TO_FILE LPAREN PATH RPAREN exportToFile
               | EXPORT_TO_IMAGE LPAREN PATH RPAREN exportToImage;

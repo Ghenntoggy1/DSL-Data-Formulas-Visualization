@@ -62,6 +62,15 @@ class DSL_Data_Formulas_Visualization_GrammarListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.
+    def enterEmpty(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):
+        pass
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.
+    def exitEmpty(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):
+        pass
+
+
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#exportCommand.
     def enterExportCommand(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.ExportCommandContext):
         pass

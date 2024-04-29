@@ -72,6 +72,16 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     def exitReadCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadCommandContext):
         self.pointer = None
 
+
+    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.
+    def enterEmpty(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):
+        pass
+
+    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.
+    def exitEmpty(self, ctx:DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):
+        pass
+
+
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readFromFile.
     def enterReadFromFile(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadFromFileContext):
         pass
