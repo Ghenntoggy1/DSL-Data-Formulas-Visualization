@@ -12,8 +12,7 @@ import math
 class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     def __init__(self):
         super().__init__()
-        self.variables = {
-                          'np': np,
+        self.variables = {'np': np,
                           'v1': Test(),
                           'v2': Test(),
                           }
@@ -65,6 +64,9 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readCommand.
     def enterReadCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadCommandContext):
         if ctx.FORMULA_T() is not None:
+            self.variables[ctx.ID().getText()] = None
+            self.pointer = ctx.ID().getText()
+        if ctx.DATA() is not None:
             self.variables[ctx.ID().getText()] = None
             self.pointer = ctx.ID().getText()
 
@@ -127,7 +129,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     def enterVisualizeFormula(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeFormulaContext):
         # basic implementation of formula visualization
         # TODO make it work for other variable names, not only x
-        # TODO make it accept formula as a variable
+        # TODO make it accept formula as a variable -> Done
 
         formula_content = None
         range_start = None
@@ -156,9 +158,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
         print(f"Formula: {formula_content}")
 
         x = np.linspace(range_start, range_end, 200)
-        # for key in self.variables.keys():
-        #     formula_content = formula_content.replace(key, str(self.variables[key]))
-        # # formula_content = formula_content.replace('formula', self.variables['formula'])
 
         formula_content = formula_content.replace('+', ' + ')
         formula_content = formula_content.replace('-', ' - ')
@@ -178,7 +177,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                 token = formula[i]
                 if token in self.variables.keys():
                     formula[i] = self.variables[token]
-                    # formula_content_new.append(self.variables[token])
+
             formula_content = ' '.join(formula)
             formula_content = formula_content.replace('+', ' + ')
             formula_content = formula_content.replace('-', ' - ')
