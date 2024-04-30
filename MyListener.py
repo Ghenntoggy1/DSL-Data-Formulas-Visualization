@@ -242,12 +242,8 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     def exitVisualizeCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeCommandContext):
         pass
 
-
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeFormula.
     def enterVisualizeFormula(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeFormulaContext):
-        # basic implementation of formula visualization
-        # TODO make it work for other variable names, not only x
-        # TODO make it accept formula as a variable -> Done
 
         formula_content = None
         range_start = None
@@ -294,9 +290,21 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
         formula_content = self._process_formula_content(formula_content, replace_with_python_mappings=True)
         formula_content = formula_content.replace('^', ' ** ')
 
+
+        free_variable = None
+        known_tokens = {'sin', 'cos', 'tan', 'log', 'exp', 'sqrt', 'sqr', '+', '-', '*', '/', '^', }
+        for token in formula:
+            if token[0].isalpha() and not (token in self.variables.keys() or token in known_tokens):
+                free_variable = token
+                break
+
+        if not free_variable:
+            print("Could not detect the free variable in the formula - assuming 'x' as the free variable")
+            free_variable = 'x'
+
         print(f"Formula: {formula}")
         print(f"Formula: {formula_content}")
-        y = eval(formula_content, {'np': np, 'x': x})
+        y = eval(formula_content, {'np': np, free_variable: x})
         print(f"Y: {y}")
         print(type(y))
         if type(y) is not np.ndarray:
@@ -304,7 +312,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
         plt.figure()
         plt.plot(x, y)
         plt.title('Formula Visualization')
-        plt.xlabel('x')
+        plt.xlabel(free_variable)
         plt.ylabel('Formula result')
         plt.grid(True)
         plt.show()
