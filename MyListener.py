@@ -311,7 +311,10 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
             y = [y] * 200
         plt.figure()
         plt.plot(x, y)
-        plt.title(f'Formula Visualization: {formula_content}')
+        if ctx.formulaWhole().getText() == "".join(formula):
+            plt.title(f'Formula Visualization: {"".join(formula)}')
+        else:
+            plt.title(f'Formula Visualization: {ctx.formulaWhole().getText()} = {"".join(formula)}')
         plt.xlabel(free_variable)
         plt.ylabel('Formula result')
         plt.grid(True)

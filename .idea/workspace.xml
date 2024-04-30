@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc725dec-f923-4da1-bc49-ceb824ae6da1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Grammar/Example_Program_Code/Example_Program_3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Grammar/Example_Program_Code/Example_Program_3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyListener.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyListener.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,6 +147,7 @@
       <workItem from="1714426539748" duration="2513000" />
       <workItem from="1714479245036" duration="66000" />
       <workItem from="1714480280199" duration="452000" />
+      <workItem from="1714481129334" duration="416000" />
     </task>
     <servers />
   </component>
@@ -166,7 +167,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DSL_Data_Formulas_Visualization$MyListener.coverage" NAME="MyListener Coverage Results" MODIFIED="1714398188999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/DSL_Data_Formulas_Visualization$main.coverage" NAME="main Coverage Results" MODIFIED="1714480633993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DSL_Data_Formulas_Visualization$main.coverage" NAME="main Coverage Results" MODIFIED="1714481549783" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DSL_Data_Formulas_Visualization$test.coverage" NAME="test Coverage Results" MODIFIED="1714424881831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Grammar" />
   </component>
 </project>
