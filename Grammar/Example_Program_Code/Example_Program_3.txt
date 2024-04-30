@@ -1,7 +1,7 @@
 # Data tableData = ReadFrom("/path1/folder1/file.txt");
 Formula bb = 1+1;
-Formula formula = bb^2;
-Formula formula1 = formula^2 + (-5 + 6) * 2;
+Formula x = bb^2;
+Formula formula1 = x^2 + (-5 + 6) * z ^ 5;
 VisualFormula(formula1) range=(-10, 10);
 Data tableData = ReadFrom("C:\Users\user\Desktop\DOTA SKIN.txt");
 Data tableData2 = ReadFrom("C:\Users\user\Desktop\DOTA SKIN.txt");

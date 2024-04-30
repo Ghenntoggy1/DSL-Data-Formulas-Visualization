@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc725dec-f923-4da1-bc49-ceb824ae6da1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Grammar/Example_Program_Code/Example_Program_3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Grammar/Example_Program_Code/Example_Program_3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +45,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;formula-visualization-improvements&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/Programming/Projects/DSL/DSL_Data_Formulas_Visualization/Grammar/Example_Program_Code/Example_Program_1.txt&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -144,7 +144,9 @@
       <workItem from="1714393196652" duration="11000" />
       <workItem from="1714401336237" duration="103000" />
       <workItem from="1714418807351" duration="333000" />
-      <workItem from="1714426539748" duration="1598000" />
+      <workItem from="1714426539748" duration="2513000" />
+      <workItem from="1714479245036" duration="66000" />
+      <workItem from="1714480280199" duration="452000" />
     </task>
     <servers />
   </component>
@@ -164,7 +166,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DSL_Data_Formulas_Visualization$MyListener.coverage" NAME="MyListener Coverage Results" MODIFIED="1714398188999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/DSL_Data_Formulas_Visualization$main.coverage" NAME="main Coverage Results" MODIFIED="1714428155918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DSL_Data_Formulas_Visualization$main.coverage" NAME="main Coverage Results" MODIFIED="1714480633993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DSL_Data_Formulas_Visualization$test.coverage" NAME="test Coverage Results" MODIFIED="1714424881831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Grammar" />
   </component>
 </project>

@@ -311,7 +311,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
             y = [y] * 200
         plt.figure()
         plt.plot(x, y)
-        plt.title('Formula Visualization')
+        plt.title(f'Formula Visualization: {formula_content}')
         plt.xlabel(free_variable)
         plt.ylabel('Formula result')
         plt.grid(True)
