@@ -9,6 +9,8 @@ import numpy as np  # mathematical operations + arrays
 import tkinter as tk  # context menu for Reading Files
 from tkinter import filedialog  # context menu for Reading Files
 import math  # mathematical operations
+from mpl_toolkits.mplot3d import Axes3D
+
 
 
 class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
@@ -292,11 +294,15 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
 
         free_variable = None
+        free_variable1 = None
         known_tokens = {'sin', 'cos', 'tan', 'log', 'exp', 'sqrt', 'sqr', '+', '-', '*', '/', '^', }
         for token in formula:
             if token[0].isalpha() and not (token in self.variables.keys() or token in known_tokens):
-                free_variable = token
-                break
+                if free_variable is None:
+                    free_variable = token
+                elif free_variable is not None and free_variable != token:
+                    free_variable1 = token
+                    break
 
         if not free_variable:
             print("Could not detect the free variable in the formula - assuming 'x' as the free variable")
@@ -304,21 +310,37 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
         print(f"Formula: {formula}")
         print(f"Formula: {formula_content}")
-        y = eval(formula_content, {'np': np, free_variable: x})
-        print(f"Y: {y}")
-        print(type(y))
-        if type(y) is not np.ndarray:
-            y = [y] * 200
-        plt.figure()
-        plt.plot(x, y)
-        if ctx.formulaWhole().getText() == "".join(formula):
-            plt.title(f'Formula Visualization: {"".join(formula)}')
+        if free_variable1 is None:
+            y = eval(formula_content, {'np': np, free_variable: x})
+            print(f"Y: {y}")
+            print(type(y))
+            if type(y) is not np.ndarray:
+                y = [y] * 200
+            plt.figure()
+            plt.plot(x, y)
+            if ctx.formulaWhole().getText() == "".join(formula):
+                plt.title(f'Formula Visualization: {"".join(formula)}')
+            else:
+                plt.title(f'Formula Visualization: {ctx.formulaWhole().getText()} = {"".join(formula)}')
+            plt.xlabel(free_variable)
+            plt.ylabel('Formula result')
+            plt.grid(True)
+            plt.show()
         else:
-            plt.title(f'Formula Visualization: {ctx.formulaWhole().getText()} = {"".join(formula)}')
-        plt.xlabel(free_variable)
-        plt.ylabel('Formula result')
-        plt.grid(True)
-        plt.show()
+            x, y = np.meshgrid(x, x)
+            z = eval(formula_content, {'np': np, free_variable: x, free_variable1: y})
+            fig = plt.figure()
+            ax = fig.add_subplot(111, projection='3d')
+            ax.plot_surface(x, y, z)
+            if ctx.formulaWhole().getText() == "".join(formula):
+                plt.title(f'Formula Visualization: {"".join(formula)}')
+            else:
+                plt.title(f'Formula Visualization: {ctx.formulaWhole().getText()} = {"".join(formula)}')
+            ax.set_xlabel(free_variable)
+            ax.set_ylabel(free_variable1)
+            ax.set_zlabel('Formula result')
+            plt.show()
+
         print(f"variables: {self.variables}")
 
     def _process_formula_content(self, formula_string, replace_with_python_mappings=False):
