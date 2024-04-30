@@ -12,7 +12,6 @@ command : readCommand SEMICOLON
 comment : COMMENT_BLOCK
         | COMMENT_LINE;
 
-// TODO: Add dialog for data selection file -> empty parenthesis
 readCommand : DATA ID ASSIGN readFromFile
             | FORMULA_T ID ASSIGN formulaWhole;
 

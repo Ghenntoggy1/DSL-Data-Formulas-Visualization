@@ -242,12 +242,8 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     def exitVisualizeCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeCommandContext):
         pass
 
-
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeFormula.
     def enterVisualizeFormula(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeFormulaContext):
-        # basic implementation of formula visualization
-        # TODO make it work for other variable names, not only x
-        # TODO make it accept formula as a variable -> Done
 
         formula_content = None
         range_start = None
@@ -277,17 +273,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
         x = np.linspace(range_start, range_end, 200)
 
-        formula_content = formula_content.replace('+', ' + ')
-        formula_content = formula_content.replace('-', ' - ')
-        formula_content = formula_content.replace('*', ' * ')
-        formula_content = formula_content.replace('/', ' / ')
-        formula_content = formula_content.replace('(', ' ( ')
-        formula_content = formula_content.replace(')', ' ) ')
-        formula_content = formula_content.replace("sin", " np.sin").replace("exp", " np.exp")
-        formula_content = formula_content.replace("cos", " np.cos").replace("tan", " np.tan")
-        formula_content = formula_content.replace("log", " np.log").replace("sqrt", " np.sqrt")
-        formula_content = formula_content.replace('sqr (', ' np.square (')  # '(' is required so that it doesn't match sqrt
-        formula_content = formula_content.replace('^', ' ^ ')
+        formula_content = self._process_formula_content(formula_content)
         formula = formula_content.split()
         while any([token in self.variables.keys() for token in formula]):
             print(f"Formula: {formula}")
@@ -297,50 +283,79 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                     formula[i] = self.variables[token]
 
             formula_content = ' '.join(formula)
-            formula_content = formula_content.replace('+', ' + ')
-            formula_content = formula_content.replace('-', ' - ')
-            formula_content = formula_content.replace('*', ' * ')
-            formula_content = formula_content.replace('/', ' / ')
-            formula_content = formula_content.replace('(', ' ( ')
-            formula_content = formula_content.replace(')', ' ) ')
-            formula_content = formula_content.replace("sin", " np.sin").replace("exp", " np.exp")
-            formula_content = formula_content.replace("cos", " np.cos").replace("tan", " np.tan")
-            formula_content = formula_content.replace("log", " np.log").replace("sqrt", " np.sqrt")
-            formula_content = formula_content.replace('sqr (',
-                                                      ' np.square (')  # '(' is required so that it doesn't match sqrt
-            formula_content = formula_content.replace('^', ' ^ ')
+            formula_content = self._process_formula_content(formula_content)
             formula = formula_content.split()
 
-
         formula_content = ' '.join(formula)
-        formula_content = formula_content.replace('+', ' + ')
-        formula_content = formula_content.replace('-', ' - ')
-        formula_content = formula_content.replace('*', ' * ')
-        formula_content = formula_content.replace('/', ' / ')
-        formula_content = formula_content.replace('(', ' ( ')
-        formula_content = formula_content.replace(')', ' ) ')
-        formula_content = formula_content.replace("sin", " np.sin").replace("exp", " np.exp")
-        formula_content = formula_content.replace("cos", " np.cos").replace("tan", " np.tan")
-        formula_content = formula_content.replace("log", " np.log").replace("sqrt", " np.sqrt")
-        formula_content = formula_content.replace('sqr (',
-                                                  ' np.square (')  # '(' is required so that it doesn't match sqrt
+        formula_content = self._process_formula_content(formula_content, replace_with_python_mappings=True)
         formula_content = formula_content.replace('^', ' ** ')
+
+
+        free_variable = None
+        known_tokens = {'sin', 'cos', 'tan', 'log', 'exp', 'sqrt', 'sqr', '+', '-', '*', '/', '^', }
+        for token in formula:
+            if token[0].isalpha() and not (token in self.variables.keys() or token in known_tokens):
+                free_variable = token
+                break
+
+        if not free_variable:
+            print("Could not detect the free variable in the formula - assuming 'x' as the free variable")
+            free_variable = 'x'
 
         print(f"Formula: {formula}")
         print(f"Formula: {formula_content}")
-        y = eval(formula_content, {'np': np, 'x': x})
+        y = eval(formula_content, {'np': np, free_variable: x})
         print(f"Y: {y}")
         print(type(y))
         if type(y) is not np.ndarray:
             y = [y] * 200
         plt.figure()
         plt.plot(x, y)
-        plt.title('Formula Visualization')
-        plt.xlabel('x')
+        if ctx.formulaWhole().getText() == "".join(formula):
+            plt.title(f'Formula Visualization: {"".join(formula)}')
+        else:
+            plt.title(f'Formula Visualization: {ctx.formulaWhole().getText()} = {"".join(formula)}')
+        plt.xlabel(free_variable)
         plt.ylabel('Formula result')
         plt.grid(True)
         plt.show()
         print(f"variables: {self.variables}")
+
+    def _process_formula_content(self, formula_string, replace_with_python_mappings=False):
+        mapping_dict_spaces = {
+            '+': ' + ',
+            '-': ' - ',
+            '*': ' * ',
+            '/': ' / ',
+            '(': ' ( ',
+            ')': ' ) ',
+            'sin': ' sin',
+            'exp': ' exp',
+            'cos': ' cos',
+            'tan': ' tan',
+            'log': ' log',
+            'sqrt': ' sqrt',
+            'sqr (': ' square (',  # '(' is required so that it doesn't match sqrt
+            'sqr(': ' square(',
+            '^': ' ^ '
+        }
+        mapping_dict_python_mappings = {
+            'sin': 'np.sin',
+            'exp': 'np.exp',
+            'cos': 'np.cos',
+            'tan': 'np.tan',
+            'log': 'np.log',
+            'sqrt': 'np.sqrt',
+            'sqr (': 'np.square (',
+            'sqr(': 'np.square(',
+            '^': '**'
+        }
+        mapping_dict = mapping_dict_python_mappings if replace_with_python_mappings else mapping_dict_spaces
+
+        for original, new in mapping_dict.items():
+            formula_string = formula_string.replace(original, new)
+        return formula_string
+
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeFormula.
     def exitVisualizeFormula(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeFormulaContext):
