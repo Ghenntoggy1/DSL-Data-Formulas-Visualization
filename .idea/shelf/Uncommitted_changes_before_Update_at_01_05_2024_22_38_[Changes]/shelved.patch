@@ -1,0 +1,375 @@
+Index: MyListener.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import os\r\n\r\nfrom Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarListener import DSL_Data_Formulas_Visualization_GrammarListener\r\nfrom Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarParser import DSL_Data_Formulas_Visualization_GrammarParser\r\nfrom Grammar.test import Test\r\n\r\nimport matplotlib.pyplot as plt  # Visualization\r\nimport numpy as np  # mathematical operations + arrays\r\nimport tkinter as tk  # context menu for Reading Files\r\nfrom tkinter import filedialog  # context menu for Reading Files\r\nimport math  # mathematical operations\r\n\r\n\r\nclass MyListener(DSL_Data_Formulas_Visualization_GrammarListener):\r\n    def __init__(self):\r\n        super().__init__()\r\n        self.variables = {'np': np,\r\n                          'v1': Test(),\r\n                          'v2': Test(),\r\n                          }\r\n        self.pointer = None\r\n        self.filePath = None\r\n\r\n    def enterProgram(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ProgramContext):\r\n        print(\"Enter Program\")\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#program.\r\n    def exitProgram(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ProgramContext):\r\n        # del MyListener\r\n        print(f\"Variables: {self.variables}\")\r\n        print(\"Exit Program\")\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#commandsList.\r\n    def enterCommandsList(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.CommandsListContext):\r\n        pass\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#commandsList.\r\n    def exitCommandsList(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.CommandsListContext):\r\n        pass\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#command.\r\n    def enterCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.CommandContext):\r\n        pass\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#command.\r\n    def exitCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.CommandContext):\r\n        pass\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#comment.\r\n    def enterComment(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.CommentContext):\r\n        # TODO: delete if elif, leave pass -> now it s for testing purposes\r\n        print(\"Enter Comment\")\r\n        if ctx.COMMENT_LINE():\r\n            print(f\"Comment Line: {ctx.COMMENT_LINE().getText()}\")\r\n        elif ctx.COMMENT_BLOCK():\r\n            print(f\"Comment Block: {ctx.COMMENT_BLOCK().getText()}\")\r\n        else:\r\n            pass\r\n\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#comment.\r\n    def exitComment(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.CommentContext):\r\n        print(\"Exit Comment\")\r\n        # pass\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readCommand.\r\n    def enterReadCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadCommandContext):\r\n        if ctx.FORMULA_T() is not None:\r\n            print(\"Enter Read Formula Command\")\r\n            self.variables[ctx.ID().getText()] = None\r\n            self.pointer = ctx.ID().getText()\r\n        if ctx.DATA() is not None:\r\n            print(\"Enter Read Data Command\")\r\n            self.variables[ctx.ID().getText()] = None\r\n            self.pointer = ctx.ID().getText()\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readCommand.\r\n    def exitReadCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadCommandContext):\r\n        self.pointer = None\r\n        print(\"Exit Read Command\")\r\n\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readFromFile.\r\n    def enterReadFromFile(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadFromFileContext):\r\n        if ctx.PATH() is not None:\r\n            print(\"Enter Read From File\")\r\n            file_path = ctx.PATH().getText().replace('\"', '')\r\n            print(file_path)\r\n            if os.path.isfile(file_path):\r\n                print(f\"File existent: {file_path}\")\r\n                if file_path != \"\":\r\n                    tail = os.path.split(file_path)[1]\r\n                    tail = tail.split(\".\")[1]\r\n                else:\r\n                    tail = None\r\n                if tail not in [\"xlsx\", \"csv\", \"txt\"]:\r\n                    print(\"Invalid file format!\")\r\n                    file_path = \"\"\r\n                while file_path == \"\":\r\n                    file_path = filedialog.askopenfilename(initialdir=tail[0],\r\n                                                           title=\"Select a dataset file (.xlsx, .csv, .txt)\")\r\n                    if file_path != \"\":\r\n                        tail = os.path.split(file_path)[1]\r\n                        tail = tail.split(\".\")[1]\r\n                    print(tail)\r\n                    if tail not in [\"xlsx\", \"csv\", \"txt\"]:\r\n                        print(\"Invalid file format!\")\r\n                        file_path = \"\"\r\n                self.filePath = file_path\r\n            elif os.path.exists(file_path):\r\n                print(f\"File path existent but not file: {file_path}\")\r\n                root = tk.Tk()\r\n                root.withdraw()\r\n                root.attributes(\"-topmost\", True)\r\n                file_path = filedialog.askopenfilename(initialdir=file_path,\r\n                                                       title=\"Select a dataset file (.xlsx, .csv, .txt)\")\r\n                if file_path != \"\":\r\n                    tail = os.path.split(file_path)[1]\r\n                    tail = tail.split(\".\")[1]\r\n                else:\r\n                    tail = None\r\n                if tail not in [\"xlsx\", \"csv\", \"txt\"]:\r\n                    print(\"Invalid file format!\")\r\n                    file_path = \"\"\r\n                while file_path == \"\":\r\n                    file_path = filedialog.askopenfilename(initialdir=file_path,\r\n                                                           title=\"Select a dataset file (.xlsx, .csv, .txt)\")\r\n                    if file_path != \"\":\r\n                        tail = os.path.split(file_path)[1]\r\n                        tail = tail.split(\".\")[1]\r\n                    print(tail)\r\n                    if tail not in [\"xlsx\", \"csv\", \"txt\"]:\r\n                        print(\"Invalid file format!\")\r\n                        file_path = \"\"\r\n\r\n                print(f\"File path: {file_path}\")\r\n                self.filePath = file_path\r\n\r\n            else:\r\n                print(f\"File path doesn't exist: {file_path}\")\r\n                root = tk.Tk()\r\n                root.withdraw()\r\n                root.attributes(\"-topmost\", True)\r\n\r\n                desktop_path = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')\r\n\r\n                file_path = filedialog.askopenfilename(initialdir=desktop_path,  # initialdir=\"\" for project opening\r\n                                                       title=\"Select a dataset file (.xlsx, .csv, .txt)\")\r\n                if file_path != \"\":\r\n                    tail = os.path.split(file_path)[1]\r\n                    tail = tail.split(\".\")[1]\r\n                else:\r\n                    tail = None\r\n                if tail not in [\"xlsx\", \"csv\", \"txt\"]:\r\n                    print(\"Invalid file format!\")\r\n                    file_path = \"\"\r\n                while file_path == \"\":\r\n                    file_path = filedialog.askopenfilename(initialdir=file_path,\r\n                                                           title=\"Select a dataset file (.xlsx, .csv, .txt)\")\r\n                    if file_path != \"\":\r\n                        tail = os.path.split(file_path)[1]\r\n                        tail = tail.split(\".\")[1]\r\n                    if tail not in [\"xlsx\", \"csv\", \"txt\"]:\r\n                        print(\"Invalid file format!\")\r\n                        file_path = \"\"\r\n                print(f\"File path: {file_path}\")\r\n                self.filePath = file_path\r\n            self.variables[self.pointer] = self.filePath\r\n            print(\"FINAL FILE PATH: \", self.filePath)\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readFromFile.\r\n    def exitReadFromFile(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadFromFileContext):\r\n        self.filePath = None\r\n\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.\r\n    def enterEmpty(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):\r\n        print(\"Enter Empty\")\r\n        root = tk.Tk()\r\n        root.withdraw()\r\n        root.attributes(\"-topmost\", True)\r\n\r\n        file_path = filedialog.askopenfilename(initialdir=\"\",\r\n                                               title=\"Select a dataset file (.xlsx, .csv, .txt)\")\r\n        if file_path != \"\":\r\n            tail = os.path.split(file_path)[1]\r\n            tail = tail.split(\".\")[1]\r\n        else:\r\n            tail = None\r\n        if tail not in [\"xlsx\", \"csv\", \"txt\"]:\r\n            print(\"Invalid file format!\")\r\n            file_path = \"\"\r\n        while file_path == \"\":\r\n            file_path = filedialog.askopenfilename(initialdir=file_path,\r\n                                                   title=\"Select a dataset file (.xlsx, .csv, .txt)\")\r\n            if file_path != \"\":\r\n                tail = os.path.split(file_path)[1]\r\n                tail = tail.split(\".\")[1]\r\n            print(tail)\r\n            if tail not in [\"xlsx\", \"csv\", \"txt\"]:\r\n                print(\"Invalid file format!\")\r\n                file_path = \"\"\r\n        print(f\"File path: {file_path}\")\r\n        self.filePath = file_path\r\n        self.variables[self.pointer] = self.filePath\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.\r\n    def exitEmpty(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):\r\n        self.filePath = None\r\n        print(\"Exit Empty\")\r\n\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#exportCommand.\r\n    def enterExportCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ExportCommandContext):\r\n        pass\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#exportCommand.\r\n    def exitExportCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ExportCommandContext):\r\n        pass\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#exportToFile.\r\n    def enterExportToFile(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ExportToFileContext):\r\n        pass\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#exportToFile.\r\n    def exitExportToFile(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ExportToFileContext):\r\n        pass\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#exportToImage.\r\n    def enterExportToImage(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ExportToImageContext):\r\n        pass\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#exportToImage.\r\n    def exitExportToImage(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ExportToImageContext):\r\n        pass\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeCommand.\r\n    def enterVisualizeCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeCommandContext):\r\n        print(\"Enter Visualize Command\")\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeCommand.\r\n    def exitVisualizeCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeCommandContext):\r\n        pass\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeFormula.\r\n    def enterVisualizeFormula(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeFormulaContext):\r\n\r\n        formula_content = None\r\n        range_start = None\r\n        range_end = None\r\n\r\n        for child in ctx.children:\r\n            if isinstance(child, DSL_Data_Formulas_Visualization_GrammarParser.FormulaWholeContext):\r\n                print(f\"Formula content: {child.getText()}\")\r\n                if child.getText() in self.variables.keys():\r\n                    formula_content = self.variables[child.getText()]\r\n                else:\r\n                    formula_content = child.getText()\r\n            elif child.getText() == 'range':\r\n                # according to grammar, range numbers are at fixed positions after 'range'\r\n                try:\r\n                    range_start = float(ctx.children[ctx.children.index(child) + 3].getText())\r\n                    range_end = float(ctx.children[ctx.children.index(child) + 5].getText())\r\n                except (IndexError, ValueError) as e:\r\n                    print(f\"Error parsing range values: {e}\")\r\n                    return\r\n        print(f'{self.variables}')\r\n\r\n        if formula_content is None or range_start is None or range_end is None:\r\n            print(\"Error: Formula content or range values could not be parsed.\")\r\n            return\r\n        print(f\"Formula: {formula_content}\")\r\n\r\n        x = np.linspace(range_start, range_end, 200)\r\n\r\n        formula_content = self._process_formula_content(formula_content)\r\n        formula = formula_content.split()\r\n        while any([token in self.variables.keys() for token in formula]):\r\n            print(f\"Formula: {formula}\")\r\n            for i in range(len(formula)):\r\n                token = formula[i]\r\n                if token in self.variables.keys():\r\n                    formula[i] = self.variables[token]\r\n\r\n            formula_content = ' '.join(formula)\r\n            formula_content = self._process_formula_content(formula_content)\r\n            formula = formula_content.split()\r\n\r\n        formula_content = ' '.join(formula)\r\n        formula_content = self._process_formula_content(formula_content, replace_with_python_mappings=True)\r\n        formula_content = formula_content.replace('^', ' ** ')\r\n\r\n\r\n        free_variable = None\r\n        known_tokens = {'sin', 'cos', 'tan', 'log', 'exp', 'sqrt', 'sqr', '+', '-', '*', '/', '^', }\r\n        for token in formula:\r\n            if token[0].isalpha() and not (token in self.variables.keys() or token in known_tokens):\r\n                free_variable = token\r\n                break\r\n\r\n        if not free_variable:\r\n            print(\"Could not detect the free variable in the formula - assuming 'x' as the free variable\")\r\n            free_variable = 'x'\r\n\r\n        print(f\"Formula: {formula}\")\r\n        print(f\"Formula: {formula_content}\")\r\n        y = eval(formula_content, {'np': np, free_variable: x})\r\n        print(f\"Y: {y}\")\r\n        print(type(y))\r\n        if type(y) is not np.ndarray:\r\n            y = [y] * 200\r\n        plt.figure()\r\n        plt.plot(x, y)\r\n        if ctx.formulaWhole().getText() == \"\".join(formula):\r\n            plt.title(f'Formula Visualization: {\"\".join(formula)}')\r\n        else:\r\n            plt.title(f'Formula Visualization: {ctx.formulaWhole().getText()} = {\"\".join(formula)}')\r\n        plt.xlabel(free_variable)\r\n        plt.ylabel('Formula result')\r\n        plt.grid(True)\r\n        plt.show()\r\n        print(f\"variables: {self.variables}\")\r\n\r\n    def _process_formula_content(self, formula_string, replace_with_python_mappings=False):\r\n        mapping_dict_spaces = {\r\n            '+': ' + ',\r\n            '-': ' - ',\r\n            '*': ' * ',\r\n            '/': ' / ',\r\n            '(': ' ( ',\r\n            ')': ' ) ',\r\n            'sin': ' sin',\r\n            'exp': ' exp',\r\n            'cos': ' cos',\r\n            'tan': ' tan',\r\n            'log': ' log',\r\n            'sqrt': ' sqrt',\r\n            'sqr (': ' square (',  # '(' is required so that it doesn't match sqrt\r\n            'sqr(': ' square(',\r\n            '^': ' ^ '\r\n        }\r\n        mapping_dict_python_mappings = {\r\n            'sin': 'np.sin',\r\n            'exp': 'np.exp',\r\n            'cos': 'np.cos',\r\n            'tan': 'np.tan',\r\n            'log': 'np.log',\r\n            'sqrt': 'np.sqrt',\r\n            'sqr (': 'np.square (',\r\n            'sqr(': 'np.square(',\r\n            '^': '**'\r\n        }\r\n        mapping_dict = mapping_dict_python_mappings if replace_with_python_mappings else mapping_dict_spaces\r\n\r\n        for original, new in mapping_dict.items():\r\n            formula_string = formula_string.replace(original, new)\r\n        return formula_string\r\n\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeFormula.\r\n    def exitVisualizeFormula(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeFormulaContext):\r\n        print(\"Exit Visualize Formula\")\r\n        # pass\r\n\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeData.\r\n    def enterVisualizeData(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeDataContext):\r\n        pass\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeData.\r\n    def exitVisualizeData(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeDataContext):\r\n        pass\r\n\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizationType.\r\n    def enterVisualizationType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizationTypeContext):\r\n        pass\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizationType.\r\n    def exitVisualizationType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizationTypeContext):\r\n        pass\r\n\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#plotType.\r\n    def enterPlotType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.PlotTypeContext):\r\n        pass\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#plotType.\r\n    def exitPlotType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.PlotTypeContext):\r\n        pass\r\n\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#fileType.\r\n    def enterFileType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FileTypeContext):\r\n        pass\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#fileType.\r\n    def exitFileType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FileTypeContext):\r\n        pass\r\n\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#imageType.\r\n    def enterImageType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ImageTypeContext):\r\n        pass\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#imageType.\r\n    def exitImageType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ImageTypeContext):\r\n        pass\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaWhole.\r\n    def enterFormulaWhole(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FormulaWholeContext):\r\n        print(\"Enter Formula Whole\")\r\n        text = ctx.getText()\r\n        if self.pointer is not None:\r\n            self.variables[self.pointer] = text\r\n        # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaWhole.\r\n    def exitFormulaWhole(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FormulaWholeContext):\r\n        print(\"Exit Formula Whole\")\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaContent.\r\n    def enterFormulaContent(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):\r\n        pass\r\n\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaContent.\r\n    def exitFormulaContent(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):\r\n        pass\r\n\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#primaryExpression.\r\n    def enterPrimaryExpression(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.PrimaryExpressionContext):\r\n        pass\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#primaryExpression.\r\n    def exitPrimaryExpression(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.PrimaryExpressionContext):\r\n        pass\r\n\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#ifStatement.\r\n    def enterIfStatement(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.IfStatementContext):\r\n        pass\r\n\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#ifStatement.\r\n    def exitIfStatement(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.IfStatementContext):\r\n        pass\r\n\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#whileStatement.\r\n    def enterWhileStatement(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.WhileStatementContext):\r\n        pass\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#whileStatement.\r\n    def exitWhileStatement(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.WhileStatementContext):\r\n        pass\r\n\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition.\r\n    def enterCondition(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ConditionContext):\r\n        pass\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition.\r\n    def exitCondition(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ConditionContext):\r\n        pass\r\n\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_objects.\r\n    def enterCondition_objects(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.Condition_objectsContext):\r\n        params = []\r\n        condition = ctx\r\n        operator = None\r\n        # Check each method if it's relevant for condition\r\n        for method_name in dir(condition):\r\n            if callable(getattr(condition, method_name)) and not method_name.startswith(\"__\"):\r\n                method = getattr(condition, method_name)\r\n                # Check if method returns a token\r\n                if hasattr(method, \"__self__\") and hasattr(method.__self__, \"getRuleIndex\"):\r\n                    # Check if the method is one of the variable tokens\r\n                    if method_name in [\"ID\"] and len(method()) > 0:\r\n                        for token in method():\r\n                            params.append(token.getText())\r\n                    if method_name in [\"EQUAL\", \"NOT_EQUAL\"]:\r\n                        if method() is not None:\r\n                            operator = method().getText()\r\n\r\n        print(f\"Params: {params}\")\r\n        print(f\"Expression: {operator}\")\r\n\r\n        for i in range(len(params)):\r\n            if params[i] in self.variables.keys():\r\n                params[i] = self.variables[params[i]]\r\n            else:\r\n                # Not sure if None substitution is the best way to handle this. In essence, if the variable is not in\r\n                # the variables dictionary, it means that it's not defined, and languages throw an error.\r\n                # params[i] = None\r\n\r\n                raise NameError(f\"Variable {params[i]} is not defined.\")\r\n        print(f\"Params: {params}\")\r\n        value_eval = params[0] == params[1]\r\n        print(f\"Evaluated: {value_eval}\")\r\n        self.variables['cond_eval'] = value_eval\r\n\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_objects.\r\n    def exitCondition_objects(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.Condition_objectsContext):\r\n        print(\"Exit Condition Objects\")\r\n        # pass\r\n\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_numbers.\r\n    def enterCondition_numbers(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.Condition_numbersContext):\r\n        self.params = []\r\n        condition = ctx\r\n        # Check each method if it's relevant for condition\r\n        for method_name in dir(condition):\r\n            if callable(getattr(condition, method_name)) and not method_name.startswith(\"__\"):\r\n                method = getattr(condition, method_name)\r\n                # Check if method returns a token\r\n                if hasattr(method, \"__self__\") and hasattr(method.__self__, \"getRuleIndex\"):\r\n                    # Check if the method is one of the variable tokens\r\n                    if method_name in [\r\n                        \"DIGIT\", \"INTEGER\", \"FLOAT\",\r\n                    ] and len(method()) > 0:\r\n                        for token in method():\r\n                            self.params.append(token.getText())\r\n\r\n        print(f\"Params: {self.params}\")\r\n        print(f\"Expression: {condition.expression().getText()}\")\r\n\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_numbers.\r\n    def exitCondition_numbers(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.Condition_numbersContext):\r\n        if 'cond_eval' not in self.variables.keys():\r\n            self.variables['cond_eval'] = None\r\n        value_eval = eval(self.params[0] + \" \" + ctx.expression().getText() + \" \" + self.params[1])\r\n        print(f\"Evaluated: {value_eval}\")\r\n        self.variables['cond_eval'] = value_eval\r\n        print(\"Exit Condition Numbers\")\r\n\r\n    # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#expression.\r\n    def enterExpression(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ExpressionContext):\r\n        pass\r\n\r\n    # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#expression.\r\n    def exitExpression(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ExpressionContext):\r\n        pass\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/MyListener.py b/MyListener.py
+--- a/MyListener.py	(revision 4e6e0b8d800a78a13cb3e498f005d5137ae6bea7)
++++ b/MyListener.py	(date 1714483777431)
+@@ -1,7 +1,9 @@
+ import os
+ 
+-from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarListener import DSL_Data_Formulas_Visualization_GrammarListener
+-from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarParser import DSL_Data_Formulas_Visualization_GrammarParser
++from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarListener import \
++    DSL_Data_Formulas_Visualization_GrammarListener
++from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarParser import \
++    DSL_Data_Formulas_Visualization_GrammarParser
+ from Grammar.test import Test
+ 
+ import matplotlib.pyplot as plt  # Visualization
+@@ -57,7 +59,6 @@
+         else:
+             pass
+ 
+-
+     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#comment.
+     def exitComment(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.CommentContext):
+         print("Exit Comment")
+@@ -79,7 +80,6 @@
+         self.pointer = None
+         print("Exit Read Command")
+ 
+-
+     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readFromFile.
+     def enterReadFromFile(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadFromFileContext):
+         if ctx.PATH() is not None:
+@@ -172,7 +172,6 @@
+     def exitReadFromFile(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadFromFileContext):
+         self.filePath = None
+ 
+-
+     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.
+     def enterEmpty(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):
+         print("Enter Empty")
+@@ -204,12 +203,13 @@
+         self.filePath = file_path
+         self.variables[self.pointer] = self.filePath
+ 
++    # TODO:
++    # If user closes file selector we need it to remake it so it is an error case.
+     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.
+     def exitEmpty(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):
+         self.filePath = None
+         print("Exit Empty")
+ 
+-
+     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#exportCommand.
+     def enterExportCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ExportCommandContext):
+         pass
+@@ -290,7 +290,6 @@
+         formula_content = self._process_formula_content(formula_content, replace_with_python_mappings=True)
+         formula_content = formula_content.replace('^', ' ** ')
+ 
+-
+         free_variable = None
+         known_tokens = {'sin', 'cos', 'tan', 'log', 'exp', 'sqrt', 'sqr', '+', '-', '*', '/', '^', }
+         for token in formula:
+@@ -356,13 +355,11 @@
+             formula_string = formula_string.replace(original, new)
+         return formula_string
+ 
+-
+     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeFormula.
+     def exitVisualizeFormula(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeFormulaContext):
+         print("Exit Visualize Formula")
+         # pass
+ 
+-
+     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeData.
+     def enterVisualizeData(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeDataContext):
+         pass
+@@ -371,7 +368,6 @@
+     def exitVisualizeData(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeDataContext):
+         pass
+ 
+-
+     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizationType.
+     def enterVisualizationType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizationTypeContext):
+         pass
+@@ -380,7 +376,6 @@
+     def exitVisualizationType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizationTypeContext):
+         pass
+ 
+-
+     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#plotType.
+     def enterPlotType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.PlotTypeContext):
+         pass
+@@ -389,7 +384,6 @@
+     def exitPlotType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.PlotTypeContext):
+         pass
+ 
+-
+     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#fileType.
+     def enterFileType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FileTypeContext):
+         pass
+@@ -398,7 +392,6 @@
+     def exitFileType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FileTypeContext):
+         pass
+ 
+-
+     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#imageType.
+     def enterImageType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ImageTypeContext):
+         pass
+@@ -414,6 +407,7 @@
+         if self.pointer is not None:
+             self.variables[self.pointer] = text
+         # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaWhole.
++
+     def exitFormulaWhole(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FormulaWholeContext):
+         print("Exit Formula Whole")
+ 
+@@ -421,12 +415,10 @@
+     def enterFormulaContent(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):
+         pass
+ 
+-
+     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaContent.
+     def exitFormulaContent(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):
+         pass
+ 
+-
+     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#primaryExpression.
+     def enterPrimaryExpression(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.PrimaryExpressionContext):
+         pass
+@@ -435,17 +427,14 @@
+     def exitPrimaryExpression(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.PrimaryExpressionContext):
+         pass
+ 
+-
+     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#ifStatement.
+     def enterIfStatement(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.IfStatementContext):
+         pass
+ 
+-
+     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#ifStatement.
+     def exitIfStatement(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.IfStatementContext):
+         pass
+ 
+-
+     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#whileStatement.
+     def enterWhileStatement(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.WhileStatementContext):
+         pass
+@@ -454,7 +443,6 @@
+     def exitWhileStatement(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.WhileStatementContext):
+         pass
+ 
+-
+     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition.
+     def enterCondition(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ConditionContext):
+         pass
+@@ -463,7 +451,6 @@
+     def exitCondition(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ConditionContext):
+         pass
+ 
+-
+     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_objects.
+     def enterCondition_objects(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.Condition_objectsContext):
+         params = []
+@@ -500,13 +487,11 @@
+         print(f"Evaluated: {value_eval}")
+         self.variables['cond_eval'] = value_eval
+ 
+-
+     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_objects.
+     def exitCondition_objects(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.Condition_objectsContext):
+         print("Exit Condition Objects")
+         # pass
+ 
+-
+     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_numbers.
+     def enterCondition_numbers(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.Condition_numbersContext):
+         self.params = []
+@@ -527,7 +512,6 @@
+         print(f"Params: {self.params}")
+         print(f"Expression: {condition.expression().getText()}")
+ 
+-
+     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_numbers.
+     def exitCondition_numbers(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.Condition_numbersContext):
+         if 'cond_eval' not in self.variables.keys():
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ANTLRGenerationPreferences\">\r\n    <option name=\"perGrammarGenerationSettings\">\r\n      <list>\r\n        <PerGrammarGenerationSettings>\r\n          <option name=\"fileName\" value=\"$PROJECT_DIR$/Grammar/grammar.g4\" />\r\n          <option name=\"autoGen\" value=\"true\" />\r\n          <option name=\"outputDir\" value=\"\" />\r\n          <option name=\"libDir\" value=\"\" />\r\n          <option name=\"encoding\" value=\"\" />\r\n          <option name=\"pkg\" value=\"\" />\r\n          <option name=\"language\" value=\"Python3\" />\r\n        </PerGrammarGenerationSettings>\r\n        <PerGrammarGenerationSettings>\r\n          <option name=\"fileName\" value=\"$PROJECT_DIR$/Grammar/DSL_Data_Formulas_Visualization_Grammar.g4\" />\r\n          <option name=\"autoGen\" value=\"true\" />\r\n          <option name=\"outputDir\" value=\"D:\\Programming\\Projects\\DSL\\DSL_Data_Formulas_Visualization\\Grammar\" />\r\n          <option name=\"libDir\" value=\"\" />\r\n          <option name=\"encoding\" value=\"\" />\r\n          <option name=\"pkg\" value=\"Generated_Code\" />\r\n          <option name=\"language\" value=\"Python3\" />\r\n          <option name=\"generateVisitor\" value=\"true\" />\r\n        </PerGrammarGenerationSettings>\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Black\">\r\n    <option name=\"sdkName\" value=\"Python 3.12 (DSL_Data_Formulas_Visualization)\" />\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" project-jdk-name=\"Python 3.12 (DSL_Data_Formulas_Visualization)\" project-jdk-type=\"Python SDK\" />\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 4e6e0b8d800a78a13cb3e498f005d5137ae6bea7)
++++ b/.idea/misc.xml	(date 1714482433983)
+@@ -28,5 +28,5 @@
+   <component name="Black">
+     <option name="sdkName" value="Python 3.12 (DSL_Data_Formulas_Visualization)" />
+   </component>
+-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (DSL_Data_Formulas_Visualization)" project-jdk-type="Python SDK" />
++  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (DSL-Data-Formulas-Visualization)" project-jdk-type="Python SDK" />
+ </project>
+\ No newline at end of file
+Index: .idea/DSL_Data_Formulas_Visualization.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"PYTHON_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\">\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <excludeFolder url=\"file://$MODULE_DIR$/.venv\" />\r\n    </content>\r\n    <orderEntry type=\"inheritedJdk\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/DSL_Data_Formulas_Visualization.iml b/.idea/DSL_Data_Formulas_Visualization.iml
+--- a/.idea/DSL_Data_Formulas_Visualization.iml	(revision 4e6e0b8d800a78a13cb3e498f005d5137ae6bea7)
++++ b/.idea/DSL_Data_Formulas_Visualization.iml	(date 1714482433896)
+@@ -3,8 +3,9 @@
+   <component name="NewModuleRootManager">
+     <content url="file://$MODULE_DIR$">
+       <excludeFolder url="file://$MODULE_DIR$/.venv" />
++      <excludeFolder url="file://$MODULE_DIR$/venv" />
+     </content>
+-    <orderEntry type="inheritedJdk" />
++    <orderEntry type="jdk" jdkName="Python 3.11 (DSL-Data-Formulas-Visualization)" jdkType="Python SDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+   </component>
+ </module>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"dc725dec-f923-4da1-bc49-ceb824ae6da1\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/Grammar/Example_Program_Code/Example_Program_3.txt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Grammar/Example_Program_Code/Example_Program_3.txt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/MyListener.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/MyListener.py\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"Grammar\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 1\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2cT3j5H2QY2nlRHDW6awxtXcbn5\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Python.MyListener.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.main.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.test.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;formula-visualization-improvements&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;D:/Programming/Projects/DSL/DSL_Data_Formulas_Visualization/Grammar/Example_Program_Code/Example_Program_1.txt&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\Programming\\Projects\\DSL\\DSL_Data_Formulas_Visualization\\Grammar\\Example_Program_Code\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\Programming\\Projects\\DSL\\DSL_Data_Formulas_Visualization\\Grammar\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"main\" type=\"PythonConfigurationType\" factoryName=\"Python\" nameIsGenerated=\"true\">\r\n      <module name=\"DSL_Data_Formulas_Visualization\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/main.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-PY-241.14494.241\" />\r\n        <option value=\"bundled-python-sdk-0509580d9d50-28c9f5db9ffe-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.14494.241\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"dc725dec-f923-4da1-bc49-ceb824ae6da1\" name=\"Changes\" comment=\"\" />\r\n      <created>1708121873035</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1708121873035</updated>\r\n      <workItem from=\"1708121876525\" duration=\"723000\" />\r\n      <workItem from=\"1708297116983\" duration=\"12000\" />\r\n      <workItem from=\"1709154794221\" duration=\"159000\" />\r\n      <workItem from=\"1709154961501\" duration=\"8354000\" />\r\n      <workItem from=\"1709163475941\" duration=\"1540000\" />\r\n      <workItem from=\"1709312448035\" duration=\"11000\" />\r\n      <workItem from=\"1709724824003\" duration=\"3865000\" />\r\n      <workItem from=\"1709797831230\" duration=\"2303000\" />\r\n      <workItem from=\"1709830041504\" duration=\"7981000\" />\r\n      <workItem from=\"1710793993844\" duration=\"1425000\" />\r\n      <workItem from=\"1710857124040\" duration=\"73000\" />\r\n      <workItem from=\"1710934986052\" duration=\"796000\" />\r\n      <workItem from=\"1710956238957\" duration=\"711000\" />\r\n      <workItem from=\"1711041984211\" duration=\"3726000\" />\r\n      <workItem from=\"1711045730468\" duration=\"2246000\" />\r\n      <workItem from=\"1711114084869\" duration=\"1195000\" />\r\n      <workItem from=\"1711197701913\" duration=\"8000\" />\r\n      <workItem from=\"1711462195209\" duration=\"3000\" />\r\n      <workItem from=\"1711545887201\" duration=\"579000\" />\r\n      <workItem from=\"1711546836494\" duration=\"102000\" />\r\n      <workItem from=\"1711559506046\" duration=\"4000\" />\r\n      <workItem from=\"1712259378243\" duration=\"1133000\" />\r\n      <workItem from=\"1712261881470\" duration=\"43000\" />\r\n      <workItem from=\"1712515022213\" duration=\"1256000\" />\r\n      <workItem from=\"1712582814024\" duration=\"7000\" />\r\n      <workItem from=\"1712744990607\" duration=\"27000\" />\r\n      <workItem from=\"1713184053471\" duration=\"1111000\" />\r\n      <workItem from=\"1714145793440\" duration=\"145000\" />\r\n      <workItem from=\"1714155116896\" duration=\"49000\" />\r\n      <workItem from=\"1714162388161\" duration=\"3105000\" />\r\n      <workItem from=\"1714176040278\" duration=\"3109000\" />\r\n      <workItem from=\"1714220144096\" duration=\"2913000\" />\r\n      <workItem from=\"1714298854584\" duration=\"1369000\" />\r\n      <workItem from=\"1714304144010\" duration=\"19231000\" />\r\n      <workItem from=\"1714382449394\" duration=\"454000\" />\r\n      <workItem from=\"1714385112914\" duration=\"68000\" />\r\n      <workItem from=\"1714393196652\" duration=\"11000\" />\r\n      <workItem from=\"1714401336237\" duration=\"103000\" />\r\n      <workItem from=\"1714418807351\" duration=\"333000\" />\r\n      <workItem from=\"1714426539748\" duration=\"2513000\" />\r\n      <workItem from=\"1714479245036\" duration=\"66000\" />\r\n      <workItem from=\"1714480280199\" duration=\"452000\" />\r\n      <workItem from=\"1714481129334\" duration=\"416000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/DSL_Data_Formulas_Visualization$MyListener.coverage\" NAME=\"MyListener Coverage Results\" MODIFIED=\"1714398188999\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/DSL_Data_Formulas_Visualization$main.coverage\" NAME=\"main Coverage Results\" MODIFIED=\"1714481549783\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/DSL_Data_Formulas_Visualization$test.coverage\" NAME=\"test Coverage Results\" MODIFIED=\"1714424881831\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$/Grammar\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 4e6e0b8d800a78a13cb3e498f005d5137ae6bea7)
++++ b/.idea/workspace.xml	(date 1714592238426)
+@@ -5,7 +5,10 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="dc725dec-f923-4da1-bc49-ceb824ae6da1" name="Changes" comment="">
+-      <change beforePath="$PROJECT_DIR$/Grammar/Example_Program_Code/Example_Program_3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Grammar/Example_Program_Code/Example_Program_3.txt" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/DSL_Data_Formulas_Visualization.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DSL_Data_Formulas_Visualization.iml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/MyListener.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyListener.py" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -19,6 +22,9 @@
+         <option value="Python Script" />
+       </list>
+     </option>
++  </component>
++  <component name="FormatOnSaveOptions">
++    <option name="myRunOnSave" value="true" />
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+@@ -28,6 +34,9 @@
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
++  <component name="ProblemsViewState">
++    <option name="selectedTabId" value="CurrentFile" />
++  </component>
+   <component name="ProjectColorInfo">{
+   &quot;associatedIndex&quot;: 1
+ }</component>
+@@ -45,19 +54,20 @@
+     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;formula-visualization-improvements&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;D:/Programming/Projects/DSL/DSL_Data_Formulas_Visualization/Grammar/Example_Program_Code/Example_Program_1.txt&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Study/DSL-Data-Formulas-Visualization&quot;,
+     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,
+     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+ }</component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
++      <recent name="C:\Study\DSL-Data-Formulas-Visualization" />
+       <recent name="D:\Programming\Projects\DSL\DSL_Data_Formulas_Visualization\Grammar\Example_Program_Code" />
+     </key>
+     <key name="MoveFile.RECENT_KEYS">
+@@ -74,8 +84,9 @@
+         <env name="PYTHONUNBUFFERED" value="1" />
+       </envs>
+       <option name="SDK_HOME" value="" />
++      <option name="SDK_NAME" value="Python 3.11 (DSL-Data-Formulas-Visualization)" />
+       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+-      <option name="IS_MODULE_SDK" value="true" />
++      <option name="IS_MODULE_SDK" value="false" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+@@ -92,8 +103,7 @@
+   <component name="SharedIndexes">
+     <attachedChunks>
+       <set>
+-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-PY-241.14494.241" />
+-        <option value="bundled-python-sdk-0509580d9d50-28c9f5db9ffe-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.14494.241" />
++        <option value="bundled-python-sdk-0509580d9d50-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.14494.241" />
+       </set>
+     </attachedChunks>
+   </component>
+Index: requirements.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-16LE
+===================================================================
+diff --git a/requirements.txt b/requirements.txt
+new file mode 100644
+--- /dev/null	(date 1714482886095)
++++ b/requirements.txt	(date 1714482886095)
+@@ -0,0 +1,46 @@
++antlr4-python3-runtime==4.13.1
++asgiref==3.7.2
++async-timeout==4.0.3
++beautifulsoup4==4.9.3
++blinker==1.7.0
++cachetools==5.3.3
++certifi==2024.2.2
++charset-normalizer==3.3.2
++click==8.1.7
++colorama==0.4.6
++contourpy==1.2.1
++cycler==0.12.1
++fonttools==4.51.0
++greenlet==3.0.3
++httplib2==0.22.0
++idna==3.6
++itsdangerous==2.1.2
++kiwisolver==1.4.5
++MarkupSafe==2.1.5
++matplotlib==3.8.4
++numpy==1.26.4
++oauthlib==3.2.2
++packaging==23.2
++pillow==10.3.0
++protobuf==4.25.3
++psycopg2-binary==2.9.9
++pyasn1==0.5.1
++pyasn1-modules==0.3.0
++pyparsing==3.1.2
++PyQt5==5.15.10
++PyQt5-Qt5==5.15.2
++PyQt5-sip==12.13.0
++python-dateutil==2.9.0.post0
++python-dotenv==1.0.1
++requests==2.31.0
++requests-oauthlib==1.3.1
++rsa==4.9
++selenium==3.141.0
++six==1.16.0
++soupsieve==2.5
++sqlparse==0.4.4
++typing_extensions==4.9.0
++tzdata==2023.3
++uritemplate==4.1.1
++urllib3==2.2.1
++xlrd==2.0.1

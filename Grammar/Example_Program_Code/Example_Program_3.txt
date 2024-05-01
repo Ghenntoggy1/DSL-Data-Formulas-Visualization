@@ -4,6 +4,5 @@ Formula formula = bb^2;
 Formula formula1 = sin(x);
 VisualFormula(formula1) range=(-10, 10);
 VisualFormula(y  +  2 ^ 2 * formula1) range=(-10, 10);
-Data tableData = ReadFrom("C:\Users\user\Desktop\DOTA SKIN.txt");
-Data tableData2 = ReadFrom("C:\Users\user\Desktop\DOTA SKIN.txt");
 Data tableData = ReadFrom();
+VisualData(bar) dataset = (tableData);

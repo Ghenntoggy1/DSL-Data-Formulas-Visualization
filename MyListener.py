@@ -1,7 +1,11 @@
+import csv
 import os
+from turtle import pd
 
-from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarListener import DSL_Data_Formulas_Visualization_GrammarListener
-from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarParser import DSL_Data_Formulas_Visualization_GrammarParser
+from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarListener import \
+    DSL_Data_Formulas_Visualization_GrammarListener
+from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarParser import \
+    DSL_Data_Formulas_Visualization_GrammarParser
 from Grammar.test import Test
 
 import matplotlib.pyplot as plt  # Visualization
@@ -59,7 +63,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
         else:
             pass
 
-
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#comment.
     def exitComment(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.CommentContext):
         print("Exit Comment")
@@ -80,7 +83,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     def exitReadCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadCommandContext):
         self.pointer = None
         print("Exit Read Command")
-
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#readFromFile.
     def enterReadFromFile(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadFromFileContext):
@@ -174,7 +176,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     def exitReadFromFile(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ReadFromFileContext):
         self.filePath = None
 
-
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.
     def enterEmpty(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):
         print("Enter Empty")
@@ -206,11 +207,12 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
         self.filePath = file_path
         self.variables[self.pointer] = self.filePath
 
+    # TODO:
+    # If user closes file selector we need it to remake it so it is an error case.
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#empty.
     def exitEmpty(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.EmptyContext):
         self.filePath = None
         print("Exit Empty")
-
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#exportCommand.
     def enterExportCommand(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ExportCommandContext):
@@ -291,7 +293,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
         formula_content = ' '.join(formula)
         formula_content = self._process_formula_content(formula_content, replace_with_python_mappings=True)
         formula_content = formula_content.replace('^', ' ** ')
-
 
         free_variable = None
         free_variable1 = None
@@ -378,21 +379,91 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
             formula_string = formula_string.replace(original, new)
         return formula_string
 
-
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeFormula.
     def exitVisualizeFormula(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeFormulaContext):
         print("Exit Visualize Formula")
         # pass
 
-
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeData.
+    # Inside enterVisualizeData method:
     def enterVisualizeData(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeDataContext):
-        pass
+        plot_type = ctx.visualizationType().getText()
+        dataset_name = ctx.ID().getText()
+
+        if dataset_name in self.variables:
+            file_path = self.variables[dataset_name]
+
+            if file_path is not None and os.path.isfile(file_path):
+                if file_path.endswith('.txt'):
+                    # Handle txt file
+                    with open(file_path, 'r') as file:
+                        data = file.read()
+                    try:
+                        data = eval(data)
+                        if not isinstance(data, list):
+                            raise ValueError("Data is not in the expected format")
+                    except Exception as e:
+                        print("Error evaluating data from file:", e)
+                        return
+
+                    labels = []
+                    values = []
+                    for item in data:
+                        if len(item) != 2 or not isinstance(item[0], str) or not isinstance(item[1], list):
+                            print("Invalid data format:", item)
+                            continue
+                        labels.append(item[0])
+                        values.append(sum(item[1]))
+
+                    # Ensure labels and values have the same length
+                    if len(labels) != len(values):
+                        print("Number of labels does not match the number of values")
+                        return
+
+                    if plot_type == "bar":
+                        plt.bar(labels, values)
+                        plt.title("Bar Graph")
+                        plt.xlabel("Categories")
+                        plt.ylabel("Values")
+                        plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
+                        plt.show()
+                    elif plot_type == "pie":
+                        plt.pie(values, labels=labels, autopct='%1.1f%%')
+                        plt.title("Pie Chart")
+                        plt.show()
+                    else:
+                        print("Unsupported plot type:", plot_type)
+                elif file_path.endswith('.csv') or file_path.endswith('.xlsx'):
+                    # Handle CSV and Excel file
+                    data = pd.read_csv(file_path) if file_path.endswith('.csv') else pd.read_excel(file_path)
+
+                    # Assuming the first column contains labels and the second column contains values
+                    labels = data.iloc[:, 0].tolist()
+                    values = data.iloc[:, 1].tolist()
+
+                    if plot_type == "bar":
+                        plt.bar(labels, values)
+                        plt.title("Bar Graph")
+                        plt.xlabel("Categories")
+                        plt.ylabel("Values")
+                        plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
+                        plt.show()
+                    elif plot_type == "pie":
+                        plt.pie(values, labels=labels, autopct='%1.1f%%')
+                        plt.title("Pie Chart")
+                        plt.show()
+                    else:
+                        print("Unsupported plot type:", plot_type)
+                else:
+                    print("Unsupported file format:", file_path)
+            else:
+                print("Invalid file path or file does not exist:", file_path)
+        else:
+            print(f"Dataset '{dataset_name}' either not found or not a valid file path.")
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeData.
     def exitVisualizeData(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeDataContext):
         pass
-
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizationType.
     def enterVisualizationType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizationTypeContext):
@@ -402,7 +473,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     def exitVisualizationType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizationTypeContext):
         pass
 
-
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#plotType.
     def enterPlotType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.PlotTypeContext):
         pass
@@ -411,7 +481,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     def exitPlotType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.PlotTypeContext):
         pass
 
-
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#fileType.
     def enterFileType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FileTypeContext):
         pass
@@ -419,7 +488,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#fileType.
     def exitFileType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FileTypeContext):
         pass
-
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#imageType.
     def enterImageType(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ImageTypeContext):
@@ -436,6 +504,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
         if self.pointer is not None:
             self.variables[self.pointer] = text
         # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaWhole.
+
     def exitFormulaWhole(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FormulaWholeContext):
         print("Exit Formula Whole")
 
@@ -443,11 +512,9 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     def enterFormulaContent(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):
         pass
 
-
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#formulaContent.
     def exitFormulaContent(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.FormulaContentContext):
         pass
-
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#primaryExpression.
     def enterPrimaryExpression(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.PrimaryExpressionContext):
@@ -457,16 +524,13 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     def exitPrimaryExpression(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.PrimaryExpressionContext):
         pass
 
-
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#ifStatement.
     def enterIfStatement(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.IfStatementContext):
         pass
 
-
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#ifStatement.
     def exitIfStatement(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.IfStatementContext):
         pass
-
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#whileStatement.
     def enterWhileStatement(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.WhileStatementContext):
@@ -476,7 +540,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     def exitWhileStatement(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.WhileStatementContext):
         pass
 
-
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition.
     def enterCondition(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ConditionContext):
         pass
@@ -484,7 +547,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition.
     def exitCondition(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.ConditionContext):
         pass
-
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_objects.
     def enterCondition_objects(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.Condition_objectsContext):
@@ -522,12 +584,10 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
         print(f"Evaluated: {value_eval}")
         self.variables['cond_eval'] = value_eval
 
-
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_objects.
     def exitCondition_objects(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.Condition_objectsContext):
         print("Exit Condition Objects")
         # pass
-
 
     # Enter a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_numbers.
     def enterCondition_numbers(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.Condition_numbersContext):
@@ -548,7 +608,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
         print(f"Params: {self.params}")
         print(f"Expression: {condition.expression().getText()}")
-
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#condition_numbers.
     def exitCondition_numbers(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.Condition_numbersContext):
