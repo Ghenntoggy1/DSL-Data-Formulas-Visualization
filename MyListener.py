@@ -406,51 +406,35 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                         print("Error evaluating data from file:", e)
                         return
 
-                    labels = []
-                    values = []
-                    for item in data:
-                        if len(item) != 2 or not isinstance(item[0], str) or not isinstance(item[1], list):
-                            print("Invalid data format:", item)
-                            continue
-                        labels.append(item[0])
-                        values.append(sum(item[1]))
-
-                    # Ensure labels and values have the same length
-                    if len(labels) != len(values):
-                        print("Number of labels does not match the number of values")
-                        return
-
                     if plot_type == "bar":
-                        plt.bar(labels, values)
+                        # Plot bars for each tuple
+                        for i, item in enumerate(data):
+                            plt.bar([j for j in range(len(item[1]))], item[1], label=f"{item[0]}")
                         plt.title("Bar Graph")
                         plt.xlabel("Categories")
                         plt.ylabel("Values")
-                        plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
+                        plt.legend()
+                        plt.xticks(range(len(item[1])))  # Set x-axis labels as intervals
                         plt.show()
                     elif plot_type == "pie":
-                        plt.pie(values, labels=labels, autopct='%1.1f%%')
-                        plt.title("Pie Chart")
-                        plt.show()
-                    else:
-                        print("Unsupported plot type:", plot_type)
-                elif file_path.endswith('.csv') or file_path.endswith('.xlsx'):
-                    # Handle CSV and Excel file
-                    data = pd.read_csv(file_path) if file_path.endswith('.csv') else pd.read_excel(file_path)
+                        # Plot pie chart for each tuple
+                        for item in data:
+                            plt.pie(item[1], labels=[f"{item[0]}_{j}" for j in range(len(item[1]))], autopct='%1.1f%%')
+                            plt.title(f"Pie Chart for {item[0]}")
+                            plt.show()
+                    elif plot_type == "graph":
+                        # Plot points for each tuple
+                        for i, item in enumerate(data):
+                            plt.plot(range(len(item[1])), item[1], marker='o', linestyle='-',
+                                     label=f"{item[0]}")
 
-                    # Assuming the first column contains labels and the second column contains values
-                    labels = data.iloc[:, 0].tolist()
-                    values = data.iloc[:, 1].tolist()
-
-                    if plot_type == "bar":
-                        plt.bar(labels, values)
-                        plt.title("Bar Graph")
+                        # Set x-axis labels as intervals
+                        plt.xticks(range(len(item[1])), [f"Interval {j}" for j in range(len(item[1]))])
+                        plt.title("Graph")
                         plt.xlabel("Categories")
                         plt.ylabel("Values")
-                        plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
-                        plt.show()
-                    elif plot_type == "pie":
-                        plt.pie(values, labels=labels, autopct='%1.1f%%')
-                        plt.title("Pie Chart")
+                        plt.legend()
+                        plt.grid(True)
                         plt.show()
                     else:
                         print("Unsupported plot type:", plot_type)

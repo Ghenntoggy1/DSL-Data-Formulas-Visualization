@@ -5,4 +5,4 @@ Formula formula1 = sin(x);
 VisualFormula(formula1) range=(-10, 10);
 VisualFormula(y  +  2 ^ 2 * formula1) range=(-10, 10);
 Data tableData = ReadFrom();
-VisualData(bar) dataset = (tableData);
+VisualData(graph) dataset = (tableData);
