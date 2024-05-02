@@ -10,10 +10,10 @@ from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarParser import
 from MyListener import MyListener
 
 
-def print_parse_tree(argv):
+def execute_code(argv):
     input = FileStream(argv)
     lexer = DSL_Data_Formulas_Visualization_GrammarLexer(input)
-    print(sys.path)
+
     stream = CommonTokenStream(lexer)
     stream.fill()
     print("Tokens:")
@@ -37,8 +37,8 @@ def print_parse_tree(argv):
 
 
 if __name__ == '__main__':
-    # print_parse_tree(".\\Grammar\\Example_Program_Code\\Example_Program_1.txt")
-    # print_parse_tree(".\\Grammar\\Example_Program_Code\\Example_Program_2.txt")
-    print_parse_tree(".\\Grammar\\Example_Program_Code\\Example_Program_3.txt")
-    # print_parse_tree(".\\Grammar\\Example_Program_Code\\Example_Program_4.txt")
+    # execute_code(".\\Grammar\\Example_Program_Code\\Example_Program_1.txt")
+    # execute_code(".\\Grammar\\Example_Program_Code\\Example_Program_2.txt")
+    execute_code(".\\Grammar\\Example_Program_Code\\Example_Program_3.txt")
+    # execute_code(".\\Grammar\\Example_Program_Code\\Example_Program_4.txt")
 
