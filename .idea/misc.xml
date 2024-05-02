@@ -28,5 +28,5 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.12 (DSL_Data_Formulas_Visualization)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (DSL_Data_Formulas_Visualization)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (DSL-Data-Formulas-Visualization)" project-jdk-type="Python SDK" />
 </project>
