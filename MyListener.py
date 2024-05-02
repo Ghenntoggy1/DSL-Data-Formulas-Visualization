@@ -24,6 +24,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                           'v1': Test(),
                           'v2': Test(),
                           }
+        # self.variables['v2'] = self.variables['v1']
         self.pointer = None
         self.filePath = None
 
@@ -573,7 +574,15 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
                 raise NameError(f"Variable {params[i]} is not defined.")
         print(f"Params: {params}")
-        value_eval = params[0] == params[1]
+        print(f"Params: {params[0]} {operator} {params[1]}")
+        if operator == "==" and params[0] == params[1]:
+            value_eval = True
+        elif operator == "!=" and params[0] != params[1]:
+            value_eval = True
+        elif operator == "==" and params[0] != params[1]:
+            value_eval = False
+        elif operator == "!=" and params[0] == params[1]:
+            value_eval = False
         print(f"Evaluated: {value_eval}")
         self.variables['cond_eval'] = value_eval
 

@@ -6,6 +6,7 @@ from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarLexer import 
     DSL_Data_Formulas_Visualization_GrammarLexer
 from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarParser import \
     DSL_Data_Formulas_Visualization_GrammarParser
+from Grammar.test import Test
 
 from MyListener import MyListener
 
@@ -39,6 +40,12 @@ def execute_code(argv):
 if __name__ == '__main__':
     # execute_code(".\\Grammar\\Example_Program_Code\\Example_Program_1.txt")
     # execute_code(".\\Grammar\\Example_Program_Code\\Example_Program_2.txt")
-    execute_code(".\\Grammar\\Example_Program_Code\\Example_Program_3.txt")
+    # execute_code(".\\Grammar\\Example_Program_Code\\Example_Program_3.txt")
     # execute_code(".\\Grammar\\Example_Program_Code\\Example_Program_4.txt")
+
+    execute_code(".\\Grammar\\Example_Program_Code\\Example_1_Midterm_2.txt")
+    input("Press Enter to continue...")
+    execute_code(".\\Grammar\\Example_Program_Code\\Example_2_Midterm_2.txt")
+    input("Press Enter to continue...")
+    execute_code(".\\Grammar\\Example_Program_Code\\Example_3_Midterm_2.txt")
 

@@ -1,0 +1,14 @@
+# Data Declaration + Initialization - Valid TXT File
+Data tableData = ReadFrom("D:\Programming\Projects\DSL\DSL_Data_Formulas_Visualization\Grammar\Example_Program_Code\alonso.txt");
+
+# Data Declaration + Initialization - Empty String
+Data tableData2 = ReadFrom();
+
+# Data Declaration + Initialization - Valid Path, No file specified
+Data tableData3 = ReadFrom("C:\Users\User\");
+
+# Data Declaration + Initialization - Invalid Path
+Data tableData4 = ReadFrom("F:\");
+
+# Data Visualization
+VisualData(graph) dataset = (tableData);

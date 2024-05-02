@@ -1,0 +1,15 @@
+# Conditionals - work in progress - Object comparison
+if (v2 == v1) {
+    VisualData(graph) dataset=(var1);
+} else {
+    VisualData(graph) dataset=(var2);
+};
+
+if (v2 != v1) {
+    VisualData(graph) dataset=(var1);
+};
+
+# Conditionals - work in progress - Number comparison
+if (2 >= 1) {
+    VisualData(graph) dataset=(var1);
+};
