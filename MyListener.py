@@ -4,6 +4,7 @@ from turtle import pd
 from ordered_set import OrderedSet
 from dateutil import parser as date_parser
 from datetime import datetime
+import matplotlib.dates as mdates
 
 from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarListener import \
     DSL_Data_Formulas_Visualization_GrammarListener
@@ -447,7 +448,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                         plt.title(f"Bar Graph - {os.path.split(file_path)[-1]}")
                         plt.xticks(index + bar_width * (num_companies - 1) / 2, [date.strftime('%Y-%m-%d') for date in all_dates_datetime])
                         plt.legend()
-
+                        plt.grid(True)
                         plt.show()
 
                     elif plot_type == "pie":
@@ -469,13 +470,25 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                     elif plot_type == "graph":
                         # Plot points for each tuple
                         for i, item in enumerate(data):
-                            plt.plot(range(len(item[1])), item[1], marker='o', linestyle='-',
-                                     label=f"{item[0]}")
+                            company, values, dates = item
+                            min_length = min(len(values), len(dates))  # Find the minimum length
+                            values = values[:min_length]  # Truncate values to match dates
+                            dates = dates[:min_length]  # Truncate dates to match values
+
+                            specific_dates_datetime = [datetime.strptime(date, '%Y-%m-%d') for date in dates]
+
+                            # Combine dates and values and sort by date
+                            sorted_pairs = sorted(zip(specific_dates_datetime, values))
+                            sorted_dates, sorted_values = zip(*sorted_pairs)
+
+                            plt.plot(sorted_dates, sorted_values, marker='o', linestyle='-', label=f"{company}")
 
                         # Set x-axis labels as intervals
-                        plt.xticks(range(len(item[1])), [f"Interval {j}" for j in range(len(item[1]))])
+                        # Set the locator for the x-axis to ensure proper formatting
+                        plt.gca().xaxis.set_major_locator(mdates.YearLocator())
+                        plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
                         plt.title(f"Graph - {os.path.split(file_path)[-1]}")
-                        plt.xlabel("Categories")
+                        plt.xlabel("Timestamps")
                         plt.ylabel("Values")
                         plt.legend()
                         plt.grid(True)
