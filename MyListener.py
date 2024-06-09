@@ -495,6 +495,92 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                         plt.show()
                     else:
                         print("Unsupported plot type:", plot_type)
+                elif file_path.endswith('.csv'):
+                    # Handle csv file
+                    data = []
+                    with open(file_path, 'r') as file:
+                        reader = csv.reader(file)
+                        headers = next(reader)  # Skip the header
+                        data_dict = {}
+
+                        for row in reader:
+                            if len(row) != 3:
+                                # Skip rows that do not have exactly 3 values
+                                continue
+                            company, value, date = row
+                            try:
+                                value = int(value)
+                            except ValueError:
+                                # Skip rows where value is not an integer
+                                continue
+                            if company not in data_dict:
+                                data_dict[company] = ([], [])
+                            data_dict[company][0].append(value)
+                            data_dict[company][1].append(date)
+
+                        for company, (values, dates) in data_dict.items():
+                            data.append((company, values, dates))
+
+                    if plot_type == "bar":
+                        # Get all years from the data sorted
+                        all_dates = sorted(set(date for values, dates in [item[1:] for item in data] for date in dates))
+                        all_dates_datetime = [datetime.strptime(date, '%Y-%m-%d') for date in all_dates]
+
+                        # Get all values per year
+                        values_per_year = {date: {item[0]: 0 for item in data} for date in all_dates_datetime}
+
+                        # Fill the dictionary with actual data
+                        for item in data:
+                            company, values, dates = item
+                            for value, date in zip(values, dates):
+                                values_per_year[datetime.strptime(date, '%Y-%m-%d')][company] = value
+
+                        # Plot each company's data
+                        bar_width = 1 / (len(data) + 1)
+                        num_companies = len(data)
+                        index = np.arange(len(all_dates))
+                        index -= int((num_companies - 1) * bar_width / 2)
+
+                        for i, item in enumerate(data):
+                            company, values, years = item
+                            company_values = [values_per_year[date_parser.parse(str(year))][company] for year in
+                                              all_dates_datetime]
+                            plt.bar(index + i * bar_width, company_values, bar_width, label=company)
+
+                        # Add labels and title
+                        plt.xlabel('Timestamps')
+                        plt.ylabel('Values')
+                        plt.title(f"Bar Graph - {os.path.split(file_path)[-1]}")
+                        plt.xticks(index + bar_width * (num_companies - 1) / 2,
+                                   [date.strftime('%Y-%m-%d') for date in all_dates_datetime])
+
+                        plt.legend()
+                        plt.show()
+
+                    elif plot_type == "pie":
+                        # Plot pie chart for each tuple
+                        for item in data:
+                            plt.pie(item[1], labels=[f"{item[0]}_{j}" for j in range(len(item[1]))], autopct='%1.1f%%')
+                            plt.title(f"Pie Chart for {item[0]}")
+                            plt.show()
+
+                    elif plot_type == "graph":
+                        # Plot points for each tuple
+                        for i, item in enumerate(data):
+                            plt.plot(range(len(item[1])), item[1], marker='o', linestyle='-',
+                                     label=f"{item[0]}")
+
+                        # Set x-axis labels as intervals
+                        plt.xticks(range(len(item[1])), [f"Interval {j}" for j in range(len(item[1]))])
+                        plt.title("Graph")
+                        plt.xlabel("Categories")
+                        plt.ylabel("Values")
+                        plt.legend()
+                        plt.grid(True)
+                        plt.show()
+
+                    else:
+                        print("Unsupported plot type:", plot_type)
                 else:
                     print("Unsupported file format:", file_path)
             else:
