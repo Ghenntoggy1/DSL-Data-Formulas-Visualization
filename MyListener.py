@@ -435,7 +435,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                         num_companies = len(data)
                         index = np.arange(len(all_dates))
                         index -= int((num_companies - 1) * bar_width / 2)
-                        # fig, ax = plt.subplots()
 
                         for i, item in enumerate(data):
                             company, values, years = item
@@ -447,8 +446,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                         plt.ylabel('Values')
                         plt.title(f"Bar Graph - {os.path.split(file_path)[-1]}")
                         plt.xticks(index + bar_width * (num_companies - 1) / 2, [date.strftime('%Y-%m-%d') for date in all_dates_datetime])
-
-                        # fig.update_xaxes(ticklabelposition='outside left')
                         plt.legend()
 
                         plt.show()
@@ -456,8 +453,18 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                     elif plot_type == "pie":
                         # Plot pie chart for each tuple
                         for item in data:
-                            plt.pie(item[1], labels=[f"{item[0]}_{j}" for j in range(len(item[1]))], autopct='%1.1f%%')
-                            plt.title(f"Pie Chart for {item[0]}")
+                            company, values, dates = item
+                            specific_dates = sorted(set(date for date in dates))
+                            specific_dates_datetime = [datetime.strptime(date, '%Y-%m-%d') for date in specific_dates]
+                            values_per_year = {date: {item[0]: 0} for date in specific_dates_datetime}
+                            for value, date in zip(values, dates):
+                                values_per_year[datetime.strptime(date, '%Y-%m-%d')][company] = value
+                            company_values = [values_per_year[date_parser.parse(str(year))][company] for year in
+                                              specific_dates_datetime]
+                            plt.pie(company_values, labels=[f"{date_pie}" for date_pie in [date.strftime('%Y-%m-%d') for date in specific_dates_datetime]],
+                                    autopct=self._autopct_format(company_values))
+
+                            plt.title(f"Pie Chart - {os.path.split(file_path)[-1]} for {item[0]}")
                             plt.show()
                     elif plot_type == "graph":
                         # Plot points for each tuple
@@ -467,7 +474,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
                         # Set x-axis labels as intervals
                         plt.xticks(range(len(item[1])), [f"Interval {j}" for j in range(len(item[1]))])
-                        plt.title("Graph")
+                        plt.title(f"Graph - {os.path.split(file_path)[-1]}")
                         plt.xlabel("Categories")
                         plt.ylabel("Values")
                         plt.legend()
@@ -481,6 +488,15 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                 print("Invalid file path or file does not exist:", file_path)
         else:
             print(f"Dataset '{dataset_name}' either not found or not a valid file path.")
+
+    # Define a custom function to format the percentage and actual value
+    def _autopct_format(self, values):
+        def _inner_autopct(pct):
+            total = sum(values)
+            val = int(round(pct * total / 100.0))
+            return f'{pct:.1f}%\n({val:d})'
+
+        return _inner_autopct
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeData.
     def exitVisualizeData(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeDataContext):
