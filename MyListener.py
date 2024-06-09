@@ -561,19 +561,20 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                         # Plot pie chart for each tuple
                         for item in data:
                             plt.pie(item[1], labels=[f"{item[0]}_{j}" for j in range(len(item[1]))], autopct='%1.1f%%')
-                            plt.title(f"Pie Chart for {item[0]}")
+                            plt.title(f"Pie Chart - {os.path.split(file_path)[-1]} for {item[0]}")
                             plt.show()
 
                     elif plot_type == "graph":
                         # Plot points for each tuple
                         for i, item in enumerate(data):
-                            plt.plot(range(len(item[1])), item[1], marker='o', linestyle='-',
-                                     label=f"{item[0]}")
+                            plt.plot(item[2], item[1], marker='o', linestyle='-', label=f"{item[0]}")
 
-                        # Set x-axis labels as intervals
-                        plt.xticks(range(len(item[1])), [f"Interval {j}" for j in range(len(item[1]))])
-                        plt.title("Graph")
-                        plt.xlabel("Categories")
+                        # Set x-axis labels as dates
+                        plt.xticks(item[2],
+                                   [datetime.strptime(date, '%Y-%m-%d').strftime('%Y-%m-%d') for date in item[2]],
+                                   rotation=45)
+                        plt.title(f"Graph - {os.path.split(file_path)[-1]}")
+                        plt.xlabel("Dates")
                         plt.ylabel("Values")
                         plt.legend()
                         plt.grid(True)
@@ -581,6 +582,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
                     else:
                         print("Unsupported plot type:", plot_type)
+
                 else:
                     print("Unsupported file format:", file_path)
             else:
