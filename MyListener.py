@@ -557,11 +557,20 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                         plt.legend()
                         plt.show()
 
+
                     elif plot_type == "pie":
+
                         # Plot pie chart for each tuple
+
                         for item in data:
-                            plt.pie(item[1], labels=[f"{item[0]}_{j}" for j in range(len(item[1]))], autopct='%1.1f%%')
-                            plt.title(f"Pie Chart - {os.path.split(file_path)[-1]} for {item[0]}")
+                            company, values, dates = item
+
+                            plt.pie(values,
+                                    labels=[f"{datetime.strptime(date, '%Y-%m-%d').strftime('%Y-%m-%d')}" for
+                                            date in dates], autopct='%1.1f%%')
+
+                            plt.title(f"Pie Chart for {company}")
+
                             plt.show()
 
                     elif plot_type == "graph":
