@@ -12,3 +12,5 @@ Data tableData4 = ReadFrom("F:\");
 
 # Data Visualization
 VisualData(graph) dataset = (tableData);
+VisualData(bar) dataset = (tableData);
+VisualData(pie) dataset = (tableData);

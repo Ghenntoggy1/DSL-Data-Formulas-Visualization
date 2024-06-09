@@ -1,6 +1,7 @@
 import csv
 import os
 from turtle import pd
+from ordered_set import OrderedSet
 
 from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarListener import \
     DSL_Data_Formulas_Visualization_GrammarListener
@@ -417,15 +418,37 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                         return
 
                     if plot_type == "bar":
-                        # Plot bars for each tuple
+                        # Get all years from the data sorted
+                        all_years = sorted(set(year for values, years in [item[1:] for item in data] for year in years))
+                        # Get all values per year
+                        values_per_year = {year: {item[0]: 0 for item in data} for year in all_years}
+
+                        # Fill the dictionary with actual data
+                        for item in data:
+                            company, values, years = item
+                            for value, year in zip(values, years):
+                                values_per_year[year][company] = value
+
+                        # Plot each company's data
+                        bar_width = 0.2
+                        index = np.arange(len(all_years))
+
+                        fig, ax = plt.subplots()
+
                         for i, item in enumerate(data):
-                            plt.bar([j for j in range(len(item[1]))], item[1], label=f"{item[0]}")
-                        plt.title("Bar Graph")
-                        plt.xlabel("Categories")
-                        plt.ylabel("Values")
+                            company, values, years = item
+                            company_values = [values_per_year[year][company] for year in all_years]
+                            plt.bar(index + i * bar_width, company_values, bar_width, label=company)
+
+                        # Add labels and title
+                        plt.xlabel('Timestamps')
+                        plt.ylabel('Values')
+                        plt.title(f"Bar Graph - {os.path.split(file_path)[-1]}")
+                        plt.xticks(index + bar_width, all_years)
                         plt.legend()
-                        plt.xticks(range(len(item[1])))  # Set x-axis labels as intervals
+
                         plt.show()
+
                     elif plot_type == "pie":
                         # Plot pie chart for each tuple
                         for item in data:
