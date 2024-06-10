@@ -446,7 +446,8 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                         plt.xlabel('Timestamps')
                         plt.ylabel('Values')
                         plt.title(f"Bar Graph - {os.path.split(file_path)[-1]}")
-                        plt.xticks(index + bar_width * (num_companies - 1) / 2, [date.strftime('%Y-%m-%d') for date in all_dates_datetime])
+                        plt.xticks(index + bar_width * (num_companies - 1) / 2, [date.strftime('%Y-%m-%d') for date in all_dates_datetime],
+                                   rotation=45)
                         plt.legend()
                         plt.grid(True)
                         plt.show()
@@ -487,6 +488,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                         # Set the locator for the x-axis to ensure proper formatting
                         plt.gca().xaxis.set_major_locator(mdates.YearLocator())
                         plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+                        plt.xticks(rotation=45)
                         plt.title(f"Graph - {os.path.split(file_path)[-1]}")
                         plt.xlabel("Timestamps")
                         plt.ylabel("Values")
@@ -552,7 +554,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                         plt.ylabel('Values')
                         plt.title(f"Bar Graph - {os.path.split(file_path)[-1]}")
                         plt.xticks(index + bar_width * (num_companies - 1) / 2,
-                                   [date.strftime('%Y-%m-%d') for date in all_dates_datetime])
+                                   [date.strftime('%Y-%m-%d') for date in all_dates_datetime], rotation=45)
 
                         plt.legend()
                         plt.show()
@@ -564,10 +566,16 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
                         for item in data:
                             company, values, dates = item
-
+                            specific_dates = sorted(set(date for date in dates))
+                            specific_dates_datetime = [datetime.strptime(date, '%Y-%m-%d') for date in specific_dates]
+                            values_per_year = {date: {item[0]: 0} for date in specific_dates_datetime}
+                            for value, date in zip(values, dates):
+                                values_per_year[datetime.strptime(date, '%Y-%m-%d')][company] = value
+                            company_values = [values_per_year[date_parser.parse(str(year))][company] for year in
+                                              specific_dates_datetime]
                             plt.pie(values,
                                     labels=[f"{datetime.strptime(date, '%Y-%m-%d').strftime('%Y-%m-%d')}" for
-                                            date in dates], autopct='%1.1f%%')
+                                            date in dates], autopct=self._autopct_format(company_values))
 
                             plt.title(f"Pie Chart for {company}")
 
