@@ -1,6 +1,10 @@
 import csv
 import os
 from turtle import pd
+from ordered_set import OrderedSet
+from dateutil import parser as date_parser
+from datetime import datetime
+import matplotlib.dates as mdates
 
 from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarListener import \
     DSL_Data_Formulas_Visualization_GrammarListener
@@ -12,9 +16,6 @@ import matplotlib.pyplot as plt  # Visualization
 import numpy as np  # mathematical operations + arrays
 import tkinter as tk  # context menu for Reading Files
 from tkinter import filedialog  # context menu for Reading Files
-import math  # mathematical operations
-from mpl_toolkits.mplot3d import Axes3D
-
 
 
 class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
@@ -417,43 +418,203 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                         return
 
                     if plot_type == "bar":
-                        # Plot bars for each tuple
+                        # Get all years from the data sorted
+                        all_dates = sorted(set(date for values, dates in [item[1:] for item in data] for date in dates))
+                        all_dates_datetime = [datetime.strptime(date, '%Y-%m-%d') for date in all_dates]
+
+                        # Get all values per year
+                        values_per_year = {date: {item[0]: 0 for item in data} for date in all_dates_datetime}
+
+                        # Fill the dictionary with actual data
+                        for item in data:
+                            company, values, dates = item
+                            for value, date in zip(values, dates):
+                                values_per_year[datetime.strptime(date, '%Y-%m-%d')][company] = value
+
+                        # Plot each company's data
+                        bar_width = 1 / (len(data) + 1)
+                        num_companies = len(data)
+                        index = np.arange(len(all_dates))
+                        index -= int((num_companies - 1) * bar_width / 2)
+
                         for i, item in enumerate(data):
-                            plt.bar([j for j in range(len(item[1]))], item[1], label=f"{item[0]}")
-                        plt.title("Bar Graph")
-                        plt.xlabel("Categories")
-                        plt.ylabel("Values")
+                            company, values, years = item
+                            company_values = [values_per_year[date_parser.parse(str(year))][company] for year in all_dates_datetime]
+                            plt.bar(index + i * bar_width, company_values, bar_width, label=company)
+
+                        # Add labels and title
+                        plt.xlabel('Timestamps')
+                        plt.ylabel('Values')
+                        plt.title(f"Bar Graph - {os.path.split(file_path)[-1]}")
+                        plt.xticks(index + bar_width * (num_companies - 1) / 2, [date.strftime('%Y-%m-%d') for date in all_dates_datetime],
+                                   rotation=45)
                         plt.legend()
-                        plt.xticks(range(len(item[1])))  # Set x-axis labels as intervals
+                        plt.grid(True)
                         plt.show()
+
                     elif plot_type == "pie":
                         # Plot pie chart for each tuple
                         for item in data:
-                            plt.pie(item[1], labels=[f"{item[0]}_{j}" for j in range(len(item[1]))], autopct='%1.1f%%')
-                            plt.title(f"Pie Chart for {item[0]}")
+                            company, values, dates = item
+                            specific_dates = sorted(set(date for date in dates))
+                            specific_dates_datetime = [datetime.strptime(date, '%Y-%m-%d') for date in specific_dates]
+                            values_per_year = {date: {item[0]: 0} for date in specific_dates_datetime}
+                            for value, date in zip(values, dates):
+                                values_per_year[datetime.strptime(date, '%Y-%m-%d')][company] = value
+                            company_values = [values_per_year[date_parser.parse(str(year))][company] for year in
+                                              specific_dates_datetime]
+                            plt.pie(company_values, labels=[f"{date_pie}" for date_pie in [date.strftime('%Y-%m-%d') for date in specific_dates_datetime]],
+                                    autopct=self._autopct_format(company_values))
+
+                            plt.title(f"Pie Chart - {os.path.split(file_path)[-1]} for {item[0]}")
                             plt.show()
                     elif plot_type == "graph":
                         # Plot points for each tuple
                         for i, item in enumerate(data):
-                            plt.plot(range(len(item[1])), item[1], marker='o', linestyle='-',
-                                     label=f"{item[0]}")
+                            company, values, dates = item
+                            min_length = min(len(values), len(dates))  # Find the minimum length
+                            values = values[:min_length]  # Truncate values to match dates
+                            dates = dates[:min_length]  # Truncate dates to match values
+
+                            specific_dates_datetime = [datetime.strptime(date, '%Y-%m-%d') for date in dates]
+
+                            # Combine dates and values and sort by date
+                            sorted_pairs = sorted(zip(specific_dates_datetime, values))
+                            sorted_dates, sorted_values = zip(*sorted_pairs)
+
+                            plt.plot(sorted_dates, sorted_values, marker='o', linestyle='-', label=f"{company}")
 
                         # Set x-axis labels as intervals
-                        plt.xticks(range(len(item[1])), [f"Interval {j}" for j in range(len(item[1]))])
-                        plt.title("Graph")
-                        plt.xlabel("Categories")
+                        # Set the locator for the x-axis to ensure proper formatting
+                        plt.gca().xaxis.set_major_locator(mdates.YearLocator())
+                        plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+                        plt.xticks(rotation=45)
+                        plt.title(f"Graph - {os.path.split(file_path)[-1]}")
+                        plt.xlabel("Timestamps")
                         plt.ylabel("Values")
                         plt.legend()
                         plt.grid(True)
                         plt.show()
                     else:
                         print("Unsupported plot type:", plot_type)
+                elif file_path.endswith('.csv'):
+                    # Handle csv file
+                    data = []
+                    with open(file_path, 'r') as file:
+                        reader = csv.reader(file)
+                        headers = next(reader)  # Skip the header
+                        data_dict = {}
+
+                        for row in reader:
+                            if len(row) != 3:
+                                # Skip rows that do not have exactly 3 values
+                                continue
+                            company, value, date = row
+                            try:
+                                value = int(value)
+                            except ValueError:
+                                # Skip rows where value is not an integer
+                                continue
+                            if company not in data_dict:
+                                data_dict[company] = ([], [])
+                            data_dict[company][0].append(value)
+                            data_dict[company][1].append(date)
+
+                        for company, (values, dates) in data_dict.items():
+                            data.append((company, values, dates))
+
+                    if plot_type == "bar":
+                        # Get all years from the data sorted
+                        all_dates = sorted(set(date for values, dates in [item[1:] for item in data] for date in dates))
+                        all_dates_datetime = [datetime.strptime(date, '%Y-%m-%d') for date in all_dates]
+
+                        # Get all values per year
+                        values_per_year = {date: {item[0]: 0 for item in data} for date in all_dates_datetime}
+
+                        # Fill the dictionary with actual data
+                        for item in data:
+                            company, values, dates = item
+                            for value, date in zip(values, dates):
+                                values_per_year[datetime.strptime(date, '%Y-%m-%d')][company] = value
+
+                        # Plot each company's data
+                        bar_width = 1 / (len(data) + 1)
+                        num_companies = len(data)
+                        index = np.arange(len(all_dates))
+                        index -= int((num_companies - 1) * bar_width / 2)
+
+                        for i, item in enumerate(data):
+                            company, values, years = item
+                            company_values = [values_per_year[date_parser.parse(str(year))][company] for year in
+                                              all_dates_datetime]
+                            plt.bar(index + i * bar_width, company_values, bar_width, label=company)
+
+                        # Add labels and title
+                        plt.xlabel('Timestamps')
+                        plt.ylabel('Values')
+                        plt.title(f"Bar Graph - {os.path.split(file_path)[-1]}")
+                        plt.xticks(index + bar_width * (num_companies - 1) / 2,
+                                   [date.strftime('%Y-%m-%d') for date in all_dates_datetime], rotation=45)
+
+                        plt.legend()
+                        plt.show()
+
+
+                    elif plot_type == "pie":
+
+                        # Plot pie chart for each tuple
+
+                        for item in data:
+                            company, values, dates = item
+                            specific_dates = sorted(set(date for date in dates))
+                            specific_dates_datetime = [datetime.strptime(date, '%Y-%m-%d') for date in specific_dates]
+                            values_per_year = {date: {item[0]: 0} for date in specific_dates_datetime}
+                            for value, date in zip(values, dates):
+                                values_per_year[datetime.strptime(date, '%Y-%m-%d')][company] = value
+                            company_values = [values_per_year[date_parser.parse(str(year))][company] for year in
+                                              specific_dates_datetime]
+                            plt.pie(values,
+                                    labels=[f"{datetime.strptime(date, '%Y-%m-%d').strftime('%Y-%m-%d')}" for
+                                            date in dates], autopct=self._autopct_format(company_values))
+
+                            plt.title(f"Pie Chart for {company}")
+
+                            plt.show()
+
+                    elif plot_type == "graph":
+                        # Plot points for each tuple
+                        for i, item in enumerate(data):
+                            plt.plot(item[2], item[1], marker='o', linestyle='-', label=f"{item[0]}")
+
+                        # Set x-axis labels as dates
+                        plt.xticks(item[2],
+                                   [datetime.strptime(date, '%Y-%m-%d').strftime('%Y-%m-%d') for date in item[2]],
+                                   rotation=45)
+                        plt.title(f"Graph - {os.path.split(file_path)[-1]}")
+                        plt.xlabel("Dates")
+                        plt.ylabel("Values")
+                        plt.legend()
+                        plt.grid(True)
+                        plt.show()
+
+                    else:
+                        print("Unsupported plot type:", plot_type)
+
                 else:
                     print("Unsupported file format:", file_path)
             else:
                 print("Invalid file path or file does not exist:", file_path)
         else:
             print(f"Dataset '{dataset_name}' either not found or not a valid file path.")
+
+    # Define a custom function to format the percentage and actual value
+    def _autopct_format(self, values):
+        def _inner_autopct(pct):
+            total = sum(values)
+            val = int(round(pct * total / 100.0))
+            return f'{pct:.1f}%\n({val:d})'
+
+        return _inner_autopct
 
     # Exit a parse tree produced by DSL_Data_Formulas_Visualization_GrammarParser#visualizeData.
     def exitVisualizeData(self, ctx: DSL_Data_Formulas_Visualization_GrammarParser.VisualizeDataContext):

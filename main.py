@@ -43,9 +43,9 @@ if __name__ == '__main__':
     # execute_code(".\\Grammar\\Example_Program_Code\\Example_Program_3.txt")
     # execute_code(".\\Grammar\\Example_Program_Code\\Example_Program_4.txt")
 
-    execute_code(".\\Grammar\\Example_Program_Code\\Example_1_Midterm_2.txt")
-    input("Press Enter to continue...")
-    execute_code(".\\Grammar\\Example_Program_Code\\Example_2_Midterm_2.txt")
-    input("Press Enter to continue...")
+    # execute_code(".\\Grammar\\Example_Program_Code\\Example_1_Midterm_2.txt")
+    # input("Press Enter to continue...")
+    # execute_code(".\\Grammar\\Example_Program_Code\\Example_2_Midterm_2.txt")
+    # input("Press Enter to continue...")
     execute_code(".\\Grammar\\Example_Program_Code\\Example_3_Midterm_2.txt")
 
