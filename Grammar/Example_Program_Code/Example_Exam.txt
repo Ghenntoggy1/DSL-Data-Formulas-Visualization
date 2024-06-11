@@ -1,9 +1,31 @@
-# Data Declaration + Initialization - Valid TXT File
+# Formula Declaration + Initialization
+Formula bb = 1+1;
+
+# Nested Formula 1
+Formula formula = bb^2;
+
+# Nested Formula 2
+Formula formula1 = sin(x) + cos(formula)^2 - x^2 + x + 1;
+
+# Visualization of Formulas declared above
+VisualFormula(formula1) range=(-10, 10);
+VisualFormula(y  +  2 ^ 2 * formula1) range=(-10, 10);
+
+
+# Formula Declaration + Initialization
+Formula formula2 = sqrt(x^2 + y^2);
+
+# Visualization of Formulas declared above
+VisualFormula(formula2) range=(-25, 25);
+VisualFormula(y^2 + (x + sqrt(x + y + y^2)) * formula2) range=(-25, 25);
+
+
+
+# Data Declaration + Initialization - Valid TXT, CSV, Excel File
 Data tableData = ReadFrom("D:\Programming\Projects\DSL\DSL_Data_Formulas_Visualization\Grammar\Example_Program_Code\alonso.txt");
 Data tableDataCSV = ReadFrom("D:\Programming\Projects\DSL\DSL_Data_Formulas_Visualization\Grammar\Example_Program_Code\alonso.csv");
 Data tableDataExcel = ReadFrom("D:\Programming\Projects\DSL\DSL_Data_Formulas_Visualization\Grammar\Example_Program_Code\alonso.xlsx");
 
-/*
 # Data Declaration + Initialization - Empty String
 Data tableData2 = ReadFrom();
 
@@ -12,22 +34,21 @@ Data tableData3 = ReadFrom("C:\Users\User\");
 
 # Data Declaration + Initialization - Invalid Path
 Data tableData4 = ReadFrom("F:\");
-*/
 
-# Data Visualization
+# Data Visualization - TXT File
 VisualData(graph) dataset = (tableData);
 VisualData(bar) dataset = (tableData);
 VisualData(pie) dataset = (tableData);
 VisualData(console) dataset = (tableData);
 
-# Data Visualization
+# Data Visualization - CSV File
 VisualData(graph) dataset = (tableDataCSV);
 VisualData(bar) dataset = (tableDataCSV);
 VisualData(pie) dataset = (tableDataCSV);
 VisualData(console) dataset = (tableDataCSV);
 
 
-# Data Visualization
+# Data Visualization - Excel File
 VisualData(graph) dataset = (tableDataExcel);
 VisualData(bar) dataset = (tableDataExcel);
 VisualData(pie) dataset = (tableDataExcel);

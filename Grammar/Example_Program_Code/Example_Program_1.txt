@@ -1,6 +1,6 @@
-if (v2 == v1) {
-    VisualData(graph) dataset=(var1);
-}
-else {
-    VisualData(graph) dataset=(var2);
-};
+# Formula Declaration + Initialization
+Formula formula2 = sqrt(x^2 + y^2);
+
+# Visualization of Formulas declared above
+VisualFormula(formula2) range=(-25, 25);
+VisualFormula(y^2 + (x + sqrt(x + y + y^2)) * formula2) range=(-25, 25);

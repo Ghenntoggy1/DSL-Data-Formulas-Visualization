@@ -38,7 +38,7 @@ def execute_code(argv):
 
 
 if __name__ == '__main__':
-    # execute_code(".\\Grammar\\Example_Program_Code\\Example_Program_1.txt")
+    execute_code(".\\Grammar\\Example_Program_Code\\Example_Program_1.txt")
     # execute_code(".\\Grammar\\Example_Program_Code\\Example_Program_2.txt")
     # execute_code(".\\Grammar\\Example_Program_Code\\Example_Program_3.txt")
     # execute_code(".\\Grammar\\Example_Program_Code\\Example_Program_4.txt")
@@ -47,5 +47,12 @@ if __name__ == '__main__':
     # input("Press Enter to continue...")
     # execute_code(".\\Grammar\\Example_Program_Code\\Example_2_Midterm_2.txt")
     # input("Press Enter to continue...")
-    execute_code(".\\Grammar\\Example_Program_Code\\Example_3_Midterm_2.txt")
+    # execute_code(".\\Grammar\\Example_Program_Code\\Example_3_Midterm_2.txt")
 
+    # execute_code(".\\Grammar\\Example_Program_Code\\Example_Exam_Lexer.txt")
+    # input("Press Enter to continue...")
+    # execute_code(".\\Grammar\\Example_Program_Code\\Example_Exam_Parser.txt")
+    # input("Press Enter to continue...")
+    # execute_code(".\\Grammar\\Example_Program_Code\\Example_Exam_Formulas.txt")
+    # input("Press Enter to continue...")
+    # execute_code(".\\Grammar\\Example_Program_Code\\Example_Exam_Data.txt")

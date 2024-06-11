@@ -1,7 +1,6 @@
 import csv
 import os
-from turtle import pd
-from ordered_set import OrderedSet
+from scipy import interpolate
 from dateutil import parser as date_parser
 from datetime import datetime
 import pandas
@@ -501,6 +500,47 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                         plt.legend()
                         plt.grid(True)
                         plt.show()
+                    elif plot_type == "console":
+                        print("Data from TXT file:")
+                        contents = {}
+                        for item in data:
+                            company, values, dates = item
+                            if company not in contents:
+                                if len(values) == len(dates):
+                                    contents[company] = pandas.Series(values, index=dates)
+                                else:
+                                    min_length = min(len(values), len(dates))  # Find the minimum length
+                                    values = values[:min_length]  # Truncate values to match dates
+                                    dates = dates[:min_length]  # Truncate dates to match values
+                                    contents[company] = pandas.Series(values, index=dates)
+
+                            else:
+                                if len(values) == len(dates):
+                                    old_series = contents[company]
+                                    old_series.add(pandas.Series(values, index=dates))
+                                else:
+                                    min_length = min(len(values), len(dates))  # Find the minimum length
+                                    values = values[:min_length]  # Truncate values to match dates
+                                    dates = dates[:min_length]  # Truncate dates to match values
+                                    old_series = contents[company]
+                                    old_series.add(pandas.Series(values, index=dates))
+
+                        df = pandas.DataFrame(contents).transpose()
+                        # df['Date'] = pandas.to_datetime(df['Date'])
+                        #
+                        # # Setting 'Date' column as the index
+                        # df.set_index('Date', inplace=True)
+                        #
+                        # # Performing linear interpolation
+                        # df_interpolated = df.interpolate(method='time')
+                        #
+                        # print(df_interpolated)
+                        print(tabulate(df, headers='keys', tablefmt='psql'))
+                        print("Individual pieces of Data from TXT File:")
+                        for index, row in df.iterrows():
+                            print(f"\nGroup: {index}")
+                            df_grouped = df.loc[[index]]
+                            print(tabulate(df_grouped, headers='keys', tablefmt='psql'))
                     else:
                         print("Unsupported plot type:", plot_type)
                 elif file_path.endswith('.csv'):
@@ -567,9 +607,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
 
                     elif plot_type == "pie":
-
                         # Plot pie chart for each tuple
-
                         for item in data:
                             company, values, dates = item
                             specific_dates = sorted(set(date for date in dates))
@@ -602,6 +640,15 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                         plt.legend()
                         plt.grid(True)
                         plt.show()
+                    elif plot_type == "console":
+                        df = pandas.read_csv(file_path)
+                        print("Data from CSV file:")
+                        print(tabulate(df, headers='keys', tablefmt='psql'))
+                        print("Individual pieces of Data from CSV File:")
+                        grouped = df.groupby(f"{df.columns[0]}")
+                        for company, group in grouped:
+                            print(f"\n{df.columns[0]}: {company}")
+                            print(tabulate(group, headers='keys', tablefmt='psql'))
                     else:
                         print("Unsupported plot type:", plot_type)
 
@@ -612,8 +659,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                     data = []
                     for row in df.itertuples(index=False):
                         data.append(row)
-
-                    print(data)
                     if plot_type == "bar":
                         df.sort_values(by=df.columns[0], inplace=True)
                         # Plot barchart for group
