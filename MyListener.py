@@ -6,6 +6,7 @@ from dateutil import parser as date_parser
 from datetime import datetime
 import pandas
 import matplotlib.dates as mdates
+from tabulate import tabulate
 
 from Grammar.Generated_Code.DSL_Data_Formulas_Visualization_GrammarListener import \
     DSL_Data_Formulas_Visualization_GrammarListener
@@ -440,14 +441,16 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
                         for i, item in enumerate(data):
                             company, values, years = item
-                            company_values = [values_per_year[date_parser.parse(str(year))][company] for year in all_dates_datetime]
+                            company_values = [values_per_year[date_parser.parse(str(year))][company] for year in
+                                              all_dates_datetime]
                             plt.bar(index + i * bar_width, company_values, bar_width, label=company)
 
                         # Add labels and title
                         plt.xlabel('Timestamps')
                         plt.ylabel('Values')
                         plt.title(f"Bar Graph - {os.path.split(file_path)[-1]}")
-                        plt.xticks(index + bar_width * (num_companies - 1) / 2, [date.strftime('%Y-%m-%d') for date in all_dates_datetime],
+                        plt.xticks(index + bar_width * (num_companies - 1) / 2,
+                                   [date.strftime('%Y-%m-%d') for date in all_dates_datetime],
                                    rotation=45)
                         plt.legend()
                         plt.grid(True)
@@ -464,7 +467,9 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                                 values_per_year[datetime.strptime(date, '%Y-%m-%d')][company] = value
                             company_values = [values_per_year[date_parser.parse(str(year))][company] for year in
                                               specific_dates_datetime]
-                            plt.pie(company_values, labels=[f"{date_pie}" for date_pie in [date.strftime('%Y-%m-%d') for date in specific_dates_datetime]],
+                            plt.pie(company_values, labels=[f"{date_pie}" for date_pie in
+                                                            [date.strftime('%Y-%m-%d') for date in
+                                                             specific_dates_datetime]],
                                     autopct=self._autopct_format(company_values))
 
                             plt.title(f"Pie Chart - {os.path.split(file_path)[-1]} for {item[0]}")
@@ -610,32 +615,32 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
                     print(data)
                     if plot_type == "bar":
-                        # Plot bar chart
-                        all_dates = sorted(set(date for values, dates in [item[1:] for item in data] for date in dates))
-                        all_dates_datetime = [datetime.strptime(date, '%Y-%m-%d') for date in all_dates]
-                        values_per_year = {date: {item[0]: 0 for item in data} for date in all_dates_datetime}
-
-                        for item in data:
-                            company, values, dates = item
-                            for value, date in zip(values, dates):
-                                values_per_year[datetime.strptime(date, '%Y-%m-%d')][company] = value
-
+                        df.sort_values(by=df.columns[0], inplace=True)
+                        # Plot barchart for group
                         bar_width = 1 / (len(data) + 1)
                         num_companies = len(data)
-                        index = np.arange(len(all_dates))
+                        index = np.arange(len(df.iloc[:, 0]))
                         index -= int((num_companies - 1) * bar_width / 2)
+                        for group in df.columns[1:]:  # Exclude the first column which contains timestamps
+                            # Extract the timestamp and values for the current group
+                            timestamps = df.iloc[:, 0]
+                            values = df[group]
 
-                        for i, item in enumerate(data):
-                            company, values, years = item
-                            company_values = [values_per_year[date_parser.parse(str(year))][company] for year in
-                                              all_dates_datetime]
-                            plt.bar(index + i * bar_width, company_values, bar_width, label=company)
+                            i = df.columns.get_loc(group) - 1
+                            print(f"Group: {i + 1}")
+                            print(f"Timestamps: {timestamps}")
+                            print(f"Values: {values}")
+                            try:
+                                # Plot the values for the current group against timestamps
+                                plt.bar(index + i * bar_width, values, width=bar_width, label=group)
+                            except Exception as e:
+                                print(f"Error plotting data for {group}: {e}")
 
                         plt.xlabel('Timestamps')
                         plt.ylabel('Values')
                         plt.title(f"Bar Graph - {os.path.split(file_path)[-1]}")
                         plt.xticks(index + bar_width * (num_companies - 1) / 2,
-                                   [date.strftime('%Y-%m-%d') for date in all_dates_datetime], rotation=45)
+                                   [date.strftime('%Y-%m-%d') for date in df.iloc[:, 0]], rotation=45)
 
                         plt.legend()
                         plt.grid(True)
@@ -643,22 +648,26 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
 
                     elif plot_type == "pie":
                         # Plot pie chart
-                        for item in data:
-                            company, values, dates = item
-                            specific_dates = sorted(set(date for date in dates))
-                            specific_dates_datetime = [datetime.strptime(date, '%Y-%m-%d') for date in specific_dates]
-                            values_per_year = {date: {item[0]: 0} for date in specific_dates_datetime}
-                            for value, date in zip(values, dates):
-                                values_per_year[datetime.strptime(date, '%Y-%m-%d')][company] = value
-                            company_values = [values_per_year[date_parser.parse(str(year))][company] for year in
-                                              specific_dates_datetime]
-                            plt.pie(values, labels=[f"{date_pie}" for date_pie in
-                                                    [date.strftime('%Y-%m-%d') for date in specific_dates_datetime]],
-                                    autopct=self._autopct_format(company_values))
-                            plt.title(f"Pie Chart - {os.path.split(file_path)[-1]} for {item[0]}")
+                        for group in df.columns[1:]:  # Exclude the first column which contains timestamps
+                            # Extract the timestamp and values for the current group
+                            timestamps = df.iloc[:, 0]
+                            values = df[group]
+
+                            try:
+                                # Plot the values for the current group against timestamps
+                                plt.pie(values,
+                                        labels=[f"{datetime.strftime(timestamp, '%Y-%m-%d')}" for timestamp in
+                                                timestamps],
+                                        autopct=self._autopct_format(values))
+
+                            except Exception as e:
+                                print(f"Error plotting data for {group}: {e}")
+                            plt.title(f"Pie Chart - {os.path.split(file_path)[-1]} for {group}")
                             plt.show()
                     elif plot_type == "graph":
                         # Plot graph for each group
+                        df.sort_values(by=df.columns[0], inplace=True)
+                        print(df)
                         for group in df.columns[1:]:  # Exclude the first column which contains timestamps
                             # Extract the timestamp and values for the current group
                             timestamps = df.iloc[:, 0]
@@ -672,15 +681,23 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                                 print(f"Error plotting data for {group}: {e}")
 
                         # Additional plotting configurations
-                        plt.xticks(rotation=45)
+                        plt.xticks([date.strftime('%Y-%m-%d') for date in df.iloc[:, 0]], rotation=45)
                         plt.title(f"Graph - {os.path.split(file_path)[-1]}")
                         plt.xlabel("Timestamp")
                         plt.ylabel("Values")
                         plt.legend()
                         plt.grid(True)
                         plt.show()
+                    elif plot_type == "console":
+                        print("Data from Excel file:")
+                        print(tabulate(df, headers='keys', tablefmt='psql'))
+                        print("Individual pieces of Data from Excel File:")
+                        for group in df.columns[1:]:
+                            print(f"Group: {group}")
+                            print(tabulate(df[[df.columns[0], group]], headers='keys', tablefmt='psql'))
+
                 else:
-                        print("Unsupported plot type:", plot_type)
+                    print("Unsupported plot type:", plot_type)
             else:
                 print("Invalid file path or file does not exist:", file_path)
         else:
