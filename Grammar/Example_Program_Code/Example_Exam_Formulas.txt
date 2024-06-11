@@ -1,0 +1,47 @@
+# Formula Declaration + Initialization
+Formula bb = 1+1;
+
+# Nested Formula 1
+Formula formula = bb^2;
+
+# Nested Formula 2
+Formula formula1 = sin(x) + cos(formula)^2 - x^2 + x + 1;
+
+# Visualization of Formulas declared above
+VisualFormula(formula1) range=(-10, 10);
+VisualFormula(y  +  2 ^ 2 * formula1) range=(-10, 10);
+
+
+# Formula Declaration + Initialization
+Formula formula2 = cos(x * y);
+
+# Visualization of Formulas declared above
+VisualFormula(formula2) range=(-10, 10);
+
+VisualFormula(y^2 + (x + x + y + y^2) * formula2) range=(-10, 10);
+
+
+# Formula Declaration + Initialization
+Formula formula2 = sqrt(x^2 + y^2);
+
+# Visualization of Formulas declared above
+VisualFormula(formula2) range=(-25, 25);
+
+VisualFormula(y^2 + (x + sqrt(y^2)) * formula2) range=(-25, 25);
+
+# Formula Declaration + Initialization
+Formula formula3 = fact(5);
+
+# Visualization of Formulas declared above
+VisualFormula(formula3) range=(-25, 25);
+
+Formula a = 1/7;
+Formula b = 6/7;
+Formula formula = sin(a) - 1/tan(b) + a/b - 1/a;
+VisualFormula(formula + x) range=(-10, 10);
+
+Formula b = ((118 - 331) * - 11)/ 33;
+Formula a = 36/(7 * 4) - b;
+Formula c = (99^3 - 12^4)/2;
+Formula s = a + b - c;
+VisualFormula(s + x) range=(-10, 10);

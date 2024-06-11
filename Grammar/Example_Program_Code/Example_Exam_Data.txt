@@ -1,0 +1,51 @@
+# Data Declaration + Initialization - Valid TXT, CSV, Excel File
+Data tableDataTXT = ReadFrom("D:\Programming\Projects\DSL\DSL_Data_Formulas_Visualization\Grammar\Example_Program_Code\alonso.txt");
+Data tableDataCSV = ReadFrom("D:\Programming\Projects\DSL\DSL_Data_Formulas_Visualization\Grammar\Example_Program_Code\alonso.csv");
+Data tableDataExcel = ReadFrom("D:\Programming\Projects\DSL\DSL_Data_Formulas_Visualization\Grammar\Example_Program_Code\alonso.xlsx");
+
+# Data Declaration + Initialization - Empty String
+Data tableData2 = ReadFrom("D:\Programming\Projects\DSL\DSL_Data_Formulas_Visualization\Grammar\");
+
+# Data Visualization - TXT File
+VisualData(graph) dataset = (tableData2);
+VisualData(bar) dataset = (tableData2);
+VisualData(pie) dataset = (tableData2);
+VisualData(console) dataset = (tableData2);
+
+# Data Declaration + Initialization - Valid Path, No file specified
+Data tableData3 = ReadFrom("C:\Users\User\");
+
+# Data Visualization - CSV File
+VisualData(graph) dataset = (tableData3);
+VisualData(bar) dataset = (tableData3);
+VisualData(pie) dataset = (tableData3);
+VisualData(console) dataset = (tableData3);
+
+# Data Declaration + Initialization - Invalid Path
+Data tableData4 = ReadFrom("F:\");
+
+# Data Visualization - Excel File
+VisualData(graph) dataset = (tableData4);
+VisualData(bar) dataset = (tableData4);
+VisualData(pie) dataset = (tableData4);
+VisualData(console) dataset = (tableData4);
+
+# Data Visualization - TXT File
+VisualData(graph) dataset = (tableDataTXT);
+VisualData(bar) dataset = (tableDataTXT);
+VisualData(pie) dataset = (tableDataTXT);
+VisualData(console) dataset = (tableDataTXT);
+
+# Data Visualization - CSV File
+VisualData(graph) dataset = (tableDataCSV);
+VisualData(bar) dataset = (tableDataCSV);
+VisualData(pie) dataset = (tableDataCSV);
+VisualData(console) dataset = (tableDataCSV);
+
+
+# Data Visualization - Excel File
+VisualData(graph) dataset = (tableDataExcel);
+VisualData(bar) dataset = (tableDataExcel);
+VisualData(pie) dataset = (tableDataExcel);
+VisualData(console) dataset = (tableDataExcel);
+

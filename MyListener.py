@@ -1,6 +1,5 @@
 import csv
 import os
-from scipy import interpolate
 from dateutil import parser as date_parser
 from datetime import datetime
 import pandas
@@ -381,6 +380,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
             'tan': 'np.tan',
             'log': 'np.log',
             'sqrt': 'np.sqrt',
+            'fact': 'np.math.factorial',
             'sqr (': 'np.square (',
             'sqr(': 'np.square(',
             '^': '**'
@@ -524,7 +524,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                                     dates = dates[:min_length]  # Truncate dates to match values
                                     old_series = contents[company]
                                     old_series.add(pandas.Series(values, index=dates))
-
                         df = pandas.DataFrame(contents).transpose()
                         # df['Date'] = pandas.to_datetime(df['Date'])
                         #
@@ -603,6 +602,7 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                                    [date.strftime('%Y-%m-%d') for date in all_dates_datetime], rotation=45)
 
                         plt.legend()
+                        plt.grid(True)
                         plt.show()
 
 
@@ -672,9 +672,6 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                             values = df[group]
 
                             i = df.columns.get_loc(group) - 1
-                            print(f"Group: {i + 1}")
-                            print(f"Timestamps: {timestamps}")
-                            print(f"Values: {values}")
                             try:
                                 # Plot the values for the current group against timestamps
                                 plt.bar(index + i * bar_width, values, width=bar_width, label=group)
@@ -712,10 +709,10 @@ class MyListener(DSL_Data_Formulas_Visualization_GrammarListener):
                     elif plot_type == "graph":
                         # Plot graph for each group
                         df.sort_values(by=df.columns[0], inplace=True)
-                        print(df)
                         for group in df.columns[1:]:  # Exclude the first column which contains timestamps
                             # Extract the timestamp and values for the current group
                             timestamps = df.iloc[:, 0]
+
                             values = df[group]
 
                             try:
